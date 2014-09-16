@@ -3,13 +3,13 @@
 @{
     ViewBag.Title = "Products";
 }
-
-@foreach (var p in Model.Products)
-{
-    @Html.Partial("ProductSummary",p)
-}
-
-<div class="btn-group pull-right">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x , category = Model.CurrentCategory}))
+<div class="row center-middle">
+    @foreach (var p in Model.Products)
+    {
+        @Html.Partial("ProductSummary", p)
+    }
+</div>
+<div class="btn-group pull-right panel">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
 </div>
 

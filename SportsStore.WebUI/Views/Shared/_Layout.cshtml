@@ -15,23 +15,30 @@
             margin-right: 15px;
             margin-left: 15px;
         }*/
+        #CenteredContent {
+            max-width: 1000px;
+            margin: auto;
+            background: none repeat scroll 0% 0% rgb(255, 255, 255);
+        }
     </style>
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">
-            SPORTS STORE        
-        </a>     
+            SHOPPING STORE
+        </a>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Login</a></li>
-        </ul>    
+        </ul>
         @Html.Action("Summary", "Cart")
-        
+
+
     </div>
-    <div style="max-width:1000px" class="navbar center-block" role="navigation">
+    <div style="max-width: 1000px" class="navbar center-block" role="navigation">
         <div id="navbarCollapse" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav  center-block">                
-                @Html.Action("Menu","Nav")
+            <ul class="nav navbar-nav  center-block">
+                @Html.Action("Menu", "Nav")
+
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">Messages <b class="caret"></b></a>
                     <ul role="menu" class="dropdown-menu">
@@ -47,12 +54,11 @@
                 <div class="form-group">
                     <input type="text" placeholder="Search" class="form-control">
                 </div>
-            </form>           
-            
+            </form>
         </div>
-    </div>    
-    <div >        
-        <div class="col-sm-5 col-xs-12">
+    </div>
+    <div id="CenteredContent">
+        <div class="col-sm-12 col-xs-12">
             @RenderBody()
         </div>
     </div>
