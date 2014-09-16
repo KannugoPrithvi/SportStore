@@ -25,7 +25,7 @@ namespace SportsStore.WebUI.Controllers
 
 
             //string viewName = horizontalLayout ? "MenuHorizontal" : "Menu";
-            return PartialView("FlexMenu", categories);
+            return PartialView("HorizontalMenu", categories);
         }
     }
 }
