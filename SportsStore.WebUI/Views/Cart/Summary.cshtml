@@ -14,7 +14,7 @@ Request.Url.PathAndQuery })
         <span class="glyphicon glyphicon-shopping-cart"></span>
     </a>
 </div>
-<div class="navbar-text navbar-right">
+<div class="navbar-text navbar-right" style="padding-right:10px">
     <b class="hidden-xs">Your cart:</b>
     @Model.Lines.Sum(x => x.Quantity) item(s),
     @Model.ComputeTotalValue().ToString("c")

@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<string>
 
 
-<li class="active">
-    @Html.ActionLink("Home", "List", new { controller = "Product" })
+<li>
+    @Html.ActionLink("Home", "List", new { controller = "Product" }) <span class='badge'>24</span>   
 </li>
 
 
@@ -16,6 +16,7 @@
                 category = link,
                 page = 1
             })
+        <span class='badge'>24</span> 
     </li>
 }
 
