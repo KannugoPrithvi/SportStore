@@ -2,21 +2,14 @@
 
 
 <li>
-    @Html.ActionLink("Home", "List", new { controller = "Product" }) <span class='badge'>24</span>   
+    <a href="@Url.Action("List","Product")">All <span class='badge'>24</span></a>
 </li>
 
 
 @foreach (var link in Model)
 {
     <li>
-        @Html.RouteLink(link, new
-            {
-                controller = "Product",
-                action = "List",
-                category = link,
-                page = 1
-            })
-        <span class='badge'>24</span> 
+        <a href="@Url.Action("List","Product",new{category=link,page=1})">@link <span class='badge'>24</span></a>
     </li>
 }
 
