@@ -1,16 +1,33 @@
-﻿@model IDictionary<string,int>
+﻿@model IDictionary<string, int>
 
-
-<li>
-    <a href="@Url.Action("List","Product")">All <span class='badge'>@ViewBag.TotalCount</span></a>
-</li>
+@if (ViewBag.SelectedCategory == null)
+{
+    <li class="active">
+        <a href="@Url.Action("List","Product")">All <span class='badge'>@ViewBag.TotalCount</span></a>
+    </li>
+}
+else
+{
+    <li>
+        <a href="@Url.Action("List","Product")">All <span class='badge'>@ViewBag.TotalCount</span></a>
+    </li>
+}
 
 
 @foreach (var link in Model)
 {
-    <li>
-        <a href="@Url.Action("List","Product",new{category=link.Key,page=1})">@link.Key <span class='badge'>@link.Value</span></a>
-    </li>
+    if (link.Key == ViewBag.SelectedCategory)
+    {
+        <li class="active">
+            <a href="@Url.Action("List","Product",new{category=link.Key,page=1})">@link.Key <span class='badge'>@link.Value</span></a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a href="@Url.Action("List","Product",new{category=link.Key,page=1})">@link.Key <span class='badge'>@link.Value</span></a>
+        </li>
+    }
 }
 
 
