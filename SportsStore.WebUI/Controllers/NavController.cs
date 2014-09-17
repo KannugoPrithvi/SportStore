@@ -22,10 +22,14 @@ namespace SportsStore.WebUI.Controllers
                 .Select(x => x.Category)
                 .Distinct()
                 .OrderBy(x => x);
+            Dictionary<string, int> nameAndCount = new Dictionary<string, int>();            
+            foreach (var item in categories)
+            {                
+                nameAndCount[item] = repository.Products.Count(x => x.Category == item);
+            }
 
-
-            //string viewName = horizontalLayout ? "MenuHorizontal" : "Menu";
-            return PartialView("HorizontalMenu", categories);
+            ViewBag.TotalCount = repository.Products.Count();
+            return PartialView("HorizontalMenu", nameAndCount);
         }
     }
 }
