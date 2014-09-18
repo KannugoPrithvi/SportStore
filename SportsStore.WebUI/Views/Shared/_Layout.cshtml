@@ -53,6 +53,12 @@
         .navbar-text {
             color: white;
         }
+        .col-md-3 {
+            width: 23%;
+        }
+        .col-sm-3 {
+            width: 23%;
+        }     
     </style>
 </head>
 <body>
@@ -72,9 +78,6 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav nav-pills center-block">
                 @Html.Action("Menu", "Nav")
-
-
-
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">Miscallaneous <b class="caret"></b></a>
                     <ul role="menu" class="dropdown-menu">
@@ -92,12 +95,13 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div>    
     <div class="container" id="CenteredContent">
-        <div class="col-sm-12 col-xs-12">
+        <div>
             @RenderBody()
 
         </div>
     </div>
+    
 </body>
 </html>
