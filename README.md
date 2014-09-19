@@ -4,7 +4,7 @@ SportStore
 MVC 5 Shopping Cart
 
 Extra requirements for cart controller
-) Add a quick view button for each and every button
+) Add a quick view button for each and every product
 1) While in checkout page checkout button should be disabled
 2) Change the quantity of the product in checkout page
 3) Checkout button should return to checkout pages from shipping details by showing a warning message the shipping dtails entered would be lost
