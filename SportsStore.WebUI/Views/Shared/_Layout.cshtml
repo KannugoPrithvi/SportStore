@@ -14,15 +14,15 @@
             float: right !important;
             margin-right: 15px;
             margin-left: 15px;
-        }*/        
+        }*/
         #CenteredContent {
             max-width: 1000px;
             margin: auto;
-            background: none repeat scroll 0% 0% rgb(255, 255, 255);            
+            background: none repeat scroll 0% 0% rgb(255, 255, 255);
         }
 
         body {
-            padding-top: 70px;            
+            padding-top: 70px;
         }
 
         .entry-title {
@@ -53,12 +53,21 @@
         .navbar-text {
             color: white;
         }
+
         .col-md-3 {
             width: 23%;
         }
+
         .col-sm-3 {
             width: 23%;
-        }     
+        }
+
+        .thumbnail .caption {
+            padding: 0px 9px 9px 9px;
+            color: #333;
+            height: 100px;
+            vertical-align: top;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +79,11 @@
             <li><a href="#">Login</a></li>
         </ul>
         @Html.Action("Summary", "Cart")
-
+        <form role="search" class="navbar-form navbar-right">
+            <div class="form-group">
+                <input type="text" placeholder="Search" class="form-control">
+            </div>
+        </form>
 
 
     </div>
@@ -79,29 +92,24 @@
             <ul class="nav navbar-nav nav-pills center-block">
                 @Html.Action("Menu", "Nav")
                 <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Miscallaneous <b class="caret"></b></a>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">More Categories <b class="caret"></b></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Offers Zone</a></li>
+                        <li><a href="#">Sporting</a></li>
+                        <li><a href="#">Gym Equipments</a></li>
+                        <li><a href="#">Watches</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Trash</a></li>
                     </ul>
                 </li>
             </ul>
-            <form role="search" class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" placeholder="Search" class="form-control">
-                </div>
-            </form>
         </div>
-    </div>    
+    </div>
     <div class="container" id="CenteredContent">
         <div>
             @RenderBody()
 
         </div>
     </div>
-    
+
 </body>
 </html>
