@@ -1,4 +1,5 @@
 ﻿@model IDictionary<string, int>
+@using System.Linq
 
 @if (ViewBag.SelectedCategory == null)
 {
@@ -13,22 +14,38 @@ else
     </li>
 }
 
+@{
+    int index = 0;
 
-@foreach (var link in Model)
-{
-    if (link.Key == ViewBag.SelectedCategory)
+
+    foreach (var link in Model)
     {
-        <li class="active">
-            <a href="@Url.Action("List","Product",new{category=link.Key,page=1})">@link.Key <span class='badge'>@link.Value</span></a>
-        </li>
-    }
-    else
-    {
-        <li>
-            <a href="@Url.Action("List","Product",new{category=link.Key,page=1})">@link.Key <span class='badge'>@link.Value</span></a>
-        </li>
-    }
+        if (link.Key == ViewBag.SelectedCategory)
+        {
+            <li class="active">
+                <a href="@Url.Action("List","Product",new{category=link.Key,page=1})">@link.Key <span class='badge'>@link.Value</span></a>
+            </li>
+            index++;
+        }
+        else
+        {
+            <li>
+                <a href="@Url.Action("List","Product",new{category=link.Key,page=1})">@link.Key <span class='badge'>@link.Value</span></a>
+            </li>
+            index++;
+        }
+        if (index > 4)
+        {
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle label-success drop-down-font" href="#">More Categories <b class="caret"></b></a>
+                <ul role="menu" class="dropdown-menu">
+                    @for (int extraSubMenu = index; extraSubMenu < Model.Count; extraSubMenu++)
+                    {
+                        <li><a href="@Url.Action("List", "Product", new { category = Model.ElementAt(extraSubMenu).Key, page = 1 })">@Model.ElementAt(extraSubMenu).Key <span class='badge'>@Model.ElementAt(extraSubMenu).Value</span></a></li>
+                    }                    
+                </ul>
+            </li>
+            break;
+        }
+    }    
 }
-
-
-

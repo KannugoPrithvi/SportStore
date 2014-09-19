@@ -50,7 +50,7 @@ body {
 }
 
     .thumbnail:hover {
-        border: 2px solid #ffc300;
+        border: 2px solid #ffc300;        
     }
 
     .thumbnail .caption {
@@ -65,6 +65,10 @@ body {
             overflow: hidden;
             white-space: nowrap;
         }
+
+.drop-down-font {
+    color:#fff;
+}
 
 .content-slider {
     width: 100%;
