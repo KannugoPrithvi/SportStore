@@ -102,17 +102,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\cart-image-icons\1.jpg" />
+    <Content Include="Content\images\cart-image-icons\10.jpg" />
+    <Content Include="Content\images\cart-image-icons\11.jpg" />
+    <Content Include="Content\images\cart-image-icons\12.jpg" />
+    <Content Include="Content\images\cart-image-icons\13.jpg" />
+    <Content Include="Content\images\cart-image-icons\14.jpg" />
+    <Content Include="Content\images\cart-image-icons\15.jpg" />
+    <Content Include="Content\images\cart-image-icons\2.jpg" />
+    <Content Include="Content\images\cart-image-icons\3.jpg" />
+    <Content Include="Content\images\cart-image-icons\4.jpg" />
+    <Content Include="Content\images\cart-image-icons\5.jpg" />
+    <Content Include="Content\images\cart-image-icons\6.jpg" />
+    <Content Include="Content\images\cart-image-icons\7.jpg" />
+    <Content Include="Content\images\cart-image-icons\8.jpg" />
+    <Content Include="Content\images\cart-image-icons\9.jpg" />
+    <Content Include="Content\images\cart-image-icons\Cycle.jpg" />
+    <Content Include="Content\images\cart-image-icons\s2.jpg" />
+    <Content Include="Content\images\cart-image-icons\Samsung.jpg" />
+    <Content Include="Content\images\cart-image-icons\tread.jpg" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ErrorStyles.css" />
-    <Content Include="Content\images\ajax-loader.gif" />
-    <Content Include="Content\images\ajax-loader.png" />
-    <Content Include="Content\images\icons-18-black.png" />
-    <Content Include="Content\images\icons-18-white.png" />
-    <Content Include="Content\images\icons-36-black.png" />
-    <Content Include="Content\images\icons-36-white.png" />
+    <Content Include="Content\images\cart-image-icons\ajax-loader.gif" />
+    <Content Include="Content\images\cart-image-icons\ajax-loader.png" />
+    <Content Include="Content\images\cart-image-icons\icons-18-black.png" />
+    <Content Include="Content\images\cart-image-icons\icons-18-white.png" />
+    <Content Include="Content\images\cart-image-icons\icons-36-black.png" />
+    <Content Include="Content\images\cart-image-icons\icons-36-white.png" />
     <Content Include="Content\images\icons-png\action-black.png" />
     <Content Include="Content\images\icons-png\action-white.png" />
     <Content Include="Content\images\icons-png\alert-black.png" />

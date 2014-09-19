@@ -24,6 +24,7 @@ namespace SportsStore.Domain.Entities
         public string Category { get; set; }
         public byte[] ImageData { get; set; }
         public string ImageMimeType { get; set; }
+        public string ImagePath { get; set; }
     }
 
 }
