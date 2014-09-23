@@ -50,7 +50,7 @@ body {
 }
 
     .thumbnail:hover {
-        border: 2px solid #ffc300;        
+        border: 2px solid rgba(8, 48, 59, 0.65);
     }
 
     .thumbnail .caption {
@@ -65,9 +65,27 @@ body {
             overflow: hidden;
             white-space: nowrap;
         }
+    /*Styles for on hover thumbnails*/
+    .thumbnail .slideDownCaption {
+        padding: 0px;
+        opacity: 0.0;
+        -moz-opacity: 0.0;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(8, 48, 59, 0.65);
+        width: 100%;
+        height: 100%;
+        color: #fff !important;
+        -webkit-transition: opacity 0.2s ease-in-out;
+        -moz-transition: opacity 0.2s ease-in-out;
+        -o-transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.2s ease-in-out;
+    }
 
 .drop-down-font {
-    color:#fff;
+    color: #fff;
 }
 
 .content-slider {
@@ -75,25 +93,35 @@ body {
     height: 300px;
     border: 3px solid #00B5E2;
     margin-top: 5px;
-    color:rgb(0, 181, 226);
-    padding:10px;
+    color: rgb(0, 181, 226);
+    padding: 10px;
 }
 
 .tempText {
-    color:rgb(0, 181, 226);
-    padding:10px;
+    color: rgb(0, 181, 226);
+    padding: 10px;
 }
+
 .content-slider span {
-  animation-duration: 3s;
-  animation-name: slidein;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  -moz-animation-duration: 3s;
-      -webkit-animation-duration: 3s;
-      -moz-animation-name: slidein;
-      -webkit-animation-name: slidein;
-      -moz-animation-iteration-count: infinite;
-      -webkit-animation-iteration-count: infinite;
-      -moz-animation-direction: alternate;
-      -webkit-animation-direction: alternate;
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -moz-animation-duration: 3s;
+    -webkit-animation-duration: 3s;
+    -moz-animation-name: slidein;
+    -webkit-animation-name: slidein;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
 }
+
+/*on hover animation thumbnail*/
+.slideDownCaption{
+    text-align:center
+}
+.slideDownCaption span{
+    line-height: 300px
+}
+
