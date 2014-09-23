@@ -47,42 +47,21 @@ body {
 
 .thumbnail {
     border: 2px solid #ddd;
+    height: 390px;
+    width: 230px;
 }
 
     .thumbnail:hover {
-        border: 2px solid rgba(8, 48, 59, 0.65);
+        border: 2px solid #f09614;
     }
 
     .thumbnail .caption {
-        height: 100px;
+        height: 135px;
         width: 100%;
+        overflow:hidden;
     }
 
-        .thumbnail .caption p {
-            text-overflow: ellipsis;
-            -o-text-overflow: ellipsis;
-            -webkit-text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-    /*Styles for on hover thumbnails*/
-    .thumbnail .slideDownCaption {
-        padding: 0px;
-        opacity: 0.0;
-        -moz-opacity: 0.0;
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: rgba(8, 48, 59, 0.65);
-        width: 100%;
-        height: 100%;
-        color: #fff !important;
-        -webkit-transition: opacity 0.2s ease-in-out;
-        -moz-transition: opacity 0.2s ease-in-out;
-        -o-transition: opacity 0.2s ease-in-out;
-        transition: opacity 0.2s ease-in-out;
-    }
+
 
 .drop-down-font {
     color: #fff;
@@ -95,7 +74,7 @@ body {
     margin-top: 5px;
     color: rgb(0, 181, 226);
     padding: 10px;
-    text-align:center;
+    text-align: center;
 }
 
 .tempText {
@@ -118,11 +97,11 @@ body {
     -webkit-animation-direction: alternate;
 }
 
-/*on hover animation thumbnail*/
+/*/*on hover animation thumbnail
 .slideDownCaption{
     text-align:center
 }
 .slideDownCaption span{
     line-height: 300px
-}
+}*/
 

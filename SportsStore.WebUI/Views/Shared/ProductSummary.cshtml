@@ -1,26 +1,29 @@
 ﻿@model SportsStore.Domain.Entities.Product
 
 
-<div class="col-sm-3 col-md-3 thumbnail" style="margin:10px">
+
+
+<div class="col-sm-3 col-md-3 thumbnail" style="margin: 10px">
     <div>
-        <img src=@Model.ImagePath width="100%" height="200px" alt="..." />
+        <img src="@Model.ImagePath" width="100%" height="200px" alt="..." />
         <div class="caption">
-            <h4><strong>@Model.Name</strong></h4>
-            <p>@Model.Description</p>
+            <div style="font-size:medium;font-weight:bold;height:50px" class="clampString">@Model.Name</div>
+            <div class="clampString" style="height:50px">@Model.Description</div>
+            <span style="text-align: center">
+                <span style="font-size:medium;font-weight:bold">@Model.Price.ToString("c")</span>
+            </span>
         </div>
-        <div class="slideDownCaption hidden-xs">
-            <h1><span class="glyphicon glyphicon-zoom-in"></span></h1>
-        </div>
-        <span class="pull-left label label-primary">
-            @Model.Price.ToString("c")
-        </span>
+
+        <a href="#" class="btn btn-default btn-primary pull-left">Quick View</a>
         @using (Html.BeginForm("AddToCart", "Cart"))
         {
             <div class="pull-right">
                 @Html.HiddenFor(x => x.ProductID)
                 @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                <input type="submit" class="btn btn-sm btn-success" value="Add to cart" />
+
+                <input type="submit" class="btn btn-default btn-success" value="Add to cart" />
             </div>
         }
+
     </div>
 </div>
