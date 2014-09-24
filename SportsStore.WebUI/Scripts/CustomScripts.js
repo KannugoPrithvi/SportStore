@@ -39,7 +39,7 @@
 
     //Please make sure the below two lines are the last lines of code of this file
     //These lines of code are to avoid resizing of the grid divs on the final page
-    //$('.thumbnail').css('height', '390px');
-    //$('.thumbnail').css('width', '230px');
-    $('..clampString').css('height','50px');
+    $('.thumbnail').css('height', '390px');
+    $('.thumbnail').css('width', '230px');
+    $('.clampString').css('height','50px');
 });
