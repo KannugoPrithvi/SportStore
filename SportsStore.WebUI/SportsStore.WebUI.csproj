@@ -102,6 +102,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\carousel-images\image1.jpg" />
+    <Content Include="Content\images\carousel-images\image2.jpg" />
+    <Content Include="Content\images\carousel-images\image3.jpg" />
     <Content Include="Content\images\cart-image-icons\1.jpg" />
     <Content Include="Content\images\cart-image-icons\10.jpg" />
     <Content Include="Content\images\cart-image-icons\11.jpg" />
