@@ -32,7 +32,7 @@ namespace SportsStore.Domain.Entities
         }
         public decimal ComputeTotalValue()
         {
-            return lineCollection.Sum(s => s.Product.Price * s.Quantity);
+            return lineCollection.Sum(s => s.Product.UnitPrice * s.Quantity);
         }
         public void Clear()
         {

@@ -51,7 +51,7 @@ namespace SportsStore.Domain.Concrete
                     .AppendLine("Items:");
                 foreach (var line in cart.Lines)
                 {
-                    var subTotal = line.Product.Price * line.Quantity;
+                    var subTotal = line.Product.UnitPrice * line.Quantity;
                     body.AppendFormat("{0} x {1} (subtotal: {2:c}", line.Quantity, line.Product.Name, subTotal);
 
                 }

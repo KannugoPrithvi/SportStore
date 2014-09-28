@@ -28,13 +28,13 @@ namespace SportsStore.Domain.Concrete
                 Product dbEntry = context.Products.Find(product.ProductID);
                 if(dbEntry != null)
                 {
-                    dbEntry.Category = product.Category;
-                    dbEntry.Description = product.Description;
-                    dbEntry.Name = product.Name;
-                    dbEntry.Price = product.Price;
-                    dbEntry.ImageData = product.ImageData;
-                    dbEntry.ImageMimeType = product.ImageMimeType;
-                    dbEntry.ImagePath = product.ImagePath;
+                    //dbEntry.Category = product.Category;
+                    //dbEntry.Description = product.Description;
+                    //dbEntry.Name = product.Name;
+                    //dbEntry.Price = product.Price;
+                    //dbEntry.ImageData = product.ImageData;
+                    //dbEntry.ImageMimeType = product.ImageMimeType;
+                    //dbEntry.ImagePath = product.ImagePath;
                 }
             }
             context.SaveChanges();
