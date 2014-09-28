@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//Shipping details will be updated soon
 namespace SportsStore.Domain.Entities
 {
     public class ShippingDetails
