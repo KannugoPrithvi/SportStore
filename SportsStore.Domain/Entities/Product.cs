@@ -57,14 +57,23 @@ namespace SportsStore.Domain.Entities
         public string Header { get; set; }
         public string Footer { get; set; }
         [Required(ErrorMessage="Please select yes or no")]
-        public bool IsTaxed { get; set; }
-        [Required]
-        [HiddenInput(DisplayValue=false)]
-        public int CategoryID { get; set; }
+        public bool IsTaxed { get; set; }       
         public int MaximumProductQuantity { get; set; }
         [Required(ErrorMessage="Please enter a integer value to show in order in case similar products are shown in the list")]
-        public int ProductOrder { get; set; }      
-       
+        public int ProductOrder { get; set; }
+        public string Group { get; set; }
+
+        public virtual ICollection<CustomerReview> CustomerReviews { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
+        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        public virtual ICollection<ProductRating> ProductRatings { get; set; }
+        public virtual ICollection<ProductSetting> ProductSettings { get; set; }
+        public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
+        public virtual ICollection<RelatedProduct> RelatedProducts { get; set; }
+        public virtual ICollection<RelatedProduct> RelatedProducts1 { get; set; }
+        public virtual ICollection<Sku> Skus { get; set; }
        
     }
 
