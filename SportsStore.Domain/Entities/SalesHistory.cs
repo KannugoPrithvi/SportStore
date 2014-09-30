@@ -24,6 +24,6 @@ namespace SportsStore.Domain.Entities
         public virtual CustomerAddress CustomerAddress { get; set; }
         public virtual Discount Discount { get; set; }
         public virtual SalesHistory SalesHistory1 { get; set; }
-        public virtual SalesHistory SalesHistory2 { get; set; }
+        
     }
 }

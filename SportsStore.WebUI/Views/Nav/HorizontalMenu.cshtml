@@ -1,4 +1,4 @@
-﻿@model IDictionary<string, int>
+﻿@model IEnumerable<SportsStore.WebUI.Models.ProductCategoryViewModel>
 @using System.Linq
 
 @if (ViewBag.SelectedCategory == null)
@@ -20,17 +20,17 @@ else
 
     foreach (var link in Model)
     {
-        if (link.Key == ViewBag.SelectedCategory)
+        if (link.CategoryName == ViewBag.SelectedCategory)
         {
             <li class="active">
-                <a href="@Url.Action("List","Product",new{category=link.Key,page=1})">@link.Key <span class='badge'>@link.Value</span></a>
+                <a href="@Url.Action("List", "Product", new { CategoryID = link.CategoryID, page = 1 })">@link.CategoryName <span class='badge'>@link.ProductNos</span></a>
             </li>
             index++;
         }
         else
         {
             <li>
-                <a href="@Url.Action("List","Product",new{category=link.Key,page=1})">@link.Key <span class='badge'>@link.Value</span></a>
+                <a href="@Url.Action("List", "Product", new { CategoryID = link.CategoryID, page = 1 })">@link.CategoryName <span class='badge'>@link.ProductNos</span></a>
             </li>
             index++;
         }
@@ -39,9 +39,9 @@ else
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle label-success drop-down-font" href="#">More Categories <b class="caret"></b></a>
                 <ul role="menu" class="dropdown-menu">
-                    @for (int extraSubMenu = index; extraSubMenu < Model.Count; extraSubMenu++)
+                    @for (int extraSubMenu = index; extraSubMenu < Model.Count(); extraSubMenu++)
                     {
-                        <li><a href="@Url.Action("List", "Product", new { category = Model.ElementAt(extraSubMenu).Key, page = 1 })">@Model.ElementAt(extraSubMenu).Key <span class='badge'>@Model.ElementAt(extraSubMenu).Value</span></a></li>
+                        <li><a href="@Url.Action("List", "Product", new { CategoryID = Model.ElementAt(extraSubMenu).CategoryID, page = 1 })">@Model.ElementAt(extraSubMenu).CategoryName <span class='badge'>@Model.ElementAt(extraSubMenu).ProductNos</span></a></li>
                     }                    
                 </ul>
             </li>

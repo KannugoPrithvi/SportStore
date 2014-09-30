@@ -14,7 +14,7 @@ namespace SportsStore.Domain.Entities
         public int ProductCategoryOrder { get; set; }
         public string Group { get; set; }
 
-        public virtual Category Category { get; set; }
-        public virtual Product Product { get; set; }
+        //public virtual Category Category { get; set; }
+        //public virtual Product Product { get; set; }
     }
 }

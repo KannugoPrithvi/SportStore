@@ -394,7 +394,9 @@
     <Compile Include="Models\CartIndexViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
+    <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductsListViewModel.cs" />
+    <Compile Include="Models\ProductWithImagesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

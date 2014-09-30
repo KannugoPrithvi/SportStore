@@ -20,10 +20,10 @@ namespace SportsStore.Domain.Entities
         public int CategoryOrder { get; set; }
         public string Group { get; set; }
 
-        public virtual ICollection<CategorySetting> CategorySettings { get; set; }
-        public virtual ICollection<Image> Images { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
-        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
-        public virtual ICollection<SalesHistory> SalesHistories { get; set; }
+        //public virtual ICollection<CategorySetting> CategorySettings { get; set; }
+        //public virtual ICollection<Image> Images { get; set; }
+        //public virtual ICollection<Product> Products { get; set; }
+        //public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        //public virtual ICollection<SalesHistory> SalesHistories { get; set; }
     }
 }

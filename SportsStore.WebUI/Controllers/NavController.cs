@@ -1,4 +1,5 @@
 ﻿using SportsStore.Domain.Abstract;
+using SportsStore.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,20 +17,30 @@ namespace SportsStore.WebUI.Controllers
             repository = repo;
         }
         public PartialViewResult Menu(string category = null)
-        {
+        {           
             ViewBag.SelectedCategory = category;
-            IEnumerable<string> categories = repository.Products
-                .Select(x => x.Category)
-                .Distinct()
-                .OrderBy(x => x);
-            Dictionary<string, int> nameAndCount = new Dictionary<string, int>();            
-            foreach (var item in categories)
-            {                
-                nameAndCount[item] = repository.Products.Count(x => x.Category == item);
+            var tempCategoryViewModel = from pc in repository.ProductCategories
+                                        join c in repository.Categories
+                                        on
+                                        pc.CategoryID equals c.CategoryID
+                                        group c by new { c.CategoryID, c.Name } into result
+                                        select new ProductCategoryViewModel
+                                        {
+                                            CategoryID = result.First().CategoryID,
+                                            CategoryName = result.First().Name,
+                                            ProductNos = result.Count()
+                                        };
+            List<ProductCategoryViewModel> lstOfProdCatViewModel = new List<ProductCategoryViewModel>();
+            foreach (var item in tempCategoryViewModel)
+            {
+                lstOfProdCatViewModel.Add((ProductCategoryViewModel)item);
             }
+            
+            Dictionary<string, int> nameAndCount = new Dictionary<string, int>();
 
-            ViewBag.TotalCount = repository.Products.Count();
-            return PartialView("HorizontalMenu", nameAndCount);
+
+            ViewBag.TotalCount = lstOfProdCatViewModel.Sum(x => x.ProductNos);
+            return PartialView("HorizontalMenu", lstOfProdCatViewModel);
         }
     }
 }

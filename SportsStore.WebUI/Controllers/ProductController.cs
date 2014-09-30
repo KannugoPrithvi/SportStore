@@ -18,8 +18,23 @@ namespace SportsStore.WebUI.Controllers
             this.repository = productRepository;
         }
 
-        public ViewResult List(string category,int page = 1)
+        public ViewResult List(int CategoryID,int page = 1)
         {
+            IEnumerable<int> ProductCount;
+            IEnumerable<Product> Products;
+            if(CategoryID !=0)
+            {
+                var result = repository.ProductCategories
+                    .Where(x => x.CategoryID == CategoryID)
+                    .Select(x => x.ProductID);
+                ProductCount = result.ToList();
+
+                foreach (int item in result)
+                {
+                    Products.Add
+                }
+            }
+            
             ProductsListViewModel model = new ProductsListViewModel
             {
                 Products = repository.Products
@@ -31,25 +46,26 @@ namespace SportsStore.WebUI.Controllers
                 {
                     ItemsPerPage = PageSize,
                     CurrentPage = page,
-                    TotalItems = category == null? repository.Products.Count() : repository.Products.Where(e => e.Category == category).Count()
+                    TotalItems = CategoryID == 0 ? repository.Products.Count() : ProductCount.Count()
                 },
                 CurrentCategory = category
             };
-            return View(model);
+            return null;
         }
 
 
         public FileContentResult GetImage(int productId)
         {
-            Product prod = repository.Products.FirstOrDefault(p => p.ProductID == productId);
-            if(prod != null)
-            {
-                return File(prod.ImageData, prod.ImageMimeType);
-            }
-            else
-            {
-                return null;
-            }
+            //Product prod = repository.Products.FirstOrDefault(p => p.ProductID == productId);
+            //if(prod != null)
+            //{
+            //    return File(prod.ImageData, prod.ImageMimeType);
+            //}
+            //else
+            //{
+            //    return null;
+            //}
+            return null;
         }
     }
 }
