@@ -16,9 +16,9 @@ namespace SportsStore.WebUI.Controllers
         {
             repository = repo;
         }
-        public PartialViewResult Menu(string category = null)
-        {           
-            ViewBag.SelectedCategory = category;
+        public PartialViewResult Menu(string CategoryName = null)
+        {
+            ViewBag.SelectedCategory = CategoryName;
             var tempCategoryViewModel = from pc in repository.ProductCategories
                                         join c in repository.Categories
                                         on

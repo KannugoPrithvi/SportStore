@@ -49,7 +49,7 @@
     </div>
 </div>
 <div class="entry-title">
-    <h5>@if (Model.CurrentCategoryID == 0)
+    <h5>@if (ViewBag.SelectedCategory == null)
         {
             <span>
             <strong>Products for 'All' category</strong>
@@ -59,7 +59,7 @@
         {
            
         <span>
-            <strong>Products for '@Model.CurrentCategoryID' category</strong>
+            <strong>Products for '@ViewBag.SelectedCategory' category</strong>
         </span>
         }
 

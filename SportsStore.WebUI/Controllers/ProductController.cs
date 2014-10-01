@@ -18,48 +18,61 @@ namespace SportsStore.WebUI.Controllers
             this.repository = productRepository;
         }
 
-        public ViewResult List(int CategoryID=1,int page = 1)
-        {           
-            
-            if(CategoryID !=0)
+        public ViewResult List(int CategoryID = 0, string CategoryName = null, int page = 1)
+        {
+            IEnumerable<ProductImageViewModel> result;
+            if (CategoryID != 0)
             {
-                var result = from P in repository.Products
-                             join I in repository.Images
-                             on
-                             P.ProductID equals I.ProductID
-                             join PC in repository.ProductCategories
-                             on
-                             P.ProductID equals PC.ProductID
-                             where PC.CategoryID == CategoryID
-                             select new ProductImageViewModel
-                             {
-                                 ProductID = P.ProductID,
-                                 ShortDescription = P.ShortDescription,
-                                 Name = P.Name,
-                                 AltPrice = P.AltPrice,
-                                 ImagePath = I.MediumImage
-                             };
-
-
-               ProductsListViewModel model = new ProductsListViewModel
-               {
-                   ProductsAndImages = result
-                   .OrderBy(p => p.ProductID)
-                   .Skip((page - 1) * PageSize)
-                   .Take(PageSize),
-                   PagingInfo = new PagingInfo
-                   {
-                       ItemsPerPage = PageSize,
-                       CurrentPage = page,
-                       TotalItems = CategoryID == 0 ? repository.Products.Count() : result.Count()
-                   },
-                   CurrentCategoryID = CategoryID
-               };
-               return View(model);
+                result = from P in repository.Products
+                         join I in repository.Images
+                         on
+                         P.ProductID equals I.ProductID
+                         join PC in repository.ProductCategories
+                         on
+                         P.ProductID equals PC.ProductID
+                         where PC.CategoryID == CategoryID
+                         select new ProductImageViewModel
+                         {
+                             ProductID = P.ProductID,
+                             ShortDescription = P.ShortDescription,
+                             Name = P.Name,
+                             AltPrice = P.AltPrice,
+                             ImagePath = I.MediumImage
+                         };
             }
-            
-            
-            return null;
+            else
+            {
+                //You need to do Left out join in future
+
+                result = from P in repository.Products
+                         join I in repository.Images
+                         on
+                         P.ProductID equals I.ProductID
+                         select new ProductImageViewModel
+                         {
+                             ProductID = P.ProductID,
+                             ShortDescription = P.ShortDescription,
+                             Name = P.Name,
+                             AltPrice = P.AltPrice,
+                             ImagePath = I.MediumImage
+                         };
+            }
+            ProductsListViewModel model = new ProductsListViewModel
+            {
+                ProductsAndImages = result
+                .OrderBy(p => p.ProductID)
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    ItemsPerPage = PageSize,
+                    CurrentPage = page,
+                    TotalItems = CategoryID == 0 ? repository.Products.Count() : result.Count()
+                },
+                CurrentCategoryID = CategoryID
+            };
+            ViewBag.SelectedCategory = CategoryName;
+            return View(model);
         }
 
 
