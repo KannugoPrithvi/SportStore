@@ -16,16 +16,16 @@ namespace SportsStore.Domain.Entities
                 Where(p => p.Product.ProductID == product.ProductID)
                 .FirstOrDefault();
 
-            if(line == null)
+            if (line == null)
             {
-                lineCollection.Add(new CartLine {Product = product,Quantity = quantity });
+                lineCollection.Add(new CartLine { Product = product, Quantity = quantity });
             }
             else
             {
                 line.Quantity += quantity;
             }
         }
-        
+
         public void RemoveLine(Product product)
         {
             lineCollection.RemoveAll(r => r.Product.ProductID == product.ProductID);

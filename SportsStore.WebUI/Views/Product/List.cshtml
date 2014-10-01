@@ -1,9 +1,7 @@
 ﻿@model SportsStore.WebUI.Models.ProductsListViewModel
-
 @{
     ViewBag.Title = "Products";
 }
-
 <div class="bs-example">
     <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
         <!-- Carousel indicators -->
@@ -49,23 +47,22 @@
     </div>
 </div>
 <div class="entry-title">
-    <h5>@if (ViewBag.SelectedCategory == null)
+    <h5>
+        @if (ViewBag.SelectedCategory == null)
         {
             <span>
-            <strong>Products for 'All' category</strong>
+                <strong>Products for 'All' category</strong>
             </span>
         }
         else
         {
-           
-        <span>
-            <strong>Products for '@ViewBag.SelectedCategory' category</strong>
+
+            <span>
+                <strong>Products for '@ViewBag.SelectedCategory' category</strong>
         </span>
         }
-
-    </h5>
+</h5>
 </div>
-
 <div class="row center-middle">
     @foreach (var p in Model.ProductsAndImages)
     {
@@ -73,6 +70,5 @@
     }
 </div>
 <div class="btn-group pull-right panel">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { CategoryID = Model.CurrentCategoryID, page = x}))
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { CategoryID = Model.CurrentCategoryID, page = x }))
 </div>
-

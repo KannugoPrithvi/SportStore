@@ -24,14 +24,14 @@ else
             if (link.CategoryName == ViewBag.SelectedCategory)
             {
                 <li class="active">
-                    <a href="@Url.Action("List", "Product", new { CategoryID = link.CategoryID,CategoryName=link.CategoryName, page = 1 })">@link.CategoryName <span class='badge'>@link.ProductNos</span></a>
+                    <a href="@Url.Action("List", "Product", new { CategoryID = link.CategoryID, CategoryName = link.CategoryName, page = 1 })">@link.CategoryName <span class='badge'>@link.ProductNos</span></a>
                 </li>
                 index++;
             }
             else
             {
                 <li>
-                    <a href="@Url.Action("List", "Product", new { CategoryID = link.CategoryID,CategoryName=link.CategoryName,page = 1 })">@link.CategoryName <span class='badge'>@link.ProductNos</span></a>
+                    <a href="@Url.Action("List", "Product", new { CategoryID = link.CategoryID,CategoryName = link.CategoryName, page = 1 })">@link.CategoryName <span class='badge'>@link.ProductNos</span></a>
                 </li>
                 index++;
             }
@@ -47,7 +47,7 @@ else
                     }
                 </ul>
             </li>
-             break;
+                    break;
         }
     }
 }

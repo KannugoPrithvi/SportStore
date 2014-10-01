@@ -6,12 +6,12 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
-    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />    
-    <script src="~/Scripts/jquery-2.1.1.min.js"></script>    
-    <script src="~/Scripts/bootstrap.min.js"></script> 
+    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.dotdotdot.min.js"></script>
-    <script src="~/Scripts/CustomScripts.js"></script>     
-    <title>@ViewBag.Title</title>   
+    <script src="~/Scripts/CustomScripts.js"></script>
+    <title>@ViewBag.Title</title>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -24,7 +24,7 @@
         </ul>
         @Html.Action("Summary", "Cart")
         <form role="search" class="navbar-form navbar-right">
-            <div class="form-group">                
+            <div class="form-group">
                 <input type="text" placeholder="Search" class="form-control">
                 <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
             </div>
@@ -37,8 +37,8 @@
             </ul>
         </div>
     </div>
-    <div class="container" id="CenteredContent">        
-        <div>            
+    <div class="container" id="CenteredContent">
+        <div>
             @RenderBody()
         </div>
     </div>

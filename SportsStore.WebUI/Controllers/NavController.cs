@@ -35,7 +35,7 @@ namespace SportsStore.WebUI.Controllers
             {
                 lstOfProdCatViewModel.Add((ProductCategoryViewModel)item);
             }
-            
+
             Dictionary<string, int> nameAndCount = new Dictionary<string, int>();
 
 
