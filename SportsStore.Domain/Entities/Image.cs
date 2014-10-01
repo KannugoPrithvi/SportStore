@@ -9,8 +9,7 @@ namespace SportsStore.Domain.Entities
     public class Image
     {
         public int ImageID { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        public Nullable<int> CategoryID { get; set; }
+        public Nullable<int> ProductID { get; set; }        
         public string ImageDescription { get; set; }
         public string SmallImage { get; set; }
         public string MediumImage { get; set; }
@@ -19,7 +18,7 @@ namespace SportsStore.Domain.Entities
         public string ExtraImage1 { get; set; }
         public string ExtraImage2 { get; set; }
 
-        public virtual Category Category { get; set; }
+       
         public virtual Product Product { get; set; }
     }
 }

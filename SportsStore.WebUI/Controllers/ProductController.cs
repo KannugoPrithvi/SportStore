@@ -18,38 +18,47 @@ namespace SportsStore.WebUI.Controllers
             this.repository = productRepository;
         }
 
-        public ViewResult List(int CategoryID,int page = 1)
-        {
-            IEnumerable<int> ProductCount;
-            IEnumerable<Product> Products;
+        public ViewResult List(int CategoryID=1,int page = 1)
+        {           
+            
             if(CategoryID !=0)
             {
-                var result = repository.ProductCategories
-                    .Where(x => x.CategoryID == CategoryID)
-                    .Select(x => x.ProductID);
-                ProductCount = result.ToList();
+                var result = from P in repository.Products
+                             join I in repository.Images
+                             on
+                             P.ProductID equals I.ProductID
+                             join PC in repository.ProductCategories
+                             on
+                             P.ProductID equals PC.ProductID
+                             where PC.CategoryID == CategoryID
+                             select new ProductImageViewModel
+                             {
+                                 ProductID = P.ProductID,
+                                 ShortDescription = P.ShortDescription,
+                                 Name = P.Name,
+                                 AltPrice = P.AltPrice,
+                                 ImagePath = I.MediumImage
+                             };
 
-                foreach (int item in result)
-                {
-                    Products.Add
-                }
+
+               ProductsListViewModel model = new ProductsListViewModel
+               {
+                   ProductsAndImages = result
+                   .OrderBy(p => p.ProductID)
+                   .Skip((page - 1) * PageSize)
+                   .Take(PageSize),
+                   PagingInfo = new PagingInfo
+                   {
+                       ItemsPerPage = PageSize,
+                       CurrentPage = page,
+                       TotalItems = CategoryID == 0 ? repository.Products.Count() : result.Count()
+                   },
+                   CurrentCategoryID = CategoryID
+               };
+               return View(model);
             }
             
-            ProductsListViewModel model = new ProductsListViewModel
-            {
-                Products = repository.Products
-                .Where(p => category == null || p.Category == category)
-                .OrderBy(p => p.ProductID)
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize),
-                PagingInfo = new PagingInfo
-                {
-                    ItemsPerPage = PageSize,
-                    CurrentPage = page,
-                    TotalItems = CategoryID == 0 ? repository.Products.Count() : ProductCount.Count()
-                },
-                CurrentCategory = category
-            };
+            
             return null;
         }
 

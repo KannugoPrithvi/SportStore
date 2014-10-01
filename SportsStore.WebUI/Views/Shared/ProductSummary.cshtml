@@ -1,5 +1,4 @@
-﻿@model SportsStore.Domain.Entities.Product
-
+﻿@model SportsStore.WebUI.Models.ProductImageViewModel
 
 
 
@@ -8,9 +7,9 @@
         <img src="@Model.ImagePath" width="100%" height="200px" alt="..." />
         <div class="caption">
             <div style="font-size:medium;font-weight:bold" class="clampString">@Model.Name</div>
-            <div class="clampString">@Model.Description</div>
+            <div class="clampString">@Model.ShortDescription</div>
             <span style="text-align: center">
-                <span style="font-size:medium;font-weight:bold">@Model.Price.ToString("c")</span>
+                <span style="font-size:medium;font-weight:bold">@Model.AltPrice.ToString("c")</span>
             </span>
         </div>
 

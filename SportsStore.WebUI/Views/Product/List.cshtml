@@ -49,7 +49,7 @@
     </div>
 </div>
 <div class="entry-title">
-    <h5>@if (Model.CurrentCategory == null)
+    <h5>@if (Model.CurrentCategoryID == 0)
         {
             <span>
             <strong>Products for 'All' category</strong>
@@ -59,7 +59,7 @@
         {
            
         <span>
-            <strong>Products for '@Model.CurrentCategory' category</strong>
+            <strong>Products for '@Model.CurrentCategoryID' category</strong>
         </span>
         }
 
@@ -67,12 +67,12 @@
 </div>
 
 <div class="row center-middle">
-    @foreach (var p in Model.Products)
+    @foreach (var p in Model.ProductsAndImages)
     {
         @Html.Partial("ProductSummary", p)
     }
 </div>
 <div class="btn-group pull-right panel">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { CategoryID = Model.CurrentCategoryID, page = x}))
 </div>
 
