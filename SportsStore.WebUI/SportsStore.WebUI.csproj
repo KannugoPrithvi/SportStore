@@ -396,6 +396,7 @@
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductsListViewModel.cs" />
+    <Compile Include="Models\ProductSpecificationViewModel.cs" />
     <Compile Include="Models\ProductWithImagesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
