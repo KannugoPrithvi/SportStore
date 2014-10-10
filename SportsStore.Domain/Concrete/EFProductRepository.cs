@@ -11,24 +11,10 @@ namespace SportsStore.Domain.Concrete
     public class EFProductRepository : IProductRepository
     {
         private EFDbContext context = new EFDbContext();
+        //Product related CRUD operations
         public IEnumerable<Product> Products
         {
             get { return context.Product; }
-        }
-
-        public IEnumerable<Category> Categories
-        {
-            get { return context.Category; }
-        }
-
-        public IEnumerable<ProductCategory> ProductCategories
-        {
-            get { return context.ProductCategory; }
-        }
-
-        public IEnumerable<Image> Images
-        {
-            get { return context.Image; }
         }
         public void SaveProduct(Product product)
         {
@@ -69,6 +55,53 @@ namespace SportsStore.Domain.Concrete
             if (dbEntry != null)
             {
                 context.Product.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+        //Categories related CRUD operations
+        public IEnumerable<Category> Categories
+        {
+            get { return context.Category; }
+        }
+        //ProductCategories related CRUD operations
+        public IEnumerable<ProductCategory> ProductCategories
+        {
+            get { return context.ProductCategory; }
+        }
+        //Images related CRUD operations
+        public IEnumerable<Image> Images
+        {
+            get { return context.Image; }
+        }
+        //ProductSpecifications related CRUD operations
+        public IEnumerable<ProductSpecification> ProductSpecifications
+        {
+            get { return context.ProductSpecification; }
+        }
+        public void SaveProductSpecification(ProductSpecification productSpecification)
+        {
+            if(productSpecification.ProductSpecificationID ==0)
+            {
+                context.ProductSpecification.Add(productSpecification);
+            }
+            else
+            {
+                ProductSpecification dbEntry = context.ProductSpecification.Find(productSpecification.ProductSpecificationID);
+                if(dbEntry!=null)
+                {
+                    dbEntry.ProductID = productSpecification.ProductID;
+                    dbEntry.SkuID = productSpecification.SkuID;
+                    dbEntry.ProductSpecificationInformation = productSpecification.ProductSpecificationInformation;                    
+                }
+            }
+        }
+        public ProductSpecification DeleteProductSpecification(int productSpecificationID)
+        {
+            ProductSpecification dbEntry = context.ProductSpecification.Find(productSpecification.ProductSpecificationID);
+            if (dbEntry != null)
+            {
+                context.ProductSpecification.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;

@@ -74,7 +74,8 @@ namespace SportsStore.WebUI.Controllers
             ViewBag.SelectedCategory = CategoryName;
             return View(model);
         }
-        public ActionResult QuickView(int ProductID = 0)
+        [HttpGet]
+        public ActionResult ProductQuickView(int ProductID = 0)
         {
             if(ProductID == 0)
             {
@@ -82,8 +83,13 @@ namespace SportsStore.WebUI.Controllers
             }
             else
             {
-
+                return null;
             }
+        }
+        [HttpPost]
+        public ActionResult ProductQuickView(IEnumerable<ProductSpecificationDetails> productSpecifications)
+        {
+
         }
 
         public FileContentResult GetImage(int productId)
