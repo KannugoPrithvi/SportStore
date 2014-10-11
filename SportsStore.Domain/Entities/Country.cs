@@ -10,9 +10,7 @@ namespace SportsStore.Domain.Entities
     {
         public int CountryID { get; set; }
         public string Name { get; set; }
-        public string Code { get; set; }
-        public int CountryCode { get; set; }
-        public bool AllowOtherStates { get; set; }
+        public string Code { get; set; }       
         public bool IsActive { get; set; }
         public string Group { get; set; }
 

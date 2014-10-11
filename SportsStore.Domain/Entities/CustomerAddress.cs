@@ -19,12 +19,7 @@ namespace SportsStore.Domain.Entities
         public string HomePhone { get; set; }
         public string WorkPhone { get; set; }
         public string PrimaryEmail { get; set; }
-        public string AlternativeEmail { get; set; }
-        public string Extra1 { get; set; }
-        public string Extra2 { get; set; }
-        public string Extra3 { get; set; }
-        public string Extra4 { get; set; }
-        public string Extra5 { get; set; }
+        public string AlternativeEmail { get; set; }       
         public string Notes { get; set; }
         public string Group { get; set; }
 

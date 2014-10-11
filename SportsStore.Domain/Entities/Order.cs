@@ -9,8 +9,7 @@ namespace SportsStore.Domain.Entities
     public class Order
     {
         public int OrderID { get; set; }
-        public Nullable<int> CustomerID { get; set; }
-        public string UserName { get; set; }
+        public Nullable<int> CustomerID { get; set; }        
         public Nullable<int> OrderNumber { get; set; }
         public string TrackingNumber { get; set; }
         public Nullable<decimal> Total { get; set; }

@@ -11,6 +11,8 @@ namespace SportsStore.Domain.Concrete
     public class EFProductRepository : IProductRepository
     {
         private EFDbContext context = new EFDbContext();
+
+
         //Product related CRUD operations
         public IEnumerable<Product> Products
         {
@@ -59,21 +61,24 @@ namespace SportsStore.Domain.Concrete
             }
             return dbEntry;
         }
+
+
+
         //Categories related CRUD operations
         public IEnumerable<Category> Categories
         {
             get { return context.Category; }
         }
-        public void SaveCategories(Category category)
+        public void SaveCategory(Category category)
         {
-            if(category.CategoryID ==0)
+            if (category.CategoryID == 0)
             {
                 context.Category.Add(category);
             }
             else
             {
                 Category dbEntry = context.Category.Find(category.CategoryID);
-                if(dbEntry != null)
+                if (dbEntry != null)
                 {
                     dbEntry.Code = category.Code;
                     dbEntry.Name = category.Name;
@@ -88,32 +93,35 @@ namespace SportsStore.Domain.Concrete
             }
             context.SaveChanges();
         }
-        public Category DeleteCategories(int categoryID)
+        public Category DeleteCategory(int categoryID)
         {
             Category dbEntry = context.Category.Find(categoryID);
-            if(dbEntry !=null)
+            if (dbEntry != null)
             {
                 context.Category.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;
         }
+
+
+
         //ProductCategories related CRUD operations
         public IEnumerable<ProductCategory> ProductCategories
         {
             get { return context.ProductCategory; }
         }
 
-        public void SaveImages(ProductCategory productCategory)
+        public void SaveProductCategory(ProductCategory productCategory)
         {
-            if(productCategory.ProductCategoryID == 0)
+            if (productCategory.ProductCategoryID == 0)
             {
                 context.ProductCategory.Add(productCategory);
             }
             else
             {
                 ProductCategory dbEntry = context.ProductCategory.Find(productCategory.ProductCategoryID);
-                if(dbEntry != null)
+                if (dbEntry != null)
                 {
                     dbEntry.CategoryID = productCategory.CategoryID;
                     dbEntry.ProductID = productCategory.ProductID;
@@ -125,29 +133,32 @@ namespace SportsStore.Domain.Concrete
         public ProductCategory DeleteProductCategory(int productCategoryID)
         {
             ProductCategory dbEntry = context.ProductCategory.Find(productCategoryID);
-            if(dbEntry != null)
+            if (dbEntry != null)
             {
                 context.ProductCategory.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;
         }
+
+
+
         //Images related CRUD operations
         public IEnumerable<Image> Images
         {
             get { return context.Image; }
         }
 
-        public void SaveImages(Image image)
+        public void SaveImage(Image image)
         {
-            if(image.ImageID == 0)
+            if (image.ImageID == 0)
             {
                 context.Image.Add(image);
             }
             else
             {
                 Image dbEntry = context.Image.Find(image.ImageID);
-                if(dbEntry != null)
+                if (dbEntry != null)
                 {
                     dbEntry.ProductID = image.ProductID;
                     dbEntry.ImageDescription = image.ImageDescription;
@@ -165,13 +176,17 @@ namespace SportsStore.Domain.Concrete
         public Image DeleteImage(int imageID)
         {
             Image dbEntry = context.Image.Find(imageID);
-            if(dbEntry != null)
+            if (dbEntry != null)
             {
                 context.Image.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;
         }
+
+
+
+
         //ProductSpecifications related CRUD operations
         public IEnumerable<ProductSpecification> ProductSpecifications
         {
@@ -179,18 +194,18 @@ namespace SportsStore.Domain.Concrete
         }
         public void SaveProductSpecification(ProductSpecification productSpecification)
         {
-            if(productSpecification.ProductSpecificationID ==0)
+            if (productSpecification.ProductSpecificationID == 0)
             {
                 context.ProductSpecification.Add(productSpecification);
             }
             else
             {
                 ProductSpecification dbEntry = context.ProductSpecification.Find(productSpecification.ProductSpecificationID);
-                if(dbEntry!=null)
+                if (dbEntry != null)
                 {
                     dbEntry.ProductID = productSpecification.ProductID;
                     dbEntry.SkuID = productSpecification.SkuID;
-                    dbEntry.ProductSpecificationInformation = productSpecification.ProductSpecificationInformation;                    
+                    dbEntry.ProductSpecificationInformation = productSpecification.ProductSpecificationInformation;
                 }
             }
             context.SaveChanges();
@@ -205,5 +220,559 @@ namespace SportsStore.Domain.Concrete
             }
             return dbEntry;
         }
+
+
+
+        //State related CRUD operations
+        public IEnumerable<State> States
+        {
+            get { return context.State; }
+        }
+        public void SaveState(State state)
+        {
+            if (state.StateID == 0)
+            {
+                context.State.Add(state);
+            }
+            else
+            {
+                State dbEntry = context.State.Find(state.StateID);
+                if (dbEntry != null)
+                {
+                    dbEntry.CountryID = state.CountryID;
+                    dbEntry.Name = state.Name;
+                    dbEntry.Code = state.Code;
+                    dbEntry.StateOrder = state.StateOrder;
+                    dbEntry.IsActive = state.IsActive;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public State DeleteState(int stateID)
+        {
+            State dbEntry = context.State.Find(stateID);
+            if (dbEntry != null)
+            {
+                context.State.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+
+        //RelatedProduct related CRUD operations
+        public IEnumerable<RelatedProduct> RelatedProducts
+        {
+            get { return context.RelatedProduct; }
+        }
+        public void SaveRelatedProduct(RelatedProduct relatedProduct)
+        {
+            if (relatedProduct.RelatedProductID == 0)
+            {
+                context.RelatedProduct.Add(relatedProduct);
+            }
+            else
+            {
+                RelatedProduct dbEntry = context.RelatedProduct.Find(relatedProduct.RelatedProductID);
+                if (dbEntry != null)
+                {
+                    dbEntry.ParentProductID = relatedProduct.RelatedProductID;
+                    dbEntry.ProductID = relatedProduct.ProductID;
+                    dbEntry.RelatedType = relatedProduct.RelatedType;
+                    dbEntry.RelatedProductOrder = relatedProduct.RelatedProductOrder;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public RelatedProduct DeleteRelatedProduct(int relatedProductID)
+        {
+            RelatedProduct dbEntry = context.RelatedProduct.Find(relatedProductID);
+            if (dbEntry != null)
+            {
+                context.RelatedProduct.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+
+        //ProductRating related CRUD operations
+        public IEnumerable<ProductRating> ProductRatings
+        {
+            get { return context.ProductRating; }
+        }
+        public void SaveProductRating(ProductRating productRating)
+        {
+            if (productRating.ProductRatingID == 0)
+            {
+                context.ProductRating.Add(productRating);
+            }
+            else
+            {
+                ProductRating dbEntry = context.ProductRating.Find(productRating.ProductRatingID);
+                if (dbEntry != null)
+                {
+                    dbEntry.ProductID = productRating.ProductID;
+                    dbEntry.ProductRatingDescription = productRating.ProductRatingDescription;
+                    dbEntry.AverageProductRating = productRating.AverageProductRating;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public ProductRating DeleteProductRating(int productRatingID)
+        {
+            ProductRating dbEntry = context.ProductRating.Find(productRatingID);
+            if (dbEntry != null)
+            {
+                context.ProductRating.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+        //City related CRUD operations
+        public IEnumerable<City> Cities
+        {
+            get { return context.City; }
+        }
+        public void SaveCity(City city)
+        {
+            if (city.CityID == 0)
+            {
+                context.City.Add(city);
+            }
+            else
+            {
+                City dbEntry = context.City.Find(city.CityID);
+                if (dbEntry != null)
+                {
+                    dbEntry.StateID = city.StateID;
+                    dbEntry.Name = city.Name;
+                    dbEntry.Code = city.Code;
+                    dbEntry.CityOrder = city.CityOrder;
+                    dbEntry.IsActive = city.IsActive;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public City DeleteCity(int cityID)
+        {
+            City dbEntry = context.City.Find(cityID);
+            if (dbEntry != null)
+            {
+                context.City.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+        //Country related CRUD operations
+        public IEnumerable<Country> Countries
+        {
+            get { return context.Country; }
+        }
+        public void SaveCountry(Country country)
+        {
+            if (country.CountryID == 0)
+            {
+                context.Country.Add(country);
+            }
+            else
+            {
+                Country dbEntry = context.Country.Find(country.CountryID);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = country.Name;
+                    dbEntry.Code = country.Code;
+                    dbEntry.IsActive = country.IsActive;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public Country DeleteCountry(int countryID)
+        {
+            Country dbEntry = context.Country.Find(countryID);
+            if (dbEntry != null)
+            {
+                context.Country.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+        //Customer related CRUD operations
+        public IEnumerable<Customer> Customers
+        {
+            get { return context.Customer; }
+        }
+        public void SaveCustomer(Customer customer)
+        {
+            if (customer.CustomerID == 0)
+            {
+                context.Customer.Add(customer);
+            }
+            else
+            {
+                Customer dbEntry = context.Customer.Find(customer.CustomerID);
+                if (dbEntry != null)
+                {
+                    dbEntry.UserName = customer.UserName;
+                    dbEntry.Password = customer.Password;
+                    dbEntry.CreatedDate = customer.CreatedDate;
+                    dbEntry.LastLogin = customer.LastLogin;
+                    dbEntry.Status = customer.Status;
+                    dbEntry.FirstName = customer.FirstName;
+                    dbEntry.LastName = customer.LastName;
+                    dbEntry.Organization = customer.Organization;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public Customer DeleteCustomer(int customerID)
+        {
+            Customer dbEntry = context.Customer.Find(customerID);
+            if (dbEntry != null)
+            {
+                context.Customer.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+        //CustomerAddress related CRUD operations
+        public IEnumerable<CustomerAddress> CustomerAddresses
+        {
+            get { return context.CustomerAddress; }
+        }
+        public void SaveCustomerAddress(CustomerAddress customerAddress)
+        {
+            if (customerAddress.CustomerAddressID == 0)
+            {
+                context.CustomerAddress.Add(customerAddress);
+            }
+            else
+            {
+                CustomerAddress dbEntry = context.CustomerAddress.Find(customerAddress.CustomerAddressID);
+                if (dbEntry != null)
+                {
+                    dbEntry.CustomerID = customerAddress.CustomerID;
+                    dbEntry.Address1 = customerAddress.Address1;
+                    dbEntry.Address2 = customerAddress.Address2;
+                    dbEntry.CityID = customerAddress.CityID;
+                    dbEntry.StateID = customerAddress.StateID;
+                    dbEntry.PostalCode = customerAddress.PostalCode;
+                    dbEntry.CountryID = customerAddress.CountryID;
+                    dbEntry.HomePhone = customerAddress.HomePhone;
+                    dbEntry.WorkPhone = customerAddress.WorkPhone;
+                    dbEntry.PrimaryEmail = customerAddress.PrimaryEmail;
+                    dbEntry.AlternativeEmail = customerAddress.AlternativeEmail;
+                    dbEntry.Notes = customerAddress.Notes;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public CustomerAddress DeleteCustomerAddress(int customerAddressID)
+        {
+            CustomerAddress dbEntry = context.CustomerAddress.Find(customerAddressID);
+            if (dbEntry != null)
+            {
+                context.CustomerAddress.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+        //CustomerReview related CRUD operations
+        public IEnumerable<CustomerReview> CustomerReviews
+        {
+            get { return context.CustomerReview; }
+        }
+        public void SaveCustomerReview(CustomerReview customerReview)
+        {
+            if (customerReview.CustomerReviewID == 0)
+            {
+                context.CustomerReview.Add(customerReview);
+            }
+            else
+            {
+                CustomerReview dbEntry = context.CustomerReview.Find(customerReview.CustomerReviewID);
+                if (dbEntry != null)
+                {
+                    dbEntry.ProductID = customerReview.ProductID;
+                    dbEntry.CustomerID = customerReview.CustomerID;
+                    dbEntry.Author = customerReview.Author;
+                    dbEntry.ReviewSubject = customerReview.ReviewSubject;
+                    dbEntry.ReviewText = customerReview.ReviewText;
+                    dbEntry.Rating = customerReview.Rating;
+                    dbEntry.IsHelpfulYes = customerReview.IsHelpfulYes;
+                    dbEntry.IsHelpfulNo = customerReview.IsHelpfulNo;
+                    dbEntry.AddedDate = dbEntry.AddedDate;
+                    dbEntry.ModifiedDate = dbEntry.ModifiedDate;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public CustomerReview DeleteCustomerReview(int customerReviewID)
+        {
+            CustomerReview dbEntry = context.CustomerReview.Find(customerReviewID);
+            if (dbEntry != null)
+            {
+                context.CustomerReview.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+
+
+        //Order related CRUD operations
+        public IEnumerable<Order> Orders
+        {
+            get { return context.Order; }
+        }
+        public void SaveOrder(Order order)
+        {
+            if (order.OrderID == 0)
+            {
+                context.Order.Add(order);
+            }
+            else
+            {
+                Order dbEntry = context.Order.Find(order.OrderID);
+                if (dbEntry != null)
+                {
+                    dbEntry.CustomerID = order.CustomerID;
+                    dbEntry.OrderNumber = order.OrderNumber;
+                    dbEntry.TrackingNumber = order.TrackingNumber;
+                    dbEntry.Total = order.Total;
+                    dbEntry.Shipping = order.Shipping;
+                    dbEntry.Tax = order.Tax;
+                    dbEntry.TaxableSubTotal = order.TaxableSubTotal;
+                    dbEntry.SubTotal = order.SubTotal;
+                    dbEntry.TotalWeight = order.TotalWeight;
+                    dbEntry.Quantity = order.Quantity;
+                    dbEntry.CreatedDate = order.CreatedDate;
+                    dbEntry.LastModified = order.LastModified;
+                    dbEntry.Completed = order.Completed;
+                    dbEntry.Status = order.Status;
+                    dbEntry.StatusDetails = order.StatusDetails;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public Order DeleteOrder(int orderID)
+        {
+            Order dbEntry = context.Order.Find(orderID);
+            if (dbEntry != null)
+            {
+                context.Order.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+
+        //OrderDelivery related CRUD operations
+        public IEnumerable<OrderDelivery> OrderDeliveries
+        {
+            get { return context.OrderDelivery; }
+        }
+        public void SaveOrderDelivery(OrderDelivery orderDelivery)
+        {
+            if (orderDelivery.OrderDeliveryID == 0)
+            {
+                context.OrderDelivery.Add(orderDelivery);
+            }
+            else
+            {
+                OrderDelivery dbEntry = context.OrderDelivery.Find(orderDelivery.OrderDeliveryID);
+                if (dbEntry != null)
+                {
+                    dbEntry.OrderID = orderDelivery.OrderID;
+                    dbEntry.ShippingMethodID = orderDelivery.ShippingMethodID;
+                    dbEntry.Delivered = orderDelivery.Delivered;
+                    dbEntry.Status = orderDelivery.Status;
+                    dbEntry.StatusDetails = orderDelivery.StatusDetails;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public OrderDelivery DeleteOrderDelivery(int orderDeliveryID)
+        {
+            OrderDelivery dbEntry = context.OrderDelivery.Find(orderDeliveryID);
+            if (dbEntry != null)
+            {
+                context.OrderDelivery.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+
+
+        //OrderItem related CRUD operations
+        public IEnumerable<OrderItem> OrderItems
+        {
+            get { return context.OrderItem; }
+        }
+        public void SaveOrderItem(OrderItem orderItem)
+        {
+            if (orderItem.OrderItemID == 0)
+            {
+                context.OrderItem.Add(orderItem);
+            }
+            else
+            {
+                OrderItem dbEntry = context.OrderItem.Find(orderItem.OrderDeliveryID);
+                if (dbEntry != null)
+                {
+                    dbEntry.OrderID = orderItem.OrderID;
+                    dbEntry.OrderDeliveryID = orderItem.OrderDeliveryID;
+                    dbEntry.Total = orderItem.Total;
+                    dbEntry.Weight = orderItem.Weight;
+                    dbEntry.Quantity = orderItem.Quantity;
+                    dbEntry.ProductID = orderItem.ProductID;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public OrderItem DeleteOrderItem(int orderItemID)
+        {
+            OrderItem dbEntry = context.OrderItem.Find(orderItemID);
+            if (dbEntry != null)
+            {
+                context.OrderItem.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+        //Administrator related CRUD operations
+        public IEnumerable<Administrator> Administrators
+        {
+            get { return context.Administrator; }
+        }
+        public void SaveAdministrator(Administrator administrator)
+        {
+            if (administrator.AdministratorID == 0)
+            {
+                context.Administrator.Add(administrator);
+            }
+            else
+            {
+                Administrator dbEntry = context.Administrator.Find(administrator.AdministratorID);
+                if (dbEntry != null)
+                {
+                    dbEntry.UserName = administrator.UserName;
+                    dbEntry.Password = administrator.Password;
+                    dbEntry.LastLogin = administrator.LastLogin;
+                    dbEntry.IsActive = administrator.IsActive;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public Administrator DeleteAdministrator(int administratorID)
+        {
+            Administrator dbEntry = context.Administrator.Find(administratorID);
+            if (dbEntry != null)
+            {
+                context.Administrator.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+        //AdministratorRole related CRUD operations
+        public IEnumerable<AdministratorRole> AdministratorRoles
+        {
+            get { return context.AdministratorRole; }
+        }
+        public void SaveAdministratorRole(AdministratorRole administratorRole)
+        {
+            if (administratorRole.AdministratorRoleID == 0)
+            {
+                context.AdministratorRole.Add(administratorRole);
+            }
+            else
+            {
+                AdministratorRole dbEntry = context.AdministratorRole.Find(administratorRole.AdministratorRoleID);
+                if (dbEntry != null)
+                {
+                    dbEntry.AdministratorID = administratorRole.AdministratorID;
+                    dbEntry.RoleID = administratorRole.RoleID;                    
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public AdministratorRole DeleteAdministratorRole(int administratorRoleID)
+        {
+            AdministratorRole dbEntry = context.AdministratorRole.Find(administratorRoleID);
+            if (dbEntry != null)
+            {
+                context.AdministratorRole.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+        //Role related CRUD operations
+        public IEnumerable<Role> Roles
+        {
+            get { return context.Role; }
+        }
+        public void SaveRole(Role role)
+        {
+            if (role.RoleID == 0)
+            {
+                context.Role.Add(role);
+            }
+            else
+            {
+                Role dbEntry = context.Role.Find(role.RoleID);
+                if (dbEntry != null)
+                {
+                    dbEntry.Code = role.Code;
+                    dbEntry.Name = role.Name;
+                    dbEntry.Description = role.Description;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public Role DeleteRole(int roleID)
+        {
+            Role dbEntry = context.Role.Find(roleID);
+            if (dbEntry != null)
+            {
+                context.Role.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
     }
 }
