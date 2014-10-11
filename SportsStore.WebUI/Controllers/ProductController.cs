@@ -89,7 +89,7 @@ namespace SportsStore.WebUI.Controllers
         [HttpPost]
         public ActionResult ProductQuickView(IEnumerable<ProductSpecificationDetails> productSpecifications)
         {
-
+            return null;
         }
 
         public FileContentResult GetImage(int productId)

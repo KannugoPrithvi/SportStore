@@ -64,15 +64,113 @@ namespace SportsStore.Domain.Concrete
         {
             get { return context.Category; }
         }
+        public void SaveCategories(Category category)
+        {
+            if(category.CategoryID ==0)
+            {
+                context.Category.Add(category);
+            }
+            else
+            {
+                Category dbEntry = context.Category.Find(category.CategoryID);
+                if(dbEntry != null)
+                {
+                    dbEntry.Code = category.Code;
+                    dbEntry.Name = category.Name;
+                    dbEntry.Keywords = category.Keywords;
+                    dbEntry.Description = category.Description;
+                    dbEntry.IsActive = category.IsActive;
+                    dbEntry.Header = category.Header;
+                    dbEntry.Footer = category.Footer;
+                    dbEntry.ParentCategory = category.ParentCategory;
+                    dbEntry.CategoryOrder = category.CategoryOrder;
+                }
+            }
+            context.SaveChanges();
+        }
+        public Category DeleteCategories(int categoryID)
+        {
+            Category dbEntry = context.Category.Find(categoryID);
+            if(dbEntry !=null)
+            {
+                context.Category.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
         //ProductCategories related CRUD operations
         public IEnumerable<ProductCategory> ProductCategories
         {
             get { return context.ProductCategory; }
         }
+
+        public void SaveImages(ProductCategory productCategory)
+        {
+            if(productCategory.ProductCategoryID == 0)
+            {
+                context.ProductCategory.Add(productCategory);
+            }
+            else
+            {
+                ProductCategory dbEntry = context.ProductCategory.Find(productCategory.ProductCategoryID);
+                if(dbEntry != null)
+                {
+                    dbEntry.CategoryID = productCategory.CategoryID;
+                    dbEntry.ProductID = productCategory.ProductID;
+                    dbEntry.ProductCategoryOrder = productCategory.ProductCategoryOrder;
+                }
+            }
+            context.SaveChanges();
+        }
+        public ProductCategory DeleteProductCategory(int productCategoryID)
+        {
+            ProductCategory dbEntry = context.ProductCategory.Find(productCategoryID);
+            if(dbEntry != null)
+            {
+                context.ProductCategory.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
         //Images related CRUD operations
         public IEnumerable<Image> Images
         {
             get { return context.Image; }
+        }
+
+        public void SaveImages(Image image)
+        {
+            if(image.ImageID == 0)
+            {
+                context.Image.Add(image);
+            }
+            else
+            {
+                Image dbEntry = context.Image.Find(image.ImageID);
+                if(dbEntry != null)
+                {
+                    dbEntry.ProductID = image.ProductID;
+                    dbEntry.ImageDescription = image.ImageDescription;
+                    dbEntry.SmallImage = image.SmallImage;
+                    dbEntry.MediumImage = image.MediumImage;
+                    dbEntry.LargeImage = image.LargeImage;
+                    dbEntry.ExtraImage0 = image.ExtraImage0;
+                    dbEntry.ExtraImage1 = image.ExtraImage1;
+                    dbEntry.ExtraImage2 = image.ExtraImage2;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public Image DeleteImage(int imageID)
+        {
+            Image dbEntry = context.Image.Find(imageID);
+            if(dbEntry != null)
+            {
+                context.Image.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
         }
         //ProductSpecifications related CRUD operations
         public IEnumerable<ProductSpecification> ProductSpecifications
@@ -95,10 +193,11 @@ namespace SportsStore.Domain.Concrete
                     dbEntry.ProductSpecificationInformation = productSpecification.ProductSpecificationInformation;                    
                 }
             }
+            context.SaveChanges();
         }
         public ProductSpecification DeleteProductSpecification(int productSpecificationID)
         {
-            ProductSpecification dbEntry = context.ProductSpecification.Find(productSpecification.ProductSpecificationID);
+            ProductSpecification dbEntry = context.ProductSpecification.Find(productSpecificationID);
             if (dbEntry != null)
             {
                 context.ProductSpecification.Remove(dbEntry);
