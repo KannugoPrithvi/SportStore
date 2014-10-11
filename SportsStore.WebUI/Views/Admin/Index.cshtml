@@ -14,7 +14,8 @@
             <tr>
                 <th class="text-right">ID</th>
                 <th>Name</th>
-                <th class="text-right">Price</th>
+                <th>Short Description</th>
+                <th class="text-right">Alternative Price</th>
                 <th class="text-center">Actions</th>
             </tr>
             @foreach (var item in Model)
@@ -27,7 +28,10 @@
                                item.ProductID
                            })
                     </td>
-                    <td class="text-right">@item.Price.ToString("c")</td>
+                    <td>
+                        @item.ShortDescription
+                    </td>
+                    <td class="text-right">@item.AltPrice.ToString("c")</td>
                     <td class="text-center">
                         @using (Html.BeginForm("Delete", "Admin"))
                         {
