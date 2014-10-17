@@ -1,0 +1,45 @@
+﻿@model SportsStore.Domain.Entities.Category
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 style="color:#00B4E1">Edit @Model.Name</h2>
+    </div>
+    @using (Html.BeginForm("Edit", "CategoryAdmin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="panel-body">
+            <hr />
+            @Html.ValidationSummary()
+            @Html.HiddenFor(model => model.CategoryID)
+            @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                switch (property.PropertyName)
+                {
+                    case "CategoryID":
+                        break;
+                    default:
+                        <div class="form-group">
+                            @if (property.PropertyName == "Header" || property.PropertyName == "Footer")
+                            {
+                                @Html.TextArea(property.PropertyName, null, new { @class="form-control"})
+                            }
+                            else
+                            {
+                                @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                            }
+                        </div>
+                        break;
+                }
+            }
+
+            <div class="panel-footer">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="button" value="Proceed to Product Category Page" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</div>
