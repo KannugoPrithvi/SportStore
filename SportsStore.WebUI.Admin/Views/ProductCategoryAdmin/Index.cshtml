@@ -5,48 +5,51 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="panel panel-default">
+    <div class="panel-heading"><h2>Index</h2></div>
+    <div class="panel-body">
+       
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product)
+                </th>
+                <th class="text-left">
+                    @Html.DisplayNameFor(model => model.ProductCategoryOrder)
+                </th>
+                <th class="text-left">
+                    @Html.DisplayNameFor(model => model.Group)
+                </th>
+                <th class="text-center">Actions</th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductCategoryOrder)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Group)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductCategoryOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Group)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { ProductCategoryID = item.ProductCategoryID }) |
+                        @Html.ActionLink("Details", "Details", new { ProductCategoryID = item.ProductCategoryID }) |
+                        @Html.ActionLink("Delete", "Delete", new { ProductCategoryID = item.ProductCategoryID })
+                    </td>
+                </tr>
+            }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductCategoryOrder)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Group)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { ProductCategoryID = item.ProductCategoryID }) |
-            @Html.ActionLink("Details", "Details", new { ProductCategoryID = item.ProductCategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { ProductCategoryID = item.ProductCategoryID })
-        </td>
-    </tr>
-}
-
-</table>
+        </table>
+    </div>
+    <div class="panel-footer">@Html.ActionLink("Create New", "Create")</div>
+</div>

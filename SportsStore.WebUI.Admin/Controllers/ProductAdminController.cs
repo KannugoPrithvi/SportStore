@@ -23,7 +23,7 @@ namespace SportsStore.WebUI.Admin.Controllers
         [HttpGet]
         public ViewResult Edit(int productId)
         {
-            Product product = repository.Products.FirstOrDefault(p => p.ProductID == productId);
+            Product product = repository.Products.FirstOrDefault(p => p.ProductID == productId);            
             return View(product);
         }
         [HttpPost]

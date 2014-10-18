@@ -23,30 +23,65 @@ namespace SportsStore.WebUI.Admin.Controllers
 
         //Get Product Category Admin Edit
         [HttpGet]
-        public ViewResult Edit(int ProductCategoryID)
+        public ViewResult Edit(int ProductCategoryID = 0)
         {
             ProductCategory productCategory = repository.ProductCategories.FirstOrDefault(model => model.ProductCategoryID == ProductCategoryID);
-            if(productCategory != null)
+            var Categories = from cat in repository.Categories select cat;
+            var Products = from prod in repository.Products select prod;
+            List<SelectListItem> cats = new List<SelectListItem>();
+            List<SelectListItem> prods = new List<SelectListItem>();
+            foreach (var item in Categories)
+            {
+                if (productCategory != null && item.CategoryID == productCategory.CategoryID)
+                {
+                    cats.Add(new SelectListItem { Selected = true, Text = item.Name, Value = item.CategoryID.ToString() });
+                }
+                else
+                {
+                    cats.Add(new SelectListItem { Selected = false, Text = item.Name, Value = item.CategoryID.ToString() });
+                }
+            }
+            foreach (var item in Products)
+            {
+                if (productCategory != null && item.ProductID == productCategory.ProductID)
+                {
+                    prods.Add(new SelectListItem { Selected = true, Text = item.Name, Value = item.ProductID.ToString() });
+                }
+                else
+                {
+                    prods.Add(new SelectListItem { Selected = false, Text = item.Name, Value = item.ProductID.ToString() });
+                }
+
+            }
+            ViewData["CategoryList"] = cats;
+            ViewData["ProductList"] = prods;
+            if (productCategory != null)
             {
                 return View(productCategory);
             }
+
             return View(new ProductCategory());
         }
-        
+
         //Post Product category Admin Edit
         [HttpPost]
         public ActionResult Edit(ProductCategory productCategory)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 repository.SaveProductCategory(productCategory);
-                TempData["message"] =string.Format("ProductCategory has been saved successfully");
+                TempData["message"] = string.Format("Product Category has been saved successfully");
                 return RedirectToAction("Index");
             }
             else
             {
                 return View(productCategory);
             }
+        }
+
+        public ActionResult Create()
+        {
+            return RedirectToAction("Edit");
         }
     }
 }
