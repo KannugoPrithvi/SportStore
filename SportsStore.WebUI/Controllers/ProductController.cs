@@ -74,24 +74,7 @@ namespace SportsStore.WebUI.Controllers
             ViewBag.SelectedCategory = CategoryName;
             return View(model);
         }
-        [HttpGet]
-        public ActionResult ProductQuickView(int ProductID = 0)
-        {
-            if(ProductID == 0)
-            {
-                return null;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        [HttpPost]
-        public ActionResult ProductQuickView(IEnumerable<ProductSpecificationDetails> productSpecifications)
-        {
-            return null;
-        }
-
+        
         public FileContentResult GetImage(int productId)
         {
             //Product prod = repository.Products.FirstOrDefault(p => p.ProductID == productId);
