@@ -168,6 +168,9 @@
     <Content Include="Views\CategoryAdmin\Edit.cshtml" />
     <Content Include="Views\ProductCategoryAdmin\Index.cshtml" />
     <Content Include="Views\ProductCategoryAdmin\Edit.cshtml" />
+    <Content Include="Views\ProductSpecification\ProductSpecificationList.cshtml" />
+    <Content Include="Views\ProductSpecification\Edit.cshtml" />
+    <Content Include="Views\ProductSpecification\Partial\ProductSpecification.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

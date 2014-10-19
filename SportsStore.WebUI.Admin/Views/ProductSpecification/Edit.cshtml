@@ -1,0 +1,35 @@
+﻿@model SportsStore.WebUI.Models.ProductSpecificationDetails
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>Edit Product Specificaition</h2>
+    </div>
+    <div class="panel-body">
+        @Model.ProductSpecHeading
+        <br />
+        @Model.ProductSpecOrder
+        <br />
+        <table>
+            <tr>
+                <th>Specification</th>
+                <th>Value</th>
+            </tr>
+            @foreach (var item in Model.ProductConfigurationDetails)
+            {
+                <tr><td>@item.SubHead</td><td>@item.SubSpec</td></tr>
+            }
+        </table>
+
+    </div>
+    <div class="panel-footer">
+
+    </div>
+</div>
+
+
+

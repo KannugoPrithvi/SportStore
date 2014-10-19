@@ -18,7 +18,7 @@ namespace SportsStore.WebUI.Models
         public int ProductSpecOrder { get; set; }
         public string ProductSpecHeading { get; set; }
         [XmlArray]
-        public List<ProductSubConfigurationDetails> ProductConfDetails { get; set; }
+        public List<ProductSubConfigurationDetails> ProductConfigurationDetails { get; set; }
     }   
 
 }

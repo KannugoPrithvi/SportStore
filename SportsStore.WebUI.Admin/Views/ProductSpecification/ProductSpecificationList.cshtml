@@ -1,0 +1,33 @@
+﻿@model SportsStore.WebUI.Models.ProductSpecificationDetails
+@{
+    ViewBag.Title = "ProductSpecification";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>Product Specification Edit Page</h2>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Edit", "ProductSpecification", FormMethod.Post, new { id="ProductSpecificationEditForm"}))
+        {
+            @Html.Partial("Partial/ProductSpecification")
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        }
+    </div>
+    <div class="panel-footer">
+        <input type="button" id="btnAddTbl" value="Add new Table" />
+    </div>
+</div>
+
+<script type="text/javascript">
+        $(function () {
+            $("#btnAddTbl").click(function (e) {
+                $.get("@Url.Action("ProductSpecification","ProductSpecification")", function (data) {
+                    $("#ProductSpecificationEditForm").append(data);
+                });
+            });
+        });
+    </script>

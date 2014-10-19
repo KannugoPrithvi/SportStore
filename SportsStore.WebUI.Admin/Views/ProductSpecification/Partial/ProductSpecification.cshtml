@@ -1,0 +1,38 @@
+﻿@model SportsStore.WebUI.Models.ProductSpecificationDetails
+
+<div class="panel-body">
+    <h4>Specification : @Model.ProductSpecHeading</h4>
+    <h4>Specification Order: @Model.ProductSpecOrder</h4>
+    <div class="divIntersts">
+        <table id="SpecificationList">
+            <tr>
+                <th>Product Specification</th>
+                <th>Product Specification Value</th>
+            </tr>
+            @if (Model.ProductConfigurationDetails != null)
+            {
+                for (int iterator = 0; iterator < Model.ProductConfigurationDetails.Count; iterator++)
+                {
+                    <tr>
+                        <td>@Html.TextBoxFor(m => m.ProductConfigurationDetails[iterator].SubHead)</td>
+                        <td>@Html.TextBoxFor(m => m.ProductConfigurationDetails[iterator].SubSpec)</td>
+                    </tr>
+                }
+            }
+        </table>
+        <input type="button" id="btnAdd" value="Add New Item" />
+    </div>
+    
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnAdd").click(function (e) {
+            var itemIndex = $("#SpecificationList tr").length;
+            e.preventDefault();
+            console.debug("ItemIndex = " + itemIndex);
+            var newItem = $("<tr><td><input type='text' id='ProductConfigurationDetails_" + (itemIndex - 1) + "__SubHead' name='ProductConfigurationDetails[" + (itemIndex - 1) + "].SubHead'/></td><td><input type='text' id='ProductConfigurationDetails_" + (itemIndex - 1) + "__SubSpec' name='ProductConfigurationDetails[" + (itemIndex - 1) + "].SubSpec'></td></tr>");
+            $("#SpecificationList").append(newItem);
+        });
+    });
+</script>
