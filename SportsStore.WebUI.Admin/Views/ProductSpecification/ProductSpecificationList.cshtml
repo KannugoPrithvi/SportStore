@@ -13,11 +13,19 @@
     {
         foreach (var item in Model)
         {
-            <div class="panel-body">
-                <hr />
-                @Html.Partial("Partial/ProductSpecification", item)
-                <hr />
-            </div>
+            if (item != null)
+            {
+                ViewBag.TableIndexNo = "SpecificationList_" + item.ProductSpecOrder;
+                ViewBag.ButtonAddIndex = "btnAddRow_" + item.ProductSpecOrder;
+                ViewBag.TableIndexNoJSID = "#" + ViewBag.TableIndexNo as String;
+                ViewBag.ButtonAddIndexJSID = "#" + ViewBag.ButtonAddIndex as string;
+                
+                <div class="panel-body">
+                    <hr />
+                    @Html.Partial("Partial/ProductSpecification", item)
+                    <hr />
+                </div>
+            }
         }
     }
     <div class="panel-footer">

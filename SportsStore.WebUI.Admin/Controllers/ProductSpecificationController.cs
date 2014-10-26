@@ -26,7 +26,27 @@ namespace SportsStore.WebUI.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int productSpecificationID = 0)
         {
-            List<ProductSpecificationDetails> prodSpecDetailsList = new List<ProductSpecificationDetails>();            
+            List<ProductSpecificationDetails> prodSpecDetailsList = new List<ProductSpecificationDetails>();
+            prodSpecDetailsList.Add(new ProductSpecificationDetails {
+                ProductSpecHeading="General Specification",
+                ProductSpecOrder=0,
+                ProductConfigurationDetails = GetConfigurationList()
+            
+            });
+            prodSpecDetailsList.Add(new ProductSpecificationDetails
+            {
+                ProductSpecHeading = "General Specification 1",
+                ProductSpecOrder = 1,
+                ProductConfigurationDetails = GetConfigurationList()
+
+            });
+            prodSpecDetailsList.Add(new ProductSpecificationDetails
+            {
+                ProductSpecHeading = "General Specification 2",
+                ProductSpecOrder = 2,
+                ProductConfigurationDetails = GetConfigurationList()
+
+            });
             return View("ProductSpecificationList", prodSpecDetailsList);
 
         }
