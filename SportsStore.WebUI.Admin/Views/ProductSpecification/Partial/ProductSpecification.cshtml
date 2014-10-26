@@ -1,10 +1,22 @@
 ﻿@model SportsStore.WebUI.Models.ProductSpecificationDetails
 
 <div class="panel-body">
-    <h4>Specification : @Model.ProductSpecHeading</h4>
-    <h4>Specification Order: @Model.ProductSpecOrder</h4>
-    <div class="divIntersts">
-        <table id="SpecificationList">
+    <div class="form-group">
+        @Html.Label("Specification Heading:", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.ProductSpecHeading, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Specification Order:", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.ProductSpecOrder, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="divInterests">
+        @* Dynamic ID needs to be integerated in the below line *@
+        <table id="@ViewBag.TableIndexNo" class="col-xs-6">
             <tr>
                 <th>Product Specification</th>
                 <th>Product Specification Value</th>
@@ -14,25 +26,28 @@
                 for (int iterator = 0; iterator < Model.ProductConfigurationDetails.Count; iterator++)
                 {
                     <tr>
-                        <td>@Html.TextBoxFor(m => m.ProductConfigurationDetails[iterator].SubHead)</td>
-                        <td>@Html.TextBoxFor(m => m.ProductConfigurationDetails[iterator].SubSpec)</td>
+                        <td style="padding:5px">@Html.TextBoxFor(m => m.ProductConfigurationDetails[iterator].SubHead, new { @class = "form-control col-xs-5" })</td>
+                        <td style="padding:5px">@Html.TextBoxFor(m => m.ProductConfigurationDetails[iterator].SubSpec, new { @class = "form-control col-xs-5" })</td>
                     </tr>
                 }
             }
         </table>
-        <input type="button" id="btnAdd" value="Add New Item" />
+        @* Dynamic ID needs to be integerated in the below line *@
+        <div class="col-xs-12" style="padding:5px">
+            <input type="button" id="@ViewBag.ButtonAddIndex" value="Add New Item" class="btn-primary" />
+        </div>
     </div>
-    
+
 </div>
 
+@* Dynamic ID needs to be integerated in the below line *@
 <script type="text/javascript">
-    $(function () {
-        $("#btnAdd").click(function (e) {
-            var itemIndex = $("#SpecificationList tr").length;
-            e.preventDefault();
-            console.debug("ItemIndex = " + itemIndex);
-            var newItem = $("<tr><td><input type='text' id='ProductConfigurationDetails_" + (itemIndex - 1) + "__SubHead' name='ProductConfigurationDetails[" + (itemIndex - 1) + "].SubHead'/></td><td><input type='text' id='ProductConfigurationDetails_" + (itemIndex - 1) + "__SubSpec' name='ProductConfigurationDetails[" + (itemIndex - 1) + "].SubSpec'></td></tr>");
-            $("#SpecificationList").append(newItem);
-        });
+    $("@ViewBag.ButtonAddIndexJSID").on("click",function (e) {
+        var itemIndex = $("@ViewBag.TableIndexNoJSID tr").length;
+        e.preventDefault();
+        console.debug("ItemIndex = " + itemIndex);
+        var newItem = $("<tr><td style='padding:5px'><input class='form-control' type='text' id='ProductConfigurationDetails_" + (itemIndex - 1) + "__SubHead' name='ProductConfigurationDetails[" + (itemIndex - 1) + "].SubHead'/></td><td style='padding:5px'><input class='form-control' type='text' id='ProductConfigurationDetails_" + (itemIndex - 1) + "__SubSpec' name='ProductConfigurationDetails[" + (itemIndex - 1) + "].SubSpec'></td></tr>");
+        debugger;
+        $("@ViewBag.TableIndexNoJSID").append(newItem);
     });
 </script>

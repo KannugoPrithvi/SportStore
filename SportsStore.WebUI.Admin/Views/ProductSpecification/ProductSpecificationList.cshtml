@@ -1,4 +1,4 @@
-﻿@model SportsStore.WebUI.Models.ProductSpecificationDetails
+﻿@model IEnumerable<SportsStore.WebUI.Models.ProductSpecificationDetails>
 @{
     ViewBag.Title = "ProductSpecification";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -8,26 +8,42 @@
     <div class="panel-heading">
         <h2>Product Specification Edit Page</h2>
     </div>
-    <div class="panel-body">
-        @using (Html.BeginForm("Edit", "ProductSpecification", FormMethod.Post, new { id="ProductSpecificationEditForm"}))
+
+    @using (Html.BeginForm("Edit", "ProductSpecification", FormMethod.Post, new { id = "ProductSpecificationEditForm", @class = "form-horizontal" }))
+    {
+        foreach (var item in Model)
         {
-            @Html.Partial("Partial/ProductSpecification")
-            <p>
-                <input type="submit" value="Save" />
-            </p>
+            <div class="panel-body">
+                <hr />
+                @Html.Partial("Partial/ProductSpecification", item)
+                <hr />
+            </div>
         }
-    </div>
+    }
     <div class="panel-footer">
-        <input type="button" id="btnAddTbl" value="Add new Table" />
+        <input type="button" id="btnAddTbl" value="Add new Table" class="btn-primary" style="margin:5px" />
+        <p>
+            <input id="submit" type="submit" value="Save" class="btn-primary" style="margin:5px" />
+        </p>
     </div>
 </div>
 
 <script type="text/javascript">
-        $(function () {
-            $("#btnAddTbl").click(function (e) {
-                $.get("@Url.Action("ProductSpecification","ProductSpecification")", function (data) {
-                    $("#ProductSpecificationEditForm").append(data);
-                });
+    $(function () {
+        $("#btnAddTbl").click(function (e) {
+            var itemIndex = $("#SpecificationList tr").length;
+            var itemTables = $("#ProductSpecificationEditForm").find("table").length;
+            e.preventDefault();
+            console.debug("Table ItemIndex = " + itemIndex);
+            console.debug("Table Number = " + itemTables);
+            $.get('@Url.Action("NewSpecificationTable", "ProductSpecification")/?TableIndex=' + itemTables, function (data) {
+                $('#ProductSpecificationEditForm').append(data);
             });
         });
-    </script>
+    });
+    $(function () {
+        $("#submit").click(function (e) {
+            $("#ProductSpecificationEditForm").submit();
+        });
+    });
+</script>
