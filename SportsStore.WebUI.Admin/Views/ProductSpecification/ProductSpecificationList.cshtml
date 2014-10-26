@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SportsStore.WebUI.Models.ProductSpecificationDetails>
+﻿@model List<SportsStore.WebUI.Models.ProductSpecificationDetails>
 @{
     ViewBag.Title = "ProductSpecification";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -11,7 +11,23 @@
 
     @using (Html.BeginForm("Edit", "ProductSpecification", FormMethod.Post, new { id = "ProductSpecificationEditForm", @class = "form-horizontal" }))
     {
-        foreach (var item in Model)
+        for (int iterator = 0; iterator < Model.Count(); iterator++)
+        {
+            if (Model[iterator] != null)
+            {
+                ViewBag.TableIndexNo = "SpecificationList_" + Model[iterator].ProductSpecOrder;
+                ViewBag.ButtonAddIndex = "btnAddRow_" + Model[iterator].ProductSpecOrder;
+                ViewBag.TableIndexNoJSID = "#" + ViewBag.TableIndexNo as String;
+                ViewBag.ButtonAddIndexJSID = "#" + ViewBag.ButtonAddIndex as string;
+                ViewBag.Iterator = iterator;
+                <div class="panel-body">
+                    <hr />
+                    @Html.Partial("Partial/ProductSpecification", Model[iterator])
+                    <hr />
+                </div>
+            }
+        }
+        @*foreach (var item in Model)
         {
             if (item != null)
             {
@@ -19,14 +35,14 @@
                 ViewBag.ButtonAddIndex = "btnAddRow_" + item.ProductSpecOrder;
                 ViewBag.TableIndexNoJSID = "#" + ViewBag.TableIndexNo as String;
                 ViewBag.ButtonAddIndexJSID = "#" + ViewBag.ButtonAddIndex as string;
-                
+
                 <div class="panel-body">
                     <hr />
                     @Html.Partial("Partial/ProductSpecification", item)
                     <hr />
                 </div>
             }
-        }
+        }*@
     }
     <div class="panel-footer">
         <input type="button" id="btnAddTbl" value="Add new Table" class="btn-primary" style="margin:5px" />

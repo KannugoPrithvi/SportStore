@@ -4,13 +4,15 @@
     <div class="form-group">
         @Html.Label("Specification Heading:", new { @class = "control-label col-md-2" })
         <div class="col-md-4">
-            @Html.TextBoxFor(m => m.ProductSpecHeading, new { @class = "form-control" })
+            @Html.TextBox("ProductSpecificationDetails[" + @ViewBag.Iterator as string + "].ProductSpecHeading", Model.ProductSpecHeading, new { id = "ProductSpecificationDetails_" + @ViewBag.Iterator as string + "__ProductSpecHeading", @class = "form-control" })
+            @*@Html.TextBoxFor(m => m.ProductSpecHeading, new { @class = "form-control" })*@
         </div>
     </div>
     <div class="form-group">
         @Html.Label("Specification Order:", new { @class = "control-label col-md-2" })
         <div class="col-md-4">
-            @Html.TextBoxFor(m => m.ProductSpecOrder, new { @class = "form-control" })
+            @Html.TextBox("ProductSpecificationDetails[" + @ViewBag.Iterator as string + "].ProductSpecOrder", Model.ProductSpecOrder, new { id = "ProductSpecificationDetails_" + @ViewBag.Iterator as string + "__ProductSpecOrder", @class = "form-control" })
+            @*@Html.TextBoxFor(m => m.ProductSpecOrder, new { @class = "form-control" })*@
         </div>
     </div>
 
@@ -26,9 +28,13 @@
                 for (int iterator = 0; iterator < Model.ProductConfigurationDetails.Count; iterator++)
                 {
                     <tr>
+                        <td style="padding:5px">@Html.TextBox("ProductSpecificationDetails[" + @ViewBag.Iterator as string + "].ProductConfigurationDetails[" + iterator + "].SubHead", Model.ProductConfigurationDetails[iterator].SubHead, new { id = "ProductSpecificationDetails_" + @ViewBag.Iterator as string + "__ProductConfigurationDetails_" + iterator + "__SubHead", @class = "form-control col-xs-5" })</td>
+                        <td style="padding:5px">@Html.TextBox("ProductSpecificationDetails[" + @ViewBag.Iterator as string + "].ProductConfigurationDetails[" + iterator + "].SubSpec", Model.ProductConfigurationDetails[iterator].SubSpec, new { id = "ProductSpecificationDetails_" + @ViewBag.Iterator as string + "__ProductConfigurationDetails_" + iterator + "__SubSpec", @class = "form-control col-xs-5" })</td>
+                    </tr>
+                    @*<tr>
                         <td style="padding:5px">@Html.TextBoxFor(m => m.ProductConfigurationDetails[iterator].SubHead, new { @class = "form-control col-xs-5" })</td>
                         <td style="padding:5px">@Html.TextBoxFor(m => m.ProductConfigurationDetails[iterator].SubSpec, new { @class = "form-control col-xs-5" })</td>
-                    </tr>
+                    </tr>*@
                 }
             }
         </table>
@@ -42,7 +48,7 @@
 
 @* Dynamic ID needs to be integerated in the below line *@
 <script type="text/javascript">
-    $("@ViewBag.ButtonAddIndexJSID").on("click",function (e) {
+    $("@ViewBag.ButtonAddIndexJSID").on("click", function (e) {
         var itemIndex = $("@ViewBag.TableIndexNoJSID tr").length;
         e.preventDefault();
         console.debug("ItemIndex = " + itemIndex);

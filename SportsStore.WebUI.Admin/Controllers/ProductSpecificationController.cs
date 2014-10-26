@@ -52,11 +52,10 @@ namespace SportsStore.WebUI.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductSpecificationDetails ProdSpecDetails)
+        public ActionResult Edit(List<ProductSpecificationDetails> ProdSpecDetailsList)
         {
-            var request = Request.Form;
-            ProductSpecificationDetails prodSpecDetails = ProdSpecDetails;
-            return View(ProdSpecDetails);
+            var request = Request.Form;            
+            return View(ProdSpecDetailsList);
         }
 
         public ActionResult NewSpecificationTable(int TableIndex = 0)
