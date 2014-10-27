@@ -61,6 +61,7 @@ namespace SportsStore.WebUI.Admin.Controllers
         public ActionResult NewSpecificationTable(int TableIndex = 0)
         {
             ProductSpecificationDetails prodSpecDetails = new ProductSpecificationDetails();
+            prodSpecDetails.ProductSpecOrder = TableIndex;
             prodSpecDetails.ProductConfigurationDetails = GetConfigurationList();
             ViewBag.TableIndexNo = "SpecificationList_" + TableIndex;
             ViewBag.ButtonAddIndex = "btnAddRow_" + TableIndex;
