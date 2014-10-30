@@ -1,12 +1,16 @@
 ﻿using SportsStore.Domain.Abstract;
+using SportsStore.Domain.Entities;
 using SportsStore.WebUI.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
+//This file needs code reorganize
 namespace SportsStore.WebUI.Admin.Controllers
 {
     public class ProductSpecificationController : Controller
@@ -24,14 +28,43 @@ namespace SportsStore.WebUI.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int productSpecificationID = 0)
+        public ActionResult Edit(int productSpecificationID = 1)
         {
+            ProductSpecification productSpecification = repository.ProductSpecifications.FirstOrDefault(p => p.ProductID == productSpecificationID);
+            ProductSpecificationViewModel productSpecViewModel = new ProductSpecificationViewModel();
+            var Products = from r in repository.Products select r;
+            List<SelectListItem> lstProductDropDown = null;
+            if (Products != null)
+            {
+                lstProductDropDown = new List<SelectListItem>();
+                foreach (var item in Products)
+                {
+                    //if (productSpecification.ProductID == item.ProductID)
+                    if (productSpecificationID == 1)
+                    {
+                        lstProductDropDown.Add(new SelectListItem { Text = item.Name, Value = item.ProductID.ToString(), Selected = true });
+                    }
+                    else
+                    {
+                        lstProductDropDown.Add(new SelectListItem { Text = item.Name, Value = item.ProductID.ToString(), Selected = false });
+                    }
+                }
+                ViewBag.ProductDropDown = lstProductDropDown;
+            }
+            else
+            {
+                ViewBag.ProductDropDown = null;
+            }
+
+
+            //Code needs to be written for Skus,context code and DAL code,Abover 20 lines of code has to be written for the SKU
             List<ProductSpecificationDetails> prodSpecDetailsList = new List<ProductSpecificationDetails>();
-            prodSpecDetailsList.Add(new ProductSpecificationDetails {
-                ProductSpecHeading="General Specification",
-                ProductSpecOrder=0,
+            prodSpecDetailsList.Add(new ProductSpecificationDetails
+            {
+                ProductSpecHeading = "General Specification",
+                ProductSpecOrder = 0,
                 ProductConfigurationDetails = GetConfigurationList()
-            
+
             });
             prodSpecDetailsList.Add(new ProductSpecificationDetails
             {
@@ -47,15 +80,32 @@ namespace SportsStore.WebUI.Admin.Controllers
                 ProductConfigurationDetails = GetConfigurationList()
 
             });
-            return View("ProductSpecificationList", prodSpecDetailsList);
+            //productSpecViewModel.ProductID = productSpecification.ProductID == 0 ? 1 : productSpecification.ProductID;
+            //productSpecViewModel.SkuID = productSpecification.SkuID;
+            productSpecViewModel.ProductID = 1;
+            productSpecViewModel.SkuID = 1;
+            productSpecViewModel.lstProductSpecificationDetails = prodSpecDetailsList;
+            productSpecViewModel.ProductSpecificationID = productSpecificationID;
+            return View("ProductSpecificationList", productSpecViewModel);
 
         }
 
         [HttpPost]
-        public ActionResult Edit(List<ProductSpecificationDetails> ProdSpecDetailsList)
+        public ActionResult Edit(ProductSpecificationViewModel productSpecificationViewModel)
         {
-            var request = Request.Form;            
-            return View(ProdSpecDetailsList);
+            //Need to write product Specification write operation
+            if (productSpecificationViewModel != null)
+            {
+                var request = Request.Form;
+                String XMLForm = ConvertObjectToXML(productSpecificationViewModel);
+                //repository.ProductSpecifications
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
         public ActionResult NewSpecificationTable(int TableIndex = 0)
@@ -79,6 +129,21 @@ namespace SportsStore.WebUI.Admin.Controllers
 
             return configurationList;
         }
+
+        private string ConvertObjectToXML(ProductSpecificationViewModel productSpecificationViewModel)
+        {
+            StringWriter writer = new StringWriter();
+
+            XmlSerializer x = new XmlSerializer(productSpecificationViewModel.GetType());
+            x.Serialize(writer, productSpecificationViewModel);
+            return writer.ToString();
+        }
+
+        private string ConvertXMLToObject(String Xml)
+        {
+            return null;
+        }
+
         public string ConvertToXML()
         {
             return null;

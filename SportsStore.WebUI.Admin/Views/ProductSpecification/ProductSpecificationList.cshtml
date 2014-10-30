@@ -1,4 +1,4 @@
-﻿@model List<SportsStore.WebUI.Models.ProductSpecificationDetails>
+﻿@model SportsStore.WebUI.Models.ProductSpecificationViewModel
 @{
     ViewBag.Title = "ProductSpecification";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -11,38 +11,44 @@
 
     @using (Html.BeginForm("Edit", "ProductSpecification", FormMethod.Post, new { id = "ProductSpecificationEditForm", @class = "form-horizontal" }))
     {
-        for (int iterator = 0; iterator < Model.Count(); iterator++)
+        <div class="form-group">
+            @Html.LabelFor(l => l.ProductID)
+            <div class="form-control">
+                @Html.DropDownList("ProductID", ViewBag.ProductDropDown as IEnumerable<SelectListItem>, new { @class="form-control"})
+            </div>
+        </div>
+        for (int iterator = 0; iterator < Model.lstProductSpecificationDetails.Count(); iterator++)
         {
-            if (Model[iterator] != null)
+            if (Model.lstProductSpecificationDetails[iterator] != null)
             {
-                ViewBag.TableIndexNo = "SpecificationList_" + Model[iterator].ProductSpecOrder;
-                ViewBag.ButtonAddIndex = "btnAddRow_" + Model[iterator].ProductSpecOrder;
+                ViewBag.TableIndexNo = "SpecificationList_" + Model.lstProductSpecificationDetails[iterator].ProductSpecOrder;
+                ViewBag.ButtonAddIndex = "btnAddRow_" + Model.lstProductSpecificationDetails[iterator].ProductSpecOrder;
                 ViewBag.TableIndexNoJSID = "#" + ViewBag.TableIndexNo as String;
                 ViewBag.ButtonAddIndexJSID = "#" + ViewBag.ButtonAddIndex as string;
                 ViewBag.Iterator = iterator;
                 <div class="panel-body">
                     <hr />
-                    @Html.Partial("Partial/ProductSpecification", Model[iterator])
+                    @Html.Partial("Partial/ProductSpecification", Model.lstProductSpecificationDetails[iterator])
                     <hr />
                 </div>
             }
         }
         @*foreach (var item in Model)
-        {
-            if (item != null)
             {
-                ViewBag.TableIndexNo = "SpecificationList_" + item.ProductSpecOrder;
-                ViewBag.ButtonAddIndex = "btnAddRow_" + item.ProductSpecOrder;
-                ViewBag.TableIndexNoJSID = "#" + ViewBag.TableIndexNo as String;
-                ViewBag.ButtonAddIndexJSID = "#" + ViewBag.ButtonAddIndex as string;
+                if (item != null)
+                {
+                    ViewBag.TableIndexNo = "SpecificationList_" + item.ProductSpecOrder;
+                    ViewBag.ButtonAddIndex = "btnAddRow_" + item.ProductSpecOrder;
+                    ViewBag.TableIndexNoJSID = "#" + ViewBag.TableIndexNo as String;
+                    ViewBag.ButtonAddIndexJSID = "#" + ViewBag.ButtonAddIndex as string;
 
-                <div class="panel-body">
-                    <hr />
-                    @Html.Partial("Partial/ProductSpecification", item)
-                    <hr />
-                </div>
-            }
-        }*@
+                    <div class="panel-body">
+                        <hr />
+                        @Html.Partial("Partial/ProductSpecification", item)
+                        <hr />
+                    </div>
+                }
+            }*@
     }
     <div class="panel-footer">
         <input type="button" id="btnAddTbl" value="Add new Table" class="btn-primary" style="margin:5px" />
