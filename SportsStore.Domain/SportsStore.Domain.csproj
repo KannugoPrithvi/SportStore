@@ -108,6 +108,7 @@
     <Compile Include="Entities\ProductRating.cs" />
     <Compile Include="Entities\ProductSetting.cs" />
     <Compile Include="Entities\ProductSpecification.cs" />
+    <Compile Include="Entities\ProductSpecificationAttribute.cs" />
     <Compile Include="Entities\RelatedProduct.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\SalesHistory.cs" />

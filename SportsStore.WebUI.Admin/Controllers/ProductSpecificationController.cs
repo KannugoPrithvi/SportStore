@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -16,76 +17,34 @@ namespace SportsStore.WebUI.Admin.Controllers
     public class ProductSpecificationController : Controller
     {
         IProductRepository repository;
+        XmlWriterSettings settings = null;        
 
         public ProductSpecificationController(IProductRepository repo)
         {
             repository = repo;
         }
 
-        public ViewResult Index()
+        public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "ProductAdmin");
         }
 
         [HttpGet]
-        public ActionResult Edit(int productSpecificationID = 1)
+        public ActionResult Edit(int ProductID = 0)
         {
-            ProductSpecification productSpecification = repository.ProductSpecifications.FirstOrDefault(p => p.ProductID == productSpecificationID);
+            ProductSpecification productSpecification = repository.ProductSpecifications.FirstOrDefault(p => p.ProductID == ProductID);
             ProductSpecificationViewModel productSpecViewModel = new ProductSpecificationViewModel();
-            var Products = from r in repository.Products select r;
-            List<SelectListItem> lstProductDropDown = null;
-            if (Products != null)
+            if(productSpecification != null)
             {
-                lstProductDropDown = new List<SelectListItem>();
-                foreach (var item in Products)
-                {
-                    //if (productSpecification.ProductID == item.ProductID)
-                    if (productSpecificationID == 1)
-                    {
-                        lstProductDropDown.Add(new SelectListItem { Text = item.Name, Value = item.ProductID.ToString(), Selected = true });
-                    }
-                    else
-                    {
-                        lstProductDropDown.Add(new SelectListItem { Text = item.Name, Value = item.ProductID.ToString(), Selected = false });
-                    }
-                }
-                ViewBag.ProductDropDown = lstProductDropDown;
+                productSpecViewModel.ProductID = productSpecification.ProductID;
+                productSpecViewModel.lstProductSpecificationDetails = ConvertXMLToObject(productSpecification.ProductSpecificationInformation);
             }
             else
             {
-                ViewBag.ProductDropDown = null;
+                productSpecViewModel.ProductID = ProductID;
+                productSpecViewModel.lstProductSpecificationDetails = new List<ProductSpecificationDetails> { new ProductSpecificationDetails { ProductSpecHeading = "General Specification", ProductSpecOrder = 0, ProductConfigurationDetails = GetConfigurationList() } };
             }
-
-
-            //Code needs to be written for Skus,context code and DAL code,Abover 20 lines of code has to be written for the SKU
-            List<ProductSpecificationDetails> prodSpecDetailsList = new List<ProductSpecificationDetails>();
-            prodSpecDetailsList.Add(new ProductSpecificationDetails
-            {
-                ProductSpecHeading = "General Specification",
-                ProductSpecOrder = 0,
-                ProductConfigurationDetails = GetConfigurationList()
-
-            });
-            prodSpecDetailsList.Add(new ProductSpecificationDetails
-            {
-                ProductSpecHeading = "General Specification 1",
-                ProductSpecOrder = 1,
-                ProductConfigurationDetails = GetConfigurationList()
-
-            });
-            prodSpecDetailsList.Add(new ProductSpecificationDetails
-            {
-                ProductSpecHeading = "General Specification 2",
-                ProductSpecOrder = 2,
-                ProductConfigurationDetails = GetConfigurationList()
-
-            });
-            //productSpecViewModel.ProductID = productSpecification.ProductID == 0 ? 1 : productSpecification.ProductID;
-            //productSpecViewModel.SkuID = productSpecification.SkuID;
-            productSpecViewModel.ProductID = 1;
-            productSpecViewModel.SkuID = 1;
-            productSpecViewModel.lstProductSpecificationDetails = prodSpecDetailsList;
-            productSpecViewModel.ProductSpecificationID = productSpecificationID;
+                     
             return View("ProductSpecificationList", productSpecViewModel);
 
         }
@@ -94,11 +53,17 @@ namespace SportsStore.WebUI.Admin.Controllers
         public ActionResult Edit(ProductSpecificationViewModel productSpecificationViewModel)
         {
             //Need to write product Specification write operation
-            if (productSpecificationViewModel != null)
+            if (productSpecificationViewModel != null && ModelState.IsValid)
             {
                 var request = Request.Form;
                 String XMLForm = ConvertObjectToXML(productSpecificationViewModel);
                 //repository.ProductSpecifications
+                ProductSpecification dbEntry = new ProductSpecification {
+                    ProductID=productSpecificationViewModel.ProductID,
+                    ProductSpecificationInformation = XMLForm                
+                };
+                repository.SaveProductSpecification(dbEntry);
+                TempData["message"] = string.Format("Product Specification for {0} has been saved",productSpecificationViewModel.ProductID.ToString());
                 return RedirectToAction("Index");
             }
             else
@@ -132,21 +97,25 @@ namespace SportsStore.WebUI.Admin.Controllers
 
         private string ConvertObjectToXML(ProductSpecificationViewModel productSpecificationViewModel)
         {
+            settings = new XmlWriterSettings();
             StringWriter writer = new StringWriter();
-
-            XmlSerializer x = new XmlSerializer(productSpecificationViewModel.GetType());
-            x.Serialize(writer, productSpecificationViewModel);
+            settings.OmitXmlDeclaration = true;
+            settings.Indent = false;
+            settings.NewLineHandling = NewLineHandling.None;
+            writer.NewLine = ""; 
+            XmlWriter xmlwriter = XmlWriter.Create(writer, settings);
+            XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
+            namespaces.Add(string.Empty, string.Empty);
+            XmlSerializer MySerializer = new XmlSerializer(productSpecificationViewModel.GetType());        
+            MySerializer.Serialize(writer, productSpecificationViewModel);
             return writer.ToString();
         }
 
-        private string ConvertXMLToObject(String Xml)
+        private List<ProductSpecificationDetails> ConvertXMLToObject(String Xml)
         {
+            
             return null;
         }
-
-        public string ConvertToXML()
-        {
-            return null;
-        }
+              
     }
 }

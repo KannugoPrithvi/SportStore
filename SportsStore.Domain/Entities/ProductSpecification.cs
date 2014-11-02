@@ -10,11 +10,9 @@ namespace SportsStore.Domain.Entities
     {
         public int ProductSpecificationID { get; set; }
         public int ProductID { get; set; }
-        public int SkuID { get; set; }
-        public string ProductSpecificationInformation { get; set; }
-        public string Group { get; set; }
-
+        public int ProductSpecificationOrder { get; set; }
+        public string ProductSpecificationHeader { get; set; }
         public virtual Product Product { get; set; }
-        public virtual Sku Sku { get; set; }
+        public virtual ICollection<ProductSpecificationAttribute> ProductSpecificationAttributes { get; set; }
     }
 }

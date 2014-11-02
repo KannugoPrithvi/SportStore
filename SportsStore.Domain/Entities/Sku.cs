@@ -30,7 +30,7 @@ namespace SportsStore.Domain.Entities
         public string Group { get; set; }
 
         public virtual Product Product { get; set; }
-        public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
+        
         public virtual ICollection<SkuDiscount> SkuDiscounts { get; set; }
     }
 }

@@ -75,6 +75,11 @@ namespace SportsStore.WebUI.Controllers
             return View(model);
         }
         
+        public ViewResult QuickView(int ProductID)
+        {
+
+            return null;
+        }
         public FileContentResult GetImage(int productId)
         {
             //Product prod = repository.Products.FirstOrDefault(p => p.ProductID == productId);

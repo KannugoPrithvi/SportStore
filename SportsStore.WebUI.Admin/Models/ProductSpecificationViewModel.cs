@@ -20,11 +20,12 @@ namespace SportsStore.WebUI.Models
         [XmlArray]
         public List<ProductSubConfigurationDetails> ProductConfigurationDetails { get; set; }
     }  
+    [Serializable]
     public class ProductSpecificationViewModel
     {
         public int ProductSpecificationID { get; set; }
         public int ProductID { get; set; }
-        public int SkuID { get; set; }
+        [XmlArray]
         public List<ProductSpecificationDetails> lstProductSpecificationDetails { get; set; }
     }
 

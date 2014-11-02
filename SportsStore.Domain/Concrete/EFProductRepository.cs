@@ -204,8 +204,8 @@ namespace SportsStore.Domain.Concrete
                 if (dbEntry != null)
                 {
                     dbEntry.ProductID = productSpecification.ProductID;
-                    dbEntry.SkuID = productSpecification.SkuID;
-                    dbEntry.ProductSpecificationInformation = productSpecification.ProductSpecificationInformation;
+                    dbEntry.ProductSpecificationOrder = productSpecification.ProductSpecificationOrder;
+                    dbEntry.ProductSpecificationHeader = productSpecification.ProductSpecificationHeader;
                 }
             }
             context.SaveChanges();
@@ -221,7 +221,39 @@ namespace SportsStore.Domain.Concrete
             return dbEntry;
         }
 
-
+        //ProductSpecificationAttributes related CRUD operations
+        public IEnumerable<ProductSpecificationAttribute> ProductSpecificationAttributes
+        {
+            get { return context.ProductSpecificationAttribute; }
+        }
+        public void SaveProductSpecificationAttribute(ProductSpecificationAttribute productSpecificationAttribute)
+        {
+            if (productSpecificationAttribute.ProductSpecificationAttributeID == 0)
+            {
+                context.ProductSpecificationAttribute.Add(productSpecificationAttribute);
+            }
+            else
+            {
+                ProductSpecificationAttribute dbEntry = context.ProductSpecificationAttribute.Find(productSpecificationAttribute.ProductSpecificationAttributeID);
+                if (dbEntry != null)
+                {
+                    dbEntry.ProductSpecificationID = productSpecificationAttribute.ProductSpecificationID;
+                    dbEntry.AttributeKey = productSpecificationAttribute.AttributeKey;
+                    dbEntry.AttributeValue = productSpecificationAttribute.AttributeValue;
+                }
+            }
+            context.SaveChanges();
+        }
+        public ProductSpecification DeleteProductSpecification(int productSpecificationID)
+        {
+            ProductSpecification dbEntry = context.ProductSpecification.Find(productSpecificationID);
+            if (dbEntry != null)
+            {
+                context.ProductSpecification.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
 
         //State related CRUD operations
         public IEnumerable<State> States

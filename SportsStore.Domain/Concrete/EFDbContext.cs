@@ -44,6 +44,7 @@ namespace SportsStore.Domain.Concrete
         public virtual DbSet<ProductRating> ProductRating { get; set; }
         public virtual DbSet<ProductSetting> ProductSetting { get; set; }
         public virtual DbSet<ProductSpecification> ProductSpecification { get; set; }
+        public virtual DbSet<ProductSpecificationAttribute> ProductSpecificationAttribute { get; set; }
         public virtual DbSet<RelatedProduct> RelatedProduct { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<SalesHistory> SalesHistory { get; set; }
