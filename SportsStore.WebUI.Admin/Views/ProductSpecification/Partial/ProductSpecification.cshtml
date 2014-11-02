@@ -1,6 +1,9 @@
 ﻿@model SportsStore.WebUI.Models.ProductSpecificationDetails
 
 <div class="panel-body">
+    <h4>
+        Create/Edit Specification for Table @(Model.ProductSpecOrder+1)        
+    </h4>
     <div class="form-group">
         @Html.Label("Specification Heading:", new { @class = "control-label col-md-2" })
         <div class="col-md-4">

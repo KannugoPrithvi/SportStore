@@ -128,5 +128,11 @@ body {
     font-size: 52px;
     font-family: "trebuchet ms", sans-serif;
 }
+.btn-sharp{
+    border-radius:0;
+}
+.btn-default{
+    color:blue;
+}
 
 
