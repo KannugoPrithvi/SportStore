@@ -120,9 +120,6 @@ namespace SportsStore.WebUI.Admin.Controllers
         {
             List<ProductSubConfigurationDetails> configurationList = new List<ProductSubConfigurationDetails>();
             configurationList.Add(new ProductSubConfigurationDetails { SubHead = "Name_Key_1", SubSpec = "Name_Value_1" });
-            configurationList.Add(new ProductSubConfigurationDetails { SubHead = "Name_Key_2", SubSpec = "Name_Value_2" });
-            configurationList.Add(new ProductSubConfigurationDetails { SubHead = "Name_Key_3", SubSpec = "Name_Value_3" });
-
             return configurationList;
         }
 
