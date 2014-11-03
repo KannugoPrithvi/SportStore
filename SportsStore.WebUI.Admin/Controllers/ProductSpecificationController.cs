@@ -17,7 +17,7 @@ namespace SportsStore.WebUI.Admin.Controllers
     public class ProductSpecificationController : Controller
     {
         IProductRepository repository;
-        XmlWriterSettings settings = null;        
+        XmlWriterSettings settings = null;
 
         public ProductSpecificationController(IProductRepository repo)
         {
@@ -32,19 +32,36 @@ namespace SportsStore.WebUI.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int ProductID = 0)
         {
-            ProductSpecification productSpecification = repository.ProductSpecifications.FirstOrDefault(p => p.ProductID == ProductID);
+            IEnumerable<ProductSpecification> lstProductSpecification = repository.ProductSpecifications.Where(p => p.ProductID == ProductID);
             ProductSpecificationViewModel productSpecViewModel = new ProductSpecificationViewModel();
-            if(productSpecification != null)
+            if (lstProductSpecification != null)
             {
-                productSpecViewModel.ProductID = productSpecification.ProductID;
-                productSpecViewModel.lstProductSpecificationDetails = ConvertXMLToObject(productSpecification.ProductSpecificationInformation);
+                List<ProductSpecificationDetails> lstProductSpecificationDetails = new List<ProductSpecificationDetails>();
+                foreach (var item in lstProductSpecification)
+                {
+                    List<ProductSubConfigurationDetails> productSubConfDetails = new List<ProductSubConfigurationDetails>();
+                    foreach (var subItem in item.ProductSpecificationAttributes)
+                    {
+                        productSubConfDetails.Add(new ProductSubConfigurationDetails {
+                            SubHead=subItem.AttributeKey,
+                            SubSpec=subItem.AttributeValue
+                        });
+                    }
+                    lstProductSpecificationDetails.Add(new ProductSpecificationDetails {
+                        ProductSpecHeading=item.ProductSpecificationHeader,
+                        ProductSpecOrder=item.ProductSpecificationOrder,
+                        ProductConfigurationDetails=productSubConfDetails
+                    });
+                }
+                productSpecViewModel.ProductID = ProductID;
+                productSpecViewModel.lstProductSpecificationDetails = lstProductSpecificationDetails;
             }
             else
             {
                 productSpecViewModel.ProductID = ProductID;
                 productSpecViewModel.lstProductSpecificationDetails = new List<ProductSpecificationDetails> { new ProductSpecificationDetails { ProductSpecHeading = "General Specification", ProductSpecOrder = 0, ProductConfigurationDetails = GetConfigurationList() } };
             }
-                     
+
             return View("ProductSpecificationList", productSpecViewModel);
 
         }
@@ -55,15 +72,29 @@ namespace SportsStore.WebUI.Admin.Controllers
             //Need to write product Specification write operation
             if (productSpecificationViewModel != null && ModelState.IsValid)
             {
-                var request = Request.Form;
-                String XMLForm = ConvertObjectToXML(productSpecificationViewModel);
-                //repository.ProductSpecifications
-                ProductSpecification dbEntry = new ProductSpecification {
-                    ProductID=productSpecificationViewModel.ProductID,
-                    ProductSpecificationInformation = XMLForm                
-                };
-                repository.SaveProductSpecification(dbEntry);
-                TempData["message"] = string.Format("Product Specification for {0} has been saved",productSpecificationViewModel.ProductID.ToString());
+                ProductSpecification dbEntry = null;
+                List<ProductSpecificationAttribute> lstProductSpecificationAttribute = null;
+                foreach (var item in productSpecificationViewModel.lstProductSpecificationDetails)
+                {
+                    dbEntry = new ProductSpecification();
+                    dbEntry.ProductID = productSpecificationViewModel.ProductID;
+                    dbEntry.ProductSpecificationOrder = item.ProductSpecOrder;
+                    dbEntry.ProductSpecificationHeader = item.ProductSpecHeading;
+
+                    lstProductSpecificationAttribute = new List<ProductSpecificationAttribute>();
+                    foreach (var subItem in item.ProductConfigurationDetails)
+                    {
+                        lstProductSpecificationAttribute.Add(new ProductSpecificationAttribute {
+                            AttributeKey = subItem.SubHead,
+                            AttributeValue = subItem.SubSpec,
+                            ProductSpecificationID = dbEntry.ProductSpecificationID
+                        });
+                    }
+                    dbEntry.ProductSpecificationAttributes = lstProductSpecificationAttribute;
+                    repository.SaveProductSpecification(dbEntry);
+                }
+
+                TempData["message"] = string.Format("Product Specification for {0} has been saved", productSpecificationViewModel.ProductID.ToString());
                 return RedirectToAction("Index");
             }
             else
@@ -102,20 +133,20 @@ namespace SportsStore.WebUI.Admin.Controllers
             settings.OmitXmlDeclaration = true;
             settings.Indent = false;
             settings.NewLineHandling = NewLineHandling.None;
-            writer.NewLine = ""; 
+            writer.NewLine = "";
             XmlWriter xmlwriter = XmlWriter.Create(writer, settings);
             XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
             namespaces.Add(string.Empty, string.Empty);
-            XmlSerializer MySerializer = new XmlSerializer(productSpecificationViewModel.GetType());        
+            XmlSerializer MySerializer = new XmlSerializer(productSpecificationViewModel.GetType());
             MySerializer.Serialize(writer, productSpecificationViewModel);
             return writer.ToString();
         }
 
         private List<ProductSpecificationDetails> ConvertXMLToObject(String Xml)
         {
-            
+
             return null;
         }
-              
+
     }
 }

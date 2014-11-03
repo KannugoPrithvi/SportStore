@@ -244,12 +244,12 @@ namespace SportsStore.Domain.Concrete
             }
             context.SaveChanges();
         }
-        public ProductSpecification DeleteProductSpecification(int productSpecificationID)
+        public ProductSpecificationAttribute DeleteProductSpecificationAttribute(int productSpecificationAttributeID)
         {
-            ProductSpecification dbEntry = context.ProductSpecification.Find(productSpecificationID);
+            ProductSpecificationAttribute dbEntry = context.ProductSpecificationAttribute.Find(productSpecificationAttributeID);
             if (dbEntry != null)
             {
-                context.ProductSpecification.Remove(dbEntry);
+                context.ProductSpecificationAttribute.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;

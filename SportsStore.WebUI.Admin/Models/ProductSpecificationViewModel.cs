@@ -17,15 +17,12 @@ namespace SportsStore.WebUI.Models
     {
         public int ProductSpecOrder { get; set; }
         public string ProductSpecHeading { get; set; }
-        [XmlArray]
         public List<ProductSubConfigurationDetails> ProductConfigurationDetails { get; set; }
     }  
     [Serializable]
     public class ProductSpecificationViewModel
     {
-        public int ProductSpecificationID { get; set; }
         public int ProductID { get; set; }
-        [XmlArray]
         public List<ProductSpecificationDetails> lstProductSpecificationDetails { get; set; }
     }
 
