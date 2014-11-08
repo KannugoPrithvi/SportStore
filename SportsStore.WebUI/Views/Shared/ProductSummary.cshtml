@@ -10,7 +10,7 @@
                 <span style="font-size:medium;font-weight:bold">@Model.AltPrice.ToString("c")</span>
             </span>
         </div>
-        <a href="#" class="btn btn-info pull-left btn-sharp">Quick View</a>
+        <a href='@Url.Action("QuickView", new { ProductID = Model.ProductID})' class="btn btn-info pull-left btn-sharp">Quick View</a>
         @using (Html.BeginForm("AddToCart", "Cart"))
         {
             <div class="pull-right">

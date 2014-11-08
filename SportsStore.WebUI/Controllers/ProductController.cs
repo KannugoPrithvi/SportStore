@@ -1,5 +1,6 @@
 ﻿using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Entities;
+using SportsStore.Domain.ViewModels;
 using SportsStore.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -75,10 +76,22 @@ namespace SportsStore.WebUI.Controllers
             return View(model);
         }
         
-        public ViewResult QuickView(int ProductID)
+        public ViewResult QuickView(int ProductID =0)
         {
+            return View();
+        }
 
-            return null;
+        public PartialViewResult ProductSpecificationPartial(int ProductID = 0)
+        {
+            if (ProductID == 0)
+            {
+                return PartialView("Partial/_ProductSpecification", null);
+            }
+            else
+            {
+                //var prodSpecViewModel = 
+                return PartialView("Partial/_ProductSpecification");
+            }
         }
         public FileContentResult GetImage(int productId)
         {

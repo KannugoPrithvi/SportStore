@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 
-namespace SportsStore.WebUI.Models
+namespace SportsStore.Domain.ViewModels
 {
     //Details which are shown under each table in key value pairs
     public class ProductSubConfigurationDetails

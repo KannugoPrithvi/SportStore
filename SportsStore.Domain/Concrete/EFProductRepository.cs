@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Entities;
+using System.Data.SqlClient;
 
 namespace SportsStore.Domain.Concrete
 {
@@ -221,6 +222,18 @@ namespace SportsStore.Domain.Concrete
             return dbEntry;
         }
 
+        public void DeleteProductSpecificationByProductID(int productID)
+        {
+            if (productID != 0)
+            {
+                var deleteList = context.ProductSpecification.Where(p => p.ProductID == productID);
+                foreach (var item in deleteList)
+                {
+                    context.ProductSpecification.Remove(item);
+                }
+                context.SaveChanges();
+            }
+        }
         //ProductSpecificationAttributes related CRUD operations
         public IEnumerable<ProductSpecificationAttribute> ProductSpecificationAttributes
         {

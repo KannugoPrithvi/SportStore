@@ -33,6 +33,7 @@ namespace SportsStore.Domain.Abstract
         IEnumerable<ProductSpecification> ProductSpecifications { get; }
         void SaveProductSpecification(ProductSpecification productSpecification);
         ProductSpecification DeleteProductSpecification(int productSpecificationID);
+        void DeleteProductSpecificationByProductID(int productID);
 
         //ProductSpecificationAttributes
         IEnumerable<ProductSpecificationAttribute> ProductSpecificationAttributes { get; }

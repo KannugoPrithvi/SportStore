@@ -1,5 +1,6 @@
 ﻿using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Entities;
+using SportsStore.Domain.ViewModels;
 using SportsStore.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,11 @@ namespace SportsStore.WebUI.Admin.Controllers
 
         public ActionResult Index()
         {
+            return RedirectToAction("Index", "ProductAdmin");
+        }
+        public ActionResult Temp(int ProductID = 0)
+        {
+            repository.DeleteProductSpecificationByProductID(ProductID);
             return RedirectToAction("Index", "ProductAdmin");
         }
 
@@ -74,6 +80,8 @@ namespace SportsStore.WebUI.Admin.Controllers
             {
                 ProductSpecification dbEntry = null;
                 List<ProductSpecificationAttribute> lstProductSpecificationAttribute = null;
+                //Deleting the existing rows since entity framework is inserting duplicate rows, this is a temporary fix
+                repository.DeleteProductSpecificationByProductID(productSpecificationViewModel.ProductID);
                 foreach (var item in productSpecificationViewModel.lstProductSpecificationDetails)
                 {
                     dbEntry = new ProductSpecification();
@@ -90,7 +98,7 @@ namespace SportsStore.WebUI.Admin.Controllers
                             ProductSpecificationID = dbEntry.ProductSpecificationID
                         });
                     }
-                    dbEntry.ProductSpecificationAttributes = lstProductSpecificationAttribute;
+                    dbEntry.ProductSpecificationAttributes = lstProductSpecificationAttribute;                    
                     repository.SaveProductSpecification(dbEntry);
                 }
 

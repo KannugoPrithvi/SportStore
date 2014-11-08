@@ -421,6 +421,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Nav\HorizontalMenu.cshtml" />
     <Content Include="Views\Product\QuickView.cshtml" />
+    <Content Include="Views\Product\Partial\_ProductSpecification.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,4 +1,4 @@
-﻿@model SportsStore.WebUI.Models.ProductSpecificationDetails
+﻿@model SportsStore.Domain.ViewModels.ProductSpecificationDetails
 
 <div class="panel-body">
     <h4>
@@ -8,14 +8,12 @@
         @Html.Label("Specification Heading:", new { @class = "control-label col-md-2" })
         <div class="col-md-4">
             @Html.TextBox("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductSpecHeading", Model.ProductSpecHeading, new { id = "ProductSpecificationDetails_" + @ViewBag.Iterator as string + "__ProductSpecHeading", @class = "form-control" })
-            @*@Html.TextBox("[" + Model.ProductSpecOrder as string + "].ProductSpecHeading", Model.ProductSpecHeading, new { id = "lstProductSpecificationDetails_" + @ViewBag.Iterator as string + "__ProductSpecHeading", @class = "form-control" })*@
         </div>
     </div>
     <div class="form-group">
         @Html.Label("Specification Order:", new { @class = "control-label col-md-2" })
         <div class="col-md-4">
-            @Html.TextBox("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductSpecOrder", Model.ProductSpecOrder, new { id = "lstProductSpecificationDetails_" + @ViewBag.Iterator as string + "__ProductSpecOrder", @class = "form-control" })
-            @*@Html.TextBox("[" + Model.ProductSpecOrder as string + "].ProductSpecOrder", Model.ProductSpecOrder, new { id = "lstProductSpecificationDetails_" + @ViewBag.Iterator as string + "__ProductSpecOrder", @class = "form-control" })*@
+            @Html.TextBox("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductSpecOrder", Model.ProductSpecOrder, new { id = "lstProductSpecificationDetails_" + @ViewBag.Iterator as string + "__ProductSpecOrder", @class = "form-control",@readonly="readonly" })
         </div>
     </div>
 
@@ -33,12 +31,7 @@
                     <tr>
                         <td style="padding:5px">@Html.TextBox("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductConfigurationDetails[" + iterator + "].SubHead", Model.ProductConfigurationDetails[iterator].SubHead, new { id = "lstProductSpecificationDetails_" + Model.ProductSpecOrder as string + "__ProductConfigurationDetails_" + iterator + "__SubHead", @class = "form-control col-xs-5" })</td>
                         <td style="padding:5px">@Html.TextBox("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductConfigurationDetails[" + iterator + "].SubSpec", Model.ProductConfigurationDetails[iterator].SubSpec, new { id = "lstProductSpecificationDetails_" + Model.ProductSpecOrder as string + "__ProductConfigurationDetails_" + iterator + "__SubSpec", @class = "form-control col-xs-5" })</td>
-                    </tr>
-
-                    @*<tr>
-                            <td style="padding:5px">@Html.TextBox("[" + Model.ProductSpecOrder as string + "].ProductConfigurationDetails[" + iterator + "].SubHead", Model.ProductConfigurationDetails[iterator].SubHead, new { id = "lstProductSpecificationDetails_" + Model.ProductSpecOrder as string + "__ProductConfigurationDetails_" + iterator + "__SubHead", @class = "form-control col-xs-5" })</td>
-                            <td style="padding:5px">@Html.TextBox("[" + Model.ProductSpecOrder as string + "].ProductConfigurationDetails[" + iterator + "].SubSpec", Model.ProductConfigurationDetails[iterator].SubSpec, new { id = "lstProductSpecificationDetails_" + Model.ProductSpecOrder as string + "__ProductConfigurationDetails_" + iterator + "__SubSpec", @class = "form-control col-xs-5" })</td>
-                        </tr>*@
+                    </tr>               
 
 
                 }
@@ -59,7 +52,6 @@
         e.preventDefault();
         console.debug("ItemIndex = " + itemIndex);
         var newItem = $("<tr><td style='padding:5px'><input class='form-control' type='text' id='lstProductSpecificationDetails_" + @Model.ProductSpecOrder + "__ProductConfigurationDetails_" + (itemIndex - 1) + "__SubHead' name='lstProductSpecificationDetails[" +@Model.ProductSpecOrder +"].ProductConfigurationDetails[" + (itemIndex - 1) + "].SubHead'/></td><td style='padding:5px'><input class='form-control' type='text' id='lstProductSpecificationDetails_" + @Model.ProductSpecOrder + "__ProductConfigurationDetails_" + (itemIndex - 1) + "__SubSpec' name='lstProductSpecificationDetails[" +@Model.ProductSpecOrder +"].ProductConfigurationDetails[" + (itemIndex - 1) + "].SubSpec'></td></tr>");
-        //var newItem = $("<tr><td style='padding:5px'><input class='form-control' type='text' id='lstProductSpecificationDetails_" + @Model.ProductSpecOrder + "__ProductConfigurationDetails_" + (itemIndex - 1) + "__SubHead' name='[" +@Model.ProductSpecOrder +"].ProductConfigurationDetails[" + (itemIndex - 1) + "].SubHead'/></td><td style='padding:5px'><input class='form-control' type='text' id='lstProductSpecificationDetails_" + @Model.ProductSpecOrder + "__ProductConfigurationDetails_" + (itemIndex - 1) + "__SubSpec' name='[" +@Model.ProductSpecOrder +"].ProductConfigurationDetails[" + (itemIndex - 1) + "].SubSpec'></td></tr>");
         debugger;
         $("@ViewBag.TableIndexNoJSID").append(newItem);
     });
