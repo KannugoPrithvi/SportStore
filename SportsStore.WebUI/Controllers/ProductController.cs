@@ -75,10 +75,38 @@ namespace SportsStore.WebUI.Controllers
             ViewBag.SelectedCategory = CategoryName;
             return View(model);
         }
-        
-        public ViewResult QuickView(int ProductID =0)
+
+        public ViewResult QuickView(int ProductID = 0)
         {
-            return View();
+            //The below code has to be moved to a different function or a method
+            var result = from ps in repository.ProductSpecifications
+                         join psa in repository.ProductSpecificationAttributes
+                         on ps.ProductSpecificationID equals psa.ProductSpecificationID
+                         where ps.ProductID == ProductID
+                         select new
+                         {
+                             ps.ProductID,
+                             ps.ProductSpecificationOrder,
+                             ps.ProductSpecificationHeader,
+                             psa.AttributeKey,
+                             psa.AttributeValue
+                         };
+            var distinctHeader = result.
+                Select(p => p.ProductSpecificationHeader).Distinct();
+            List<ProductSpecificationDetails> productSpecDetails = new List<ProductSpecificationDetails>();
+            foreach (var item in distinctHeader)
+            {
+                ProductSpecificationDetails productSpecDetailObject = new ProductSpecificationDetails();
+                productSpecDetailObject.ProductSpecHeading = item;
+                productSpecDetailObject.ProductConfigurationDetails = (from attr in result where attr.ProductSpecificationHeader.Equals(item) select new ProductSubConfigurationDetails { SubHead = attr.AttributeKey, SubSpec = attr.AttributeValue }).ToList<ProductSubConfigurationDetails>();
+                productSpecDetails.Add(productSpecDetailObject);
+            }
+            ProductSpecificationViewModel productSpecificationViewModel = new ProductSpecificationViewModel();
+            productSpecificationViewModel.ProductID = ProductID;
+            productSpecificationViewModel.lstProductSpecificationDetails = productSpecDetails;
+            CombinedProductSpecificationViewModel combinedProductSpecificationViewModel = new CombinedProductSpecificationViewModel();
+            combinedProductSpecificationViewModel.ProductSpecificationViewModel = productSpecificationViewModel;
+            return View(combinedProductSpecificationViewModel);
         }
 
         public PartialViewResult ProductSpecificationPartial(int ProductID = 0)

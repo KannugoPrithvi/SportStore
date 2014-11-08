@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SportsStore.WebUI.Models.CombinedProductSpecificationViewModel
+
+@{
     ViewBag.Title = "QuickView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -45,16 +47,20 @@
 
     </div>
     <hr />
-    <div class="panel-heading">
-        Specifications of the Product
-    </div>
-    <div class="panel-body">
-        This div should be encapsulated in a partial view
-    </div>
-    <div class="panel-footer">
 
-    </div>
-    <hr />
+    @if (Model.ProductSpecificationViewModel != null && Model.ProductSpecificationViewModel.lstProductSpecificationDetails.Count != 0)
+    {
+        <div class="panel-heading">
+            <span style="font-size:1.45em">Specifications of the Product</span>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("Partial/_ProductSpecification", Model.ProductSpecificationViewModel)
+        </div>
+        <div class="panel-footer">
+            <a href="@Request.UrlReferrer.ToString()">Back to product page</a>
+        </div>
+        <hr />
+    }
     <div class="panel-heading">
         Reviews of the Product
     </div>
