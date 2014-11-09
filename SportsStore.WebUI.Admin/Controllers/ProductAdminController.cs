@@ -74,7 +74,7 @@ namespace SportsStore.WebUI.Admin.Controllers
             else
             {
                 Image image = repository.Images.FirstOrDefault(p => p.ProductID == ProductID);
-                return View("UploadImageTemp", new ImageUploadViewModel { Product = image.Product});
+                return View("UploadImage", new ImageUploadViewModel { Product = image.Product});
             }
         }
         [HttpPost]
