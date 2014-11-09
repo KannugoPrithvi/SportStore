@@ -20,26 +20,22 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td class="text-right">@item.ProductID</td>
-                    <td>
+                    <td class="text-right col-md-1">@item.ProductID</td>
+                    <td class="col-md-2">
                         @Html.ActionLink((string)item.Name, "Edit", new
                            {
                                item.ProductID
                            })
                     </td>
-                    <td>
+                    <td class="col-md-5">
                         @item.ShortDescription
                     </td>
-                    <td class="text-right">@item.AltPrice.ToString("c")</td>
-                    <td class="text-center">
-                        @using (Html.BeginForm("Delete", "Admin"))
-                        {
-                            @Html.Hidden("ProductID", (int)item.ProductID)
-                            <input type="submit"
-                                   class="btn btn-default btn-xs"
-                                   value="Delete" />
-                        }
-                        @Html.ActionLink("Create/Edit Product Specification", "Edit", new { controller="ProductSpecification",ProductID=item.ProductID})
+                    <td class="text-right col-md-1">@item.AltPrice.ToString("c")</td>
+                    <td class="col-md-3">                        
+                        @Html.ActionLink("Delete", "Delete", new { controller = "ProductAdmin", ProductID = item.ProductID }, new { style="color:red"})
+                        @Html.ActionLink("Edit_Product_Spec", "Edit", new { controller = "ProductSpecification", ProductID = item.ProductID })
+                        @Html.ActionLink("Edit_Image", "UploadImage", new { controller = "ProductAdmin", ProductID = item.ProductID }, new { style="color:green"})
+                        @Html.ActionLink("Product_Category", "Edit", new { controller = "ProductCategoryAdmin", ProductID = item.ProductID }, new { style="color:orange"})
                     </td>
                 </tr>
             }
@@ -49,5 +45,3 @@
         @Html.ActionLink("Add a new product", "Create", null, new { @class = "btn btn-default" })
     </div>
 </div>
-
-
