@@ -74,7 +74,16 @@ namespace SportsStore.WebUI.Admin.Controllers
             else
             {
                 Image image = repository.Images.FirstOrDefault(p => p.ProductID == ProductID);
-                return View("UploadImage", new ImageUploadViewModel { Product = image.Product});
+                if (image != null)
+                {
+                    ViewBag.ProductName = image.Product.Name;
+                }
+                else
+                {
+                    ViewBag.ProductName = "New Product";
+                }
+            
+                return View("UploadImage", new ImageUploadViewModel());
             }
         }
         [HttpPost]
@@ -82,8 +91,14 @@ namespace SportsStore.WebUI.Admin.Controllers
         {
             if (ModelState.IsValid && imageUploadViewModel != null)
             {
-                Image image = new Image();
+                Image image = repository.Images.FirstOrDefault(p => p.ProductID == imageUploadViewModel.ProductID);
+                if(image == null)
+                {
+                    image = new Image();
+                }
                 string applicationPath = ConfigurationManager.AppSettings["ImagePath"].ToString();
+                //Storing image description
+                image.ImageDescription = imageUploadViewModel.ImageDescription;
 
                 //Storing Small Image Path
                 if (imageUploadViewModel.SmallImage != null)
@@ -91,6 +106,11 @@ namespace SportsStore.WebUI.Admin.Controllers
                     string smallImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.SmallImage.FileName);
                     string smallImageFilePath = Path.Combine(applicationPath, smallImageFileName);
                     image.SmallImage = smallImageFilePath;
+                    imageUploadViewModel.SmallImage.SaveAs(smallImageFilePath);
+                }
+                else
+                {
+                    image.SmallImage = null;
                 }
 
 
@@ -100,45 +120,70 @@ namespace SportsStore.WebUI.Admin.Controllers
                     string mediumImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.MediumImage.FileName);
                     string mediumImageFilePath = Path.Combine(applicationPath, mediumImageFileName);
                     image.MediumImage = mediumImageFilePath;
+                    imageUploadViewModel.MediumImage.SaveAs(mediumImageFilePath);
+                }
+                else
+                {
+                    image.MediumImage = null;
                 }
 
                 //Storing Large Image Path
                 if (imageUploadViewModel.LargeImage != null)
                 {
-                    string largeImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.MediumImage.FileName);
+                    string largeImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.LargeImage.FileName);
                     string largeImageFilePath = Path.Combine(applicationPath, largeImageFileName);
                     image.LargeImage = largeImageFilePath;
+                    imageUploadViewModel.LargeImage.SaveAs(largeImageFilePath);
+                }
+                else
+                {
+                    image.LargeImage = null;
                 }
 
                 //Storing Extra Image Path
                 if (imageUploadViewModel.ExtraImage != null)
                 {
-                    string extraImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.MediumImage.FileName);
+                    string extraImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.ExtraImage.FileName);
                     string extraImageFilePath = Path.Combine(applicationPath, extraImageFileName);
                     image.ExtraImage0 = extraImageFilePath;
+                    imageUploadViewModel.ExtraImage.SaveAs(extraImageFilePath);
                 }
-
+                else
+                {
+                    image.ExtraImage0 = null;
+                }
 
                 //Storing Extra Image1 Path
                 if (imageUploadViewModel.ExtraImage1 != null)
                 {
-                    string extraImage1FileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.MediumImage.FileName);
+                    string extraImage1FileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.ExtraImage1.FileName);
                     string extraImage1FilePath = Path.Combine(applicationPath, extraImage1FileName);
                     image.ExtraImage1 = extraImage1FilePath;
+                    imageUploadViewModel.ExtraImage1.SaveAs(extraImage1FilePath);
                 }
+                else 
+                {
+                    image.ExtraImage1 = null;
+                }
+
 
                 //Storing Extra Image2 Path
                 if (imageUploadViewModel.ExtraImage2 != null)
                 {
-                    string extraImage2FileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.MediumImage.FileName);
+                    string extraImage2FileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.ExtraImage2.FileName);
                     string extraImage2FilePath = Path.Combine(applicationPath, extraImage2FileName);
                     image.ExtraImage2 = extraImage2FilePath;
+                    imageUploadViewModel.ExtraImage2.SaveAs(extraImage2FilePath);
+                }
+                else
+                {
+                    image.ExtraImage2 = null;
                 }
                 image.ProductID = imageUploadViewModel.ProductID;
 
                 repository.SaveImage(image);
-                TempData["Message"] = "Image successfully stored for " + image.Product.Name;
-                return View("Index");
+                TempData["Message"] = "Image successfully saved ";
+                return RedirectToAction("Index");
             }
             else
             {
