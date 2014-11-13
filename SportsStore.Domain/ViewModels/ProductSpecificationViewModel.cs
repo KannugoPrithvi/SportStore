@@ -9,6 +9,8 @@ namespace SportsStore.Domain.ViewModels
     //Details which are shown under each table in key value pairs
     public class ProductSubConfigurationDetails
     {
+        public int ProductSpecificationAttributeID{ get; set; }
+        public int ProductSpecificationID { get; set; }
         public string SubHead { get; set; }
         public string SubSpec { get; set; }
     }
@@ -17,6 +19,7 @@ namespace SportsStore.Domain.ViewModels
     {
         public int ProductSpecOrder { get; set; }
         public string ProductSpecHeading { get; set; }
+        public int ProductSpecificationID { get; set; }
         public List<ProductSubConfigurationDetails> ProductConfigurationDetails { get; set; }
     }  
     [Serializable]

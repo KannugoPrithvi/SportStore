@@ -2,8 +2,9 @@
 
 <div class="panel-body">
     <h4>
-        Create/Edit Specification for Table @(Model.ProductSpecOrder+1)        
+        Create/Edit Specification for @Model.ProductSpecHeading)        
     </h4>
+    @Html.Hidden("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductSpecificationID", Model.ProductSpecificationID)
     <div class="form-group">
         @Html.Label("Specification Heading:", new { @class = "control-label col-md-2" })
         <div class="col-md-4">
@@ -31,6 +32,8 @@
                     <tr>
                         <td style="padding:5px">@Html.TextBox("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductConfigurationDetails[" + iterator + "].SubHead", Model.ProductConfigurationDetails[iterator].SubHead, new { id = "lstProductSpecificationDetails_" + Model.ProductSpecOrder as string + "__ProductConfigurationDetails_" + iterator + "__SubHead", @class = "form-control col-xs-5" })</td>
                         <td style="padding:5px">@Html.TextBox("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductConfigurationDetails[" + iterator + "].SubSpec", Model.ProductConfigurationDetails[iterator].SubSpec, new { id = "lstProductSpecificationDetails_" + Model.ProductSpecOrder as string + "__ProductConfigurationDetails_" + iterator + "__SubSpec", @class = "form-control col-xs-5" })</td>
+                        @Html.Hidden("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductConfigurationDetails[" + iterator + "].ProductSpecificationID", Model.ProductConfigurationDetails[iterator].ProductSpecificationID)
+                        @Html.Hidden("lstProductSpecificationDetails[" + Model.ProductSpecOrder as string + "].ProductConfigurationDetails[" + iterator + "].ProductSpecificationAttributeID", Model.ProductConfigurationDetails[iterator].ProductSpecificationAttributeID)
                     </tr>               
 
 

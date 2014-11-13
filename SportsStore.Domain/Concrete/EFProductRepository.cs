@@ -207,6 +207,17 @@ namespace SportsStore.Domain.Concrete
                     dbEntry.ProductID = productSpecification.ProductID;
                     dbEntry.ProductSpecificationOrder = productSpecification.ProductSpecificationOrder;
                     dbEntry.ProductSpecificationHeader = productSpecification.ProductSpecificationHeader;
+                    if(dbEntry.ProductSpecificationAttributes != null)
+                    {
+                        foreach (var item in productSpecification.ProductSpecificationAttributes)
+                        {
+                            SaveProductSpecificationAttribute(item);
+                        }                        
+                    }
+                    else
+                    {
+                        dbEntry.ProductSpecificationAttributes = productSpecification.ProductSpecificationAttributes;
+                    }
                 }
             }
             context.SaveChanges();

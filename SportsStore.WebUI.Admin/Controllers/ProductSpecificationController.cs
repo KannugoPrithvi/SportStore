@@ -49,6 +49,8 @@ namespace SportsStore.WebUI.Admin.Controllers
                     foreach (var subItem in item.ProductSpecificationAttributes)
                     {
                         productSubConfDetails.Add(new ProductSubConfigurationDetails {
+                            ProductSpecificationAttributeID=subItem.ProductSpecificationAttributeID,
+                            ProductSpecificationID=subItem.ProductSpecificationID,
                             SubHead=subItem.AttributeKey,
                             SubSpec=subItem.AttributeValue
                         });
@@ -56,7 +58,8 @@ namespace SportsStore.WebUI.Admin.Controllers
                     lstProductSpecificationDetails.Add(new ProductSpecificationDetails {
                         ProductSpecHeading=item.ProductSpecificationHeader,
                         ProductSpecOrder=item.ProductSpecificationOrder,
-                        ProductConfigurationDetails=productSubConfDetails
+                        ProductConfigurationDetails=productSubConfDetails,
+                        ProductSpecificationID=item.ProductSpecificationID
                     });
                 }
                 productSpecViewModel.ProductID = ProductID;
@@ -81,13 +84,15 @@ namespace SportsStore.WebUI.Admin.Controllers
                 ProductSpecification dbEntry = null;
                 List<ProductSpecificationAttribute> lstProductSpecificationAttribute = null;
                 //Deleting the existing rows since entity framework is inserting duplicate rows, this is a temporary fix
-                repository.DeleteProductSpecificationByProductID(productSpecificationViewModel.ProductID);
+                //repository.DeleteProductSpecificationByProductID(productSpecificationViewModel.ProductID);
+                //Extensive testing needed for below functionality
                 foreach (var item in productSpecificationViewModel.lstProductSpecificationDetails)
                 {
                     dbEntry = new ProductSpecification();
                     dbEntry.ProductID = productSpecificationViewModel.ProductID;
                     dbEntry.ProductSpecificationOrder = item.ProductSpecOrder;
                     dbEntry.ProductSpecificationHeader = item.ProductSpecHeading;
+                    dbEntry.ProductSpecificationID = item.ProductSpecificationID;
 
                     lstProductSpecificationAttribute = new List<ProductSpecificationAttribute>();
                     foreach (var subItem in item.ProductConfigurationDetails)
@@ -95,6 +100,7 @@ namespace SportsStore.WebUI.Admin.Controllers
                         lstProductSpecificationAttribute.Add(new ProductSpecificationAttribute {
                             AttributeKey = subItem.SubHead,
                             AttributeValue = subItem.SubSpec,
+                            ProductSpecificationAttributeID=subItem.ProductSpecificationAttributeID,
                             ProductSpecificationID = dbEntry.ProductSpecificationID
                         });
                     }

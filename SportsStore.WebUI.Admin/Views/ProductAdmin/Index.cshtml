@@ -32,10 +32,10 @@
                     </td>
                     <td class="text-right col-md-1">@item.AltPrice.ToString("c")</td>
                     <td class="col-md-3">                        
-                        @Html.ActionLink("Delete", "Delete", new { controller = "ProductAdmin", ProductID = item.ProductID }, new { style="color:red"})
-                        @Html.ActionLink("Edit_Product_Spec", "Edit", new { controller = "ProductSpecification", ProductID = item.ProductID })
-                        @Html.ActionLink("Edit_Image", "UploadImage", new { controller = "ProductAdmin", ProductID = item.ProductID }, new { style="color:green"})
-                        @Html.ActionLink("Product_Category", "Edit", new { controller = "ProductCategoryAdmin", ProductID = item.ProductID }, new { style="color:orange"})
+                        @Html.ActionLink("Delete", "Delete", new { controller = "ProductAdmin", ProductID = item.ProductID }) |
+                        @Html.ActionLink("Edit Product Spec", "Edit", new { controller = "ProductSpecification", ProductID = item.ProductID }) |
+                        @Html.ActionLink("Edit Image", "UploadImage", new { controller = "ProductAdmin", ProductID = item.ProductID }) |
+                        @Html.ActionLink("Product Category", "Edit", new { controller = "ProductCategoryAdmin", ProductID = item.ProductID })
                     </td>
                 </tr>
             }
