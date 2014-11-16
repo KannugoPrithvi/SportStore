@@ -383,6 +383,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\QuickViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -421,8 +422,8 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Nav\HorizontalMenu.cshtml" />
-    <Content Include="Views\Product\QuickView.cshtml" />
-    <Content Include="Views\Product\Partial\_ProductSpecification.cshtml" />
+    <Content Include="Views\QuickView\ProductView.cshtml" />
+    <Content Include="Views\QuickView\Partial\_ProductSpecification.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
