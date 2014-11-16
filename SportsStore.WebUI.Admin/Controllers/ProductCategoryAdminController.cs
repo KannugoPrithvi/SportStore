@@ -23,44 +23,32 @@ namespace SportsStore.WebUI.Admin.Controllers
 
         //Get Product Category Admin Edit
         [HttpGet]
-        public ViewResult Edit(int ProductCategoryID = 0)
+        public ActionResult Edit(int ProductID = 0)
         {
-            ProductCategory productCategory = repository.ProductCategories.FirstOrDefault(model => model.ProductCategoryID == ProductCategoryID);
-            var Categories = from cat in repository.Categories select cat;
-            var Products = from prod in repository.Products select prod;
-            List<SelectListItem> cats = new List<SelectListItem>();
-            List<SelectListItem> prods = new List<SelectListItem>();
-            foreach (var item in Categories)
+            if (ProductID == 0)
             {
-                if (productCategory != null && item.CategoryID == productCategory.CategoryID)
-                {
-                    cats.Add(new SelectListItem { Selected = true, Text = item.Name, Value = item.CategoryID.ToString() });
-                }
-                else
-                {
-                    cats.Add(new SelectListItem { Selected = false, Text = item.Name, Value = item.CategoryID.ToString() });
-                }
+                TempData["Message"] = "No Such product exists";
+                return RedirectToAction("Index", new { controller = "ProductAdmin" });
             }
-            foreach (var item in Products)
+            else
             {
-                if (productCategory != null && item.ProductID == productCategory.ProductID)
+                List<ProductCategory> productCategory = (repository.ProductCategories.Where(p => p.ProductID == ProductID)).ToList<ProductCategory>();
+                var Products = from prod in repository.Products select prod;
+                List<SelectListItem> prods = new List<SelectListItem>();
+                foreach (var item in Products)
                 {
-                    prods.Add(new SelectListItem { Selected = true, Text = item.Name, Value = item.ProductID.ToString() });
+                    if (item != null && item.ProductID == ProductID)
+                    {
+                        prods.Add(new SelectListItem { Selected = true, Text = item.Name, Value = item.ProductID.ToString() });
+                    }
+                    else
+                    {
+                        prods.Add(new SelectListItem { Selected = false, Text = item.Name, Value = item.ProductID.ToString() });
+                    }
                 }
-                else
-                {
-                    prods.Add(new SelectListItem { Selected = false, Text = item.Name, Value = item.ProductID.ToString() });
-                }
-
-            }
-            ViewData["CategoryList"] = cats;
-            ViewData["ProductList"] = prods;
-            if (productCategory != null)
-            {
+                ViewData["ProductList"] = prods;
                 return View(productCategory);
             }
-
-            return View(new ProductCategory());
         }
 
         //Post Product category Admin Edit
