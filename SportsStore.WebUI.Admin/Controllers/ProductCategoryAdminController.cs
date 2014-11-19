@@ -33,20 +33,8 @@ namespace SportsStore.WebUI.Admin.Controllers
             else
             {
                 List<ProductCategory> productCategory = (repository.ProductCategories.Where(p => p.ProductID == ProductID)).ToList<ProductCategory>();
-                var Products = from prod in repository.Products select prod;
-                List<SelectListItem> prods = new List<SelectListItem>();
-                foreach (var item in Products)
-                {
-                    if (item != null && item.ProductID == ProductID)
-                    {
-                        prods.Add(new SelectListItem { Selected = true, Text = item.Name, Value = item.ProductID.ToString() });
-                    }
-                    else
-                    {
-                        prods.Add(new SelectListItem { Selected = false, Text = item.Name, Value = item.ProductID.ToString() });
-                    }
-                }
-                ViewData["ProductList"] = prods;
+                var categories = repository.Categories.ToList<Category>();
+                ViewBag.categories = categories;
                 return View(productCategory);
             }
         }
@@ -55,6 +43,7 @@ namespace SportsStore.WebUI.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(ProductCategory productCategory)
         {
+            var request = Request.Form;
             if (ModelState.IsValid)
             {
                 repository.SaveProductCategory(productCategory);
