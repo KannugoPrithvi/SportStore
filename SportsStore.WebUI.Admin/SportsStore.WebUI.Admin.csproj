@@ -162,6 +162,7 @@
     <Compile Include="Infrastructure\Binders\ProductSpecificationModelBinder.cs" />
     <Compile Include="Infrastructure\NinjectDepedencyResolver.cs" />
     <Compile Include="Models\ImageUploadViewModel.cs" />
+    <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

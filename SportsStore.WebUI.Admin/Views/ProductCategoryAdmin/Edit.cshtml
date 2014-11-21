@@ -1,4 +1,5 @@
-﻿@model List<SportsStore.Domain.Entities.ProductCategory>
+﻿@model SportsStore.WebUI.Admin.Models.ProductCategoryViewModel
+@using SportsStore.WebUI.Admin.Models
 @using SportsStore.Domain.Entities
 @{
     ViewBag.Title = "Edit";
@@ -13,13 +14,29 @@
     <div class="panel-body">
         @using (Html.BeginForm())
         {
-            foreach (var item in ViewBag.categories as List<Category>)
+            @Html.HiddenFor(model => model.ProductID)
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.Label("ProductName", new { @class = "form-control col-md-2" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBox("ProductName", Model.ProductName, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <h4>Choose one or more categories for the product</h4>
+            <hr />
+            for (int i = 0; i < Model.CategoryIDNameList.Count(); i++)
             {
-                if()
-                {
-                    
-                }
+
+                @Html.Hidden("CategoryIDNameList[" + i + "].CategoryID", Model.CategoryIDNameList[i].CategoryID)
+                @Html.CheckBox("CategoryIDNameList[" + i + "].IsSelected", Model.CategoryIDNameList[i].IsSelected, new { @class = "checkbox" })
+                @Html.Label(Model.CategoryIDNameList[i].CategoryName)
+
             }
+
+            <br />
+
+            <input type="submit" class="btn-lg btn-success" />
         }
     </div>
     <div class="panel-footer">
@@ -28,8 +45,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
