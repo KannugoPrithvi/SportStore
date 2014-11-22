@@ -1,0 +1,86 @@
+﻿@model SportsStore.WebUI.Models.CombinedProductSpecificationViewModel
+
+@{
+    ViewBag.Title = "QuickView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel col-md-12 col-xs-12" style="border:1px solid black;height:300px">
+    <div class="panel-heading">
+        Name of the Product
+    </div>
+    <div class="panel-body">
+        Photos of the product with navigation controls
+    </div>
+    <div class="panel-footer">
+        Offers on the Product, Add to Cart Button
+    </div>
+</div>
+<div class="panel col-md-9 col-xs-9" style="border:1px solid black;height:2000px;margin-right:15px">
+    <div class="panel-heading">
+        Key features of the Product
+    </div>
+    <div class="panel-body">
+        This div should be encapsulated in a partial view
+    </div>
+    <div class="panel-footer">
+
+    </div>
+    <hr />
+    <div class="panel-heading">
+        Description of the Product
+    </div>
+    <div class="panel-body">
+        This div should be encapsulated in a partial view. Need to find out the commonality with all the descriptions
+    </div>
+    <div class="panel-footer">
+
+    </div>
+    <hr />
+    <div class="panel-heading">
+        Description of the Product
+    </div>
+    <div class="panel-body">
+        This div should be encapsulated in a partial view. Need to find out the commonality with all the descriptions
+    </div>
+    <div class="panel-footer">
+
+    </div>
+    <hr />
+
+    @if (Model.ProductSpecificationViewModel != null && Model.ProductSpecificationViewModel.lstProductSpecificationDetails.Count != 0)
+    {
+        <div class="panel-heading">
+            <span style="font-size:1.45em">Specifications of the Product</span>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("Partial/_ProductSpecification", Model.ProductSpecificationViewModel)
+        </div>
+        <div class="panel-footer">
+            <a href="@Request.UrlReferrer.ToString()">Back to product page</a>
+        </div>
+        <hr />
+    }
+    <div class="panel-heading">
+        Reviews of the Product
+    </div>
+    <div class="panel-body">
+        This div should be encapsulated in a partial view
+    </div>
+    <div class="panel-footer">
+
+    </div>
+</div>
+<div class="panel col-md-3 col-xs-3" style="border:1px solid black;height:2000px;float:left">
+    <div class="panel-heading">
+        Related Products
+    </div>
+    <div class="panel-body">
+        This div should be encapsulated in a partial view
+    </div>
+    <div class="panel-footer">
+
+    </div>
+</div>
+
+

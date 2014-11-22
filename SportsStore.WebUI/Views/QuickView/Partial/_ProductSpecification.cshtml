@@ -1,0 +1,17 @@
+﻿@model SportsStore.Domain.ViewModels.ProductSpecificationViewModel
+
+
+
+@foreach (var item in Model.lstProductSpecificationDetails)
+{
+    <span><b>@item.ProductSpecHeading</b></span>
+    <table class="table table-bordered table-condensed table-hover table-striped">
+        @foreach (var subItem in item.ProductConfigurationDetails)
+        {
+            <tr>
+                <td class="col-md-4">@subItem.SubHead</td>
+                <td class="col-md-8">@subItem.SubSpec</td>
+            </tr>
+        }
+    </table>
+}
