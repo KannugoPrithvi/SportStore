@@ -35,23 +35,34 @@ namespace SportsStore.WebUI.Admin.Controllers
             {
                 //List<ProductCategory> productCategory = (repository.ProductCategories.Where(p => p.ProductID == ProductID)).ToList<ProductCategory>();
                 var categories = (from result in repository.Categories
-                                 select new CategoryIDNameViewModel
-                                 {
-                                     CategoryID = result.CategoryID,
-                                     CategoryName = result.Name,
-                                     IsSelected = false
-                                 }).ToList<CategoryIDNameViewModel>();
+                                  select new CategoryIDNameViewModel
+                                  {
+                                      CategoryID = result.CategoryID,
+                                      CategoryName = result.Name,
+                                      IsSelected = false
+                                  }).ToList<CategoryIDNameViewModel>();
                 ProductCategoryViewModel productCategoryViewModel = new ProductCategoryViewModel();
                 productCategoryViewModel.ProductID = ProductID;
                 productCategoryViewModel.ProductName = repository.Products.Where(p => p.ProductID == ProductID).FirstOrDefault().Name;
                 var checkedCategoriesList = (from result in repository.ProductCategories
-                                                               where result.ProductID == ProductID
-                                                               select new CategoryIDNameViewModel
-                                                               {
-                                                                   CategoryID = result.CategoryID,
-                                                                   CategoryName = string.Empty,
-                                                                   IsSelected = true
-                                                               }).ToList<CategoryIDNameViewModel>();
+                                             where result.ProductID == ProductID
+                                             select new CategoryIDNameViewModel
+                                             {
+                                                 CategoryID = result.CategoryID,
+                                                 CategoryName = string.Empty,
+                                                 IsSelected = true
+                                             }).ToList<CategoryIDNameViewModel>();
+                foreach (var item in categories)
+                {
+                    foreach (var subItem in checkedCategoriesList)
+                    {
+                        if (subItem.CategoryID == item.CategoryID)
+                        {
+                            item.IsSelected = true;
+                            break;
+                        }
+                    }
+                }
                 productCategoryViewModel.CategoryIDNameList = categories;
                 return View(productCategoryViewModel);
             }
@@ -61,16 +72,68 @@ namespace SportsStore.WebUI.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(ProductCategoryViewModel productCategoryViewModel)
         {
-            var request = Request.Form;
-            if (ModelState.IsValid)
+            //Very delicate logic under, need to test it extensively
+            try
             {
-                //repository.SaveProductCategory(productCategoryViewModel);
-                TempData["message"] = string.Format("Product Category has been saved successfully");
-                return RedirectToAction("Index");
+                if (ModelState.IsValid && productCategoryViewModel != null)
+                {
+                    var productCategoryFromDB = (from result in repository.ProductCategories
+                                                 where result.ProductID == productCategoryViewModel.ProductID
+                                                 select new CategoryIDNameViewModel
+                                                 {
+                                                     CategoryID = result.CategoryID,
+                                                     IsSelected = true
+                                                 }).ToList<CategoryIDNameViewModel>();
+                    var productCategoryFromModel = productCategoryViewModel.CategoryIDNameList;
+                    //Generate Delete Product Category List
+                    int flag = 0;
+                    foreach (var item in productCategoryFromDB)
+                    {
+                        flag = 0;
+                        foreach (var subItem in productCategoryFromModel)
+                        {
+                            if (subItem.CategoryID == item.CategoryID && subItem.IsSelected == true)
+                            {
+                                flag = 1;
+                                break;
+                            }
+                        }
+                        if (flag == 0)
+                        {
+                            repository.DeleteProductCategory(new ProductCategory { CategoryID = item.CategoryID, ProductID = productCategoryViewModel.ProductID });
+                        }
+                    }
+                    //Generate Insert Product Category List
+                    foreach (var item in productCategoryFromModel)
+                    {
+                        flag = 0;
+                        foreach (var subItem in productCategoryFromDB)
+                        {
+                            if(item.CategoryID != subItem.CategoryID && item.IsSelected==true)
+                            {
+                                flag = 1;
+                            }
+                            else
+                            {
+                                flag = 0;
+                                break;
+                            }
+                        }
+                        if(flag ==1)
+                        {
+                            repository.SaveProductCategory(new ProductCategory { CategoryID = item.CategoryID, ProductID = productCategoryViewModel.ProductID });
+                        }
+                    }
+                    return RedirectToAction("Index", new { controller = "ProductAdmin" });
+                }
+                else
+                {
+                    return View(productCategoryViewModel);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                return View(productCategoryViewModel);
+                throw ex;
             }
         }
 

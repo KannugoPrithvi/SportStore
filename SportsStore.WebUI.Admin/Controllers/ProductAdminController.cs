@@ -118,8 +118,11 @@ namespace SportsStore.WebUI.Admin.Controllers
                 if (imageUploadViewModel.MediumImage != null)
                 {
                     string mediumImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.MediumImage.FileName);
-                    string mediumImageFilePath = Path.Combine(applicationPath, mediumImageFileName);
-                    image.MediumImage = mediumImageFilePath;
+                    string mediumImageFilePath = Path.Combine(Server.MapPath(applicationPath), mediumImageFileName);
+                    //Temporary Adjustment for image path storing
+                    //Change the below URL for respective environment
+                    image.MediumImage = string.Format(@"http://localhost:49217/Content/images/cart-image-icons/{0}", mediumImageFileName);
+                    //image.MediumImage = mediumImageFilePath;
                     imageUploadViewModel.MediumImage.SaveAs(mediumImageFilePath);
                 }
                 else

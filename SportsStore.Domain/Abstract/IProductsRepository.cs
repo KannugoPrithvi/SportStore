@@ -22,7 +22,7 @@ namespace SportsStore.Domain.Abstract
         //ProductCatgories
         IEnumerable<ProductCategory> ProductCategories { get; }
         void SaveProductCategory(ProductCategory productCategory);
-        ProductCategory DeleteProductCategory(int productCategoryID);
+        ProductCategory DeleteProductCategory(ProductCategory productCategory);
 
         //Images
         IEnumerable<Image> Images { get; }

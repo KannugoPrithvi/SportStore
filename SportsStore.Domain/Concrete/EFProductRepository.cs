@@ -115,31 +115,44 @@ namespace SportsStore.Domain.Concrete
 
         public void SaveProductCategory(ProductCategory productCategory)
         {
-            if (productCategory.ProductCategoryID == 0)
+            try
             {
-                context.ProductCategory.Add(productCategory);
-            }
-            else
-            {
-                ProductCategory dbEntry = context.ProductCategory.Find(productCategory.ProductCategoryID);
-                if (dbEntry != null)
+                if (productCategory != null)
                 {
-                    dbEntry.CategoryID = productCategory.CategoryID;
-                    dbEntry.ProductID = productCategory.ProductID;
-                    dbEntry.ProductCategoryOrder = productCategory.ProductCategoryOrder;
+                    context.ProductCategory.Add(productCategory);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    return;
                 }
             }
-            context.SaveChanges();
-        }
-        public ProductCategory DeleteProductCategory(int productCategoryID)
-        {
-            ProductCategory dbEntry = context.ProductCategory.Find(productCategoryID);
-            if (dbEntry != null)
+            catch (Exception ex)
             {
-                context.ProductCategory.Remove(dbEntry);
-                context.SaveChanges();
+                throw ex;
             }
-            return dbEntry;
+
+        }
+        public ProductCategory DeleteProductCategory(ProductCategory productCategory)
+        {
+            try
+            {
+                if (productCategory != null)
+                {
+                    ProductCategory dbEntry = context.ProductCategory.FirstOrDefault(p => p.CategoryID == productCategory.CategoryID && p.ProductID == productCategory.ProductID);
+                    context.ProductCategory.Remove(dbEntry);
+                    context.SaveChanges();
+                    return productCategory;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
@@ -207,12 +220,12 @@ namespace SportsStore.Domain.Concrete
                     dbEntry.ProductID = productSpecification.ProductID;
                     dbEntry.ProductSpecificationOrder = productSpecification.ProductSpecificationOrder;
                     dbEntry.ProductSpecificationHeader = productSpecification.ProductSpecificationHeader;
-                    if(dbEntry.ProductSpecificationAttributes != null)
+                    if (dbEntry.ProductSpecificationAttributes != null)
                     {
                         foreach (var item in productSpecification.ProductSpecificationAttributes)
                         {
                             SaveProductSpecificationAttribute(item);
-                        }                        
+                        }
                     }
                     else
                     {
@@ -777,7 +790,7 @@ namespace SportsStore.Domain.Concrete
                 if (dbEntry != null)
                 {
                     dbEntry.AdministratorID = administratorRole.AdministratorID;
-                    dbEntry.RoleID = administratorRole.RoleID;                    
+                    dbEntry.RoleID = administratorRole.RoleID;
                 }
             }
             context.SaveChanges();
