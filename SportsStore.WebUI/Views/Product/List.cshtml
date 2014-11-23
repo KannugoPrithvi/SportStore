@@ -63,11 +63,13 @@
         }
 </h5>
 </div>
-<div class="row center-middle">
-    @foreach (var p in Model.ProductsAndImages)
-    {
-        @Html.Partial("ProductSummary", p)
-    }
+<div class="container" style="margin:auto">
+    <div class="container" style="width:auto">
+        @foreach (var p in Model.ProductsAndImages)
+        {
+            @Html.Partial("ProductSummary", p)
+        }
+    </div>
 </div>
 <div class="btn-group pull-right panel">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { CategoryID = Model.CurrentCategoryID, page = x }))
