@@ -1,0 +1,35 @@
+﻿@model SportsStore.WebUI.Admin.Models.ProductFeatureViewModel
+@{
+    ViewBag.Title = "EditProductFeature";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("EditProductFeature", "ProductSpecification", FormMethod.Post, new { id = "ProductSpecificationEditForm", @class = "form-horizontal" }))
+        {            
+            for (int iterator = 0; iterator < Model.lstProductFeatureHeaderBody.Count(); iterator++)
+            {
+                if (Model.lstProductFeatureHeaderBody[iterator] != null)
+                {
+                    ViewBag.TableIndexNo = "SpecificationList_" + Model.lstProductFeatureHeaderBody[iterator].Header;
+                    ViewBag.ButtonAddIndex = "btnAddRow_" + Model.lstProductFeatureHeaderBody[iterator].Body;
+                    ViewBag.TableIndexNoJSID = "#" + ViewBag.TableIndexNo as String;
+                    ViewBag.ButtonAddIndexJSID = "#" + ViewBag.ButtonAddIndex as string;
+                    ViewBag.Iterator = iterator;
+                    <div class="panel-body">
+                        <hr />
+                        @Html.Partial("Partial/ProductSpecification", Model.lstProductFeatureHeaderBody[iterator])
+                        <hr />
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="panel-footer">
+
+    </div>
+</div>

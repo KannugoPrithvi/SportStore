@@ -163,6 +163,7 @@
     <Compile Include="Infrastructure\NinjectDepedencyResolver.cs" />
     <Compile Include="Models\ImageUploadViewModel.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
+    <Compile Include="Models\ProductFeatureViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +184,9 @@
     <Content Include="Views\ProductSpecification\Edit.cshtml" />
     <Content Include="Views\ProductSpecification\Partial\ProductSpecification.cshtml" />
     <Content Include="Views\ProductAdmin\UploadImage.cshtml" />
+    <Content Include="Views\ProductSpecification\EditProductFeature.cshtml" />
+    <Content Include="Views\ProductSpecification\Partial\_NewProductFeatureRow.cshtml" />
+    <Content Include="Views\ProductSpecification\Partial\_ExistingProductFeatureRow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

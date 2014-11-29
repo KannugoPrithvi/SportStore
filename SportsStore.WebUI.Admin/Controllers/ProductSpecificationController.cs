@@ -1,6 +1,7 @@
 ﻿using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Entities;
 using SportsStore.Domain.ViewModels;
+using SportsStore.WebUI.Admin.Models;
 using SportsStore.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -137,27 +138,40 @@ namespace SportsStore.WebUI.Admin.Controllers
             return configurationList;
         }
 
-        private string ConvertObjectToXML(ProductSpecificationViewModel productSpecificationViewModel)
+               
+        public PartialViewResult NewProductFeatureRow(int rowIndex  = 0)
         {
-            settings = new XmlWriterSettings();
-            StringWriter writer = new StringWriter();
-            settings.OmitXmlDeclaration = true;
-            settings.Indent = false;
-            settings.NewLineHandling = NewLineHandling.None;
-            writer.NewLine = "";
-            XmlWriter xmlwriter = XmlWriter.Create(writer, settings);
-            XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
-            namespaces.Add(string.Empty, string.Empty);
-            XmlSerializer MySerializer = new XmlSerializer(productSpecificationViewModel.GetType());
-            MySerializer.Serialize(writer, productSpecificationViewModel);
-            return writer.ToString();
+            return PartialView("Partial/_NewProductFeatureRow",rowIndex);
         }
-
-        private List<ProductSpecificationDetails> ConvertXMLToObject(String Xml)
+        public PartialViewResult ExistingProductFeatureRow()
         {
+            List<ProductFeature> productFeatures = repository.ProductFeatures.ToList<ProductFeature>();
 
+            foreach (var item in productFeatures)
+            {
+                
+            }
+            return PartialView("Partial/_ExistingProductFeatureRow");
+        }
+        [HttpGet]
+        public ActionResult EditProductFeature(int ProductID = 0)
+        {
+            if(ProductID == 0)
+            {
+                TempData["Message"] = "No such Product exists";
+                return View();
+            }
+            else
+            {
+                List<ProductFeature> productFeature = repository.ProductFeatures.Where(p => p.ProductID == ProductID).ToList<ProductFeature>();
+            }
             return null;
         }
-
+        [HttpPost]
+        public ActionResult EditProductFeature(ProductFeatureHeaderBody productFeatureHeaderBody,int rowIndex = 0)
+        {
+            ViewBag.rowIndex = rowIndex;
+            return PartialView("_ExistingProductFeatureRow", productFeatureHeaderBody);
+        }
     }
 }

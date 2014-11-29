@@ -105,6 +105,7 @@
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductAttribute.cs" />
     <Compile Include="Entities\ProductCategory.cs" />
+    <Compile Include="Entities\ProductFeature.cs" />
     <Compile Include="Entities\ProductRating.cs" />
     <Compile Include="Entities\ProductSetting.cs" />
     <Compile Include="Entities\ProductSpecification.cs" />

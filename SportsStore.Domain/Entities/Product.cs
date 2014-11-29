@@ -73,7 +73,8 @@ namespace SportsStore.Domain.Entities
         public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
         public virtual ICollection<RelatedProduct> RelatedProducts { get; set; }        
         public virtual ICollection<Sku> Skus { get; set; }
-       
+        public virtual ICollection<ProductFeature> ProductFeatures { get; set; }
+        
     }
 
 }

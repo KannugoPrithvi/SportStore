@@ -258,6 +258,56 @@ namespace SportsStore.Domain.Concrete
                 context.SaveChanges();
             }
         }
+
+        //ProductFeatures related CRUD operations
+        public IEnumerable<ProductFeature> ProductFeatures
+        {
+            get { return context.ProductFeature; }
+        }
+
+        public void SaveProductFeature(ProductFeature productFeature)
+        {
+
+            if (productFeature.ProductFeatureID == 0)
+            {
+                context.ProductFeature.Add(productFeature);
+            }
+            else
+            {
+                ProductFeature dbEntry = context.ProductFeature.Find(productFeature.ProductFeatureID);
+                if (dbEntry != null)
+                {
+                    dbEntry.ProductID = productFeature.ProductID;
+                    dbEntry.ProductFeatureHeader = productFeature.ProductFeatureHeader;
+                    dbEntry.ProductFeatureBody = productFeature.ProductFeatureBody;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public ProductFeature DeleteProductFeature(int productFeatureID)
+        {
+            ProductFeature dbEntry = context.ProductFeature.Find(productFeatureID);
+            if(dbEntry != null)
+            {
+                context.ProductFeature.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         //ProductSpecificationAttributes related CRUD operations
         public IEnumerable<ProductSpecificationAttribute> ProductSpecificationAttributes
         {
