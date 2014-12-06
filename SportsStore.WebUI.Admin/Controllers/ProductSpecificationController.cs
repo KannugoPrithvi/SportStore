@@ -49,18 +49,20 @@ namespace SportsStore.WebUI.Admin.Controllers
                     List<ProductSubConfigurationDetails> productSubConfDetails = new List<ProductSubConfigurationDetails>();
                     foreach (var subItem in item.ProductSpecificationAttributes)
                     {
-                        productSubConfDetails.Add(new ProductSubConfigurationDetails {
-                            ProductSpecificationAttributeID=subItem.ProductSpecificationAttributeID,
-                            ProductSpecificationID=subItem.ProductSpecificationID,
-                            SubHead=subItem.AttributeKey,
-                            SubSpec=subItem.AttributeValue
+                        productSubConfDetails.Add(new ProductSubConfigurationDetails
+                        {
+                            ProductSpecificationAttributeID = subItem.ProductSpecificationAttributeID,
+                            ProductSpecificationID = subItem.ProductSpecificationID,
+                            SubHead = subItem.AttributeKey,
+                            SubSpec = subItem.AttributeValue
                         });
                     }
-                    lstProductSpecificationDetails.Add(new ProductSpecificationDetails {
-                        ProductSpecHeading=item.ProductSpecificationHeader,
-                        ProductSpecOrder=item.ProductSpecificationOrder,
-                        ProductConfigurationDetails=productSubConfDetails,
-                        ProductSpecificationID=item.ProductSpecificationID
+                    lstProductSpecificationDetails.Add(new ProductSpecificationDetails
+                    {
+                        ProductSpecHeading = item.ProductSpecificationHeader,
+                        ProductSpecOrder = item.ProductSpecificationOrder,
+                        ProductConfigurationDetails = productSubConfDetails,
+                        ProductSpecificationID = item.ProductSpecificationID
                     });
                 }
                 productSpecViewModel.ProductID = ProductID;
@@ -98,14 +100,15 @@ namespace SportsStore.WebUI.Admin.Controllers
                     lstProductSpecificationAttribute = new List<ProductSpecificationAttribute>();
                     foreach (var subItem in item.ProductConfigurationDetails)
                     {
-                        lstProductSpecificationAttribute.Add(new ProductSpecificationAttribute {
+                        lstProductSpecificationAttribute.Add(new ProductSpecificationAttribute
+                        {
                             AttributeKey = subItem.SubHead,
                             AttributeValue = subItem.SubSpec,
-                            ProductSpecificationAttributeID=subItem.ProductSpecificationAttributeID,
+                            ProductSpecificationAttributeID = subItem.ProductSpecificationAttributeID,
                             ProductSpecificationID = dbEntry.ProductSpecificationID
                         });
                     }
-                    dbEntry.ProductSpecificationAttributes = lstProductSpecificationAttribute;                    
+                    dbEntry.ProductSpecificationAttributes = lstProductSpecificationAttribute;
                     repository.SaveProductSpecification(dbEntry);
                 }
 
@@ -138,40 +141,64 @@ namespace SportsStore.WebUI.Admin.Controllers
             return configurationList;
         }
 
-               
-        public PartialViewResult NewProductFeatureRow(int rowIndex  = 0)
-        {
-            return PartialView("Partial/_NewProductFeatureRow",rowIndex);
-        }
-        public PartialViewResult ExistingProductFeatureRow()
-        {
-            List<ProductFeature> productFeatures = repository.ProductFeatures.ToList<ProductFeature>();
 
-            foreach (var item in productFeatures)
-            {
-                
-            }
-            return PartialView("Partial/_ExistingProductFeatureRow");
+        public PartialViewResult ExistingProductFeatureRow(ProductFeatureHeaderBody productFeatureHeaderBody, int rowIndex = 0)
+        {
+            ViewBag.rowIndex = rowIndex;
+            return PartialView("Partial/_ExistingProductFeatureRow",productFeatureHeaderBody);
         }
         [HttpGet]
         public ActionResult EditProductFeature(int ProductID = 0)
         {
-            if(ProductID == 0)
+            if (ProductID == 0)
             {
                 TempData["Message"] = "No such Product exists";
                 return View();
             }
             else
             {
-                List<ProductFeature> productFeature = repository.ProductFeatures.Where(p => p.ProductID == ProductID).ToList<ProductFeature>();
+                List<ProductFeatureHeaderBody> lstProductFeature = (from result in repository.ProductFeatures
+                                                                    where result.ProductID == ProductID
+                                                                    select new ProductFeatureHeaderBody
+                                                                    {
+                                                                        ProductFeatureID = result.ProductFeatureID,
+                                                                        Header = result.ProductFeatureHeader,
+                                                                        Body = result.ProductFeatureBody
+                                                                    }).ToList<ProductFeatureHeaderBody>();
+                ProductFeatureViewModel productFeatureViewModel = new ProductFeatureViewModel
+                {
+                    lstProductFeatureHeaderBody = lstProductFeature,
+                    ProductID = ProductID
+                };
+                return View(productFeatureViewModel);
             }
-            return null;
         }
         [HttpPost]
-        public ActionResult EditProductFeature(ProductFeatureHeaderBody productFeatureHeaderBody,int rowIndex = 0)
+        public ActionResult EditProductFeature(ProductFeatureViewModel productFeatureViewModel)
         {
-            ViewBag.rowIndex = rowIndex;
-            return PartialView("_ExistingProductFeatureRow", productFeatureHeaderBody);
+
+            if (productFeatureViewModel != null && ModelState.IsValid)
+            {
+                ProductFeature productFeature;
+                foreach (var item in productFeatureViewModel.lstProductFeatureHeaderBody)
+                {
+                    productFeature = new ProductFeature
+                    {
+                        ProductID = productFeatureViewModel.ProductID,
+                        ProductFeatureHeader = item.Header,
+                        ProductFeatureBody = item.Body,
+                        ProductFeatureID = item.ProductFeatureID
+                    };
+                    repository.SaveProductFeature(productFeature);
+                }
+                return RedirectToAction("Index", "ProductAdmin");
+                
+            }
+            else
+            {
+                TempData["Message"] = "Product feature could not be stored";
+                return View();
+            }
         }
     }
 }

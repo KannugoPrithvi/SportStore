@@ -1,1 +1,14 @@
-﻿
+﻿@model SportsStore.WebUI.Admin.Models.ProductFeatureHeaderBody
+
+@{int rowIndex = ViewBag.rowIndex;}
+<tr>    
+    <td style='padding:5px'>
+        @Html.Hidden("lstProductFeatureHeaderBody[" + rowIndex + "].ProductFeatureID", Model.ProductFeatureID)
+        @Html.TextBox("lstProductFeatureHeaderBody[" + rowIndex + "].Header", Model.Header, new { @class="form-control"})
+        @*<input class='form-control' type='text' id='lstProductFeatureHeaderBody_" + @rowIndex + "__Header' name='lstProductFeatureHeaderBody[" + @rowIndex + "].Header' value="@Model.Header"/>*@
+    </td>
+    <td style='padding:5px'>
+        @Html.TextBox("lstProductFeatureHeaderBody[" + rowIndex + "].Body", Model.Body, new { @class = "form-control" })
+        @*<input class='form-control' type='text' id='lstProductFeatureHeaderBody_" + @rowIndex + "__Body' name='lstProductFeatureHeaderBody[" + @rowIndex + "].Body' value="@Model.Body">*@
+    </td>
+</tr>

@@ -6,30 +6,47 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-
+        <h3>Create/Edit Product Feature</h3>
     </div>
     <div class="panel-body">
         @using (Html.BeginForm("EditProductFeature", "ProductSpecification", FormMethod.Post, new { id = "ProductSpecificationEditForm", @class = "form-horizontal" }))
-        {            
-            for (int iterator = 0; iterator < Model.lstProductFeatureHeaderBody.Count(); iterator++)
-            {
-                if (Model.lstProductFeatureHeaderBody[iterator] != null)
+        {
+            @Html.HiddenFor(model => model.ProductID)
+            <table id="featureTable" class="col-xs-6">
+                <tr>
+                    <th class="text-center">Header</th>
+                    <th class="text-center">Body</th>
+                </tr>
+                @if (Model.lstProductFeatureHeaderBody.Count() > 0)
                 {
-                    ViewBag.TableIndexNo = "SpecificationList_" + Model.lstProductFeatureHeaderBody[iterator].Header;
-                    ViewBag.ButtonAddIndex = "btnAddRow_" + Model.lstProductFeatureHeaderBody[iterator].Body;
-                    ViewBag.TableIndexNoJSID = "#" + ViewBag.TableIndexNo as String;
-                    ViewBag.ButtonAddIndexJSID = "#" + ViewBag.ButtonAddIndex as string;
-                    ViewBag.Iterator = iterator;
-                    <div class="panel-body">
-                        <hr />
-                        @Html.Partial("Partial/ProductSpecification", Model.lstProductFeatureHeaderBody[iterator])
-                        <hr />
-                    </div>
+                    for (int iterator = 0; iterator < Model.lstProductFeatureHeaderBody.Count(); iterator++)
+                    {
+                        if (Model.lstProductFeatureHeaderBody[iterator] != null)
+                        {
+                            ViewBag.Iterator = iterator;
+                            @Html.Action("ExistingProductFeatureRow", "ProductSpecification", new { productFeatureHeaderBody = Model.lstProductFeatureHeaderBody[iterator], rowIndex = iterator })
+                        }
+                    }
                 }
-            }
+            </table>
+            <div class="col-md-12 col-xs-12">
+                <input type="button" value="Add new row" id="AddNewFeatureRow" class="btn-success btn-sm " />
+                <input type="submit" value="Submit" class="btn-primary btn-sm" />
+            </div>
+
         }
     </div>
     <div class="panel-footer">
 
     </div>
 </div>
+<script type="text/javascript">
+    $("#AddNewFeatureRow").on("click", function (e) {
+        var itemIndex = $("#featureTable tr").length;
+        e.preventDefault();
+        console.debug("ItemIndex = " + itemIndex);
+        var newItem = $("<tr><td style='padding:5px'><input class='form-control' type='text' id='lstProductFeatureHeaderBody_" + (itemIndex - 1) + "__Header' name='lstProductFeatureHeaderBody[" + (itemIndex - 1) + "].Header'/></td><td style='padding:5px'><input class='form-control' type='text' id='lstProductFeatureHeaderBody_" + (itemIndex - 1) + "__Body' name='lstProductFeatureHeaderBody[" + (itemIndex - 1) + "].Body'></td></tr>");
+        debugger;
+        $("#featureTable").append(newItem);
+    });
+</script>

@@ -35,6 +35,7 @@
                         @Html.ActionLink("Delete", "Delete", new { controller = "ProductAdmin", ProductID = item.ProductID }) |
                         @Html.ActionLink("Edit Product Spec", "Edit", new { controller = "ProductSpecification", ProductID = item.ProductID }) |
                         @Html.ActionLink("Edit Image", "UploadImage", new { controller = "ProductAdmin", ProductID = item.ProductID }) |
+                        @Html.ActionLink("Product Feature", "EditProductFeature", new { controller = "ProductSpecification",ProductID = item.ProductID }) |
                         @Html.ActionLink("Product Category", "Edit", new { controller = "ProductCategoryAdmin", ProductID = item.ProductID })
                     </td>
                 </tr>
