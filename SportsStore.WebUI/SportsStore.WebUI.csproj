@@ -398,6 +398,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
+    <Compile Include="Models\ProductFeatureViewModel.cs" />
     <Compile Include="Models\ProductsListViewModel.cs" />
     <Compile Include="Models\ProductWithImagesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -424,6 +425,7 @@
     <Content Include="Views\Nav\HorizontalMenu.cshtml" />
     <Content Include="Views\QuickView\ProductView.cshtml" />
     <Content Include="Views\QuickView\Partial\_ProductSpecification.cshtml" />
+    <Content Include="Views\QuickView\Partial\_ProductFeature.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

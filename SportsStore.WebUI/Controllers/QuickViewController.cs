@@ -36,6 +36,31 @@ namespace SportsStore.WebUI.Controllers
             
         }
         [ChildActionOnly]
+        public PartialViewResult ProductFeaturePartial(int ProductID = 0)
+        {
+            if(ProductID == 0)
+            {
+                return PartialView("Partial/_ProductFeature", null);
+            }
+            else
+            {
+                var lstFeatureHeaderBody = (from result in repository.ProductFeatures
+                                            where result.ProductID == ProductID
+                                            select new ProductFeatureHeaderAndBody
+                                            {
+                                                FeatureHeader = result.ProductFeatureHeader,
+                                                FeatureBody = result.ProductFeatureBody
+                                            }).ToList<ProductFeatureHeaderAndBody>();
+                ProductFeatureViewModelUI productFeatureViewModel = new ProductFeatureViewModelUI
+                {
+                    ProductName = repository.Products.FirstOrDefault(p => p.ProductID == ProductID).Name,
+                    lstFeatureHeaderBody = lstFeatureHeaderBody
+                };
+
+                return PartialView("Partial/_ProductFeature", productFeatureViewModel);
+            }
+        }
+        [ChildActionOnly]
         public PartialViewResult ProductSpecificationPartial(int ProductID = 0)
         {
             if (ProductID == 0)
@@ -75,6 +100,7 @@ namespace SportsStore.WebUI.Controllers
             }
             ProductSpecificationViewModel productSpecificationViewModel = new ProductSpecificationViewModel();
             productSpecificationViewModel.ProductID = ProductID;
+            productSpecificationViewModel.ProductName = repository.Products.FirstOrDefault(p => p.ProductID == ProductID).Name;
             productSpecificationViewModel.lstProductSpecificationDetails = productSpecDetails;
             CombinedProductSpecificationViewModel combinedProductSpecificationViewModel = new CombinedProductSpecificationViewModel();
             combinedProductSpecificationViewModel.ProductSpecificationViewModel = productSpecificationViewModel;

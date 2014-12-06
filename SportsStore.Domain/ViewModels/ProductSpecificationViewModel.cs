@@ -26,6 +26,7 @@ namespace SportsStore.Domain.ViewModels
     public class ProductSpecificationViewModel
     {
         public int ProductID { get; set; }
+        public string ProductName { get; set; }
         public List<ProductSpecificationDetails> lstProductSpecificationDetails { get; set; }
     }
 

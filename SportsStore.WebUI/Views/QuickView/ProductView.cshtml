@@ -37,21 +37,13 @@
 
     </div>
     <hr />
-    <div class="panel-heading">
-        Description of the Product
-    </div>
-    <div class="panel-body">
-        This div should be encapsulated in a partial view. Need to find out the commonality with all the descriptions
-    </div>
-    <div class="panel-footer">
-
-    </div>
-    <hr />
-
+    @*Key features region*@
+    @Html.Action("ProductFeaturePartial", new { ProductID = Model.ProductSpecificationViewModel.ProductID})
+    @*Product Specification region*@
     @if (Model.ProductSpecificationViewModel != null && Model.ProductSpecificationViewModel.lstProductSpecificationDetails.Count != 0)
     {
         <div class="panel-heading">
-            <span style="font-size:1.45em">Specifications of the Product</span>
+            <span style="font-size:1.45em;color:#009688">Specifications of @Model.ProductSpecificationViewModel.ProductName</span>
         </div>
         <div class="panel-body">
             @Html.Partial("Partial/_ProductSpecification", Model.ProductSpecificationViewModel)
