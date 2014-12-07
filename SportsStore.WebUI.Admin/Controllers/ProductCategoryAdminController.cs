@@ -85,43 +85,58 @@ namespace SportsStore.WebUI.Admin.Controllers
                                                      IsSelected = true
                                                  }).ToList<CategoryIDNameViewModel>();
                     var productCategoryFromModel = productCategoryViewModel.CategoryIDNameList;
-                    //Generate Delete Product Category List
-                    int flag = 0;
-                    foreach (var item in productCategoryFromDB)
+
+                    if (productCategoryFromDB.Count > 0)
                     {
-                        flag = 0;
-                        foreach (var subItem in productCategoryFromModel)
+                        //Generate Delete Product Category List
+
+                        int flag = 0;
+                        foreach (var item in productCategoryFromDB)
                         {
-                            if (subItem.CategoryID == item.CategoryID && subItem.IsSelected == true)
+                            flag = 0;
+                            foreach (var subItem in productCategoryFromModel)
                             {
-                                flag = 1;
-                                break;
+                                if (subItem.CategoryID == item.CategoryID && subItem.IsSelected == true)
+                                {
+                                    flag = 1;
+                                    break;
+                                }
+                            }
+                            if (flag == 0)
+                            {
+                                repository.DeleteProductCategory(new ProductCategory { CategoryID = item.CategoryID, ProductID = productCategoryViewModel.ProductID });
                             }
                         }
-                        if (flag == 0)
+                        //Generate Insert Product Category List
+                        foreach (var item in productCategoryFromModel)
                         {
-                            repository.DeleteProductCategory(new ProductCategory { CategoryID = item.CategoryID, ProductID = productCategoryViewModel.ProductID });
+                            flag = 0;
+                            foreach (var subItem in productCategoryFromDB)
+                            {
+                                if (item.CategoryID != subItem.CategoryID && item.IsSelected == true)
+                                {
+                                    flag = 1;
+                                }
+                                else
+                                {
+                                    flag = 0;
+                                    break;
+                                }
+                            }
+                            if (flag == 1)
+                            {
+                                repository.SaveProductCategory(new ProductCategory { CategoryID = item.CategoryID, ProductID = productCategoryViewModel.ProductID });
+                            }
                         }
                     }
-                    //Generate Insert Product Category List
-                    foreach (var item in productCategoryFromModel)
+                    else
                     {
-                        flag = 0;
-                        foreach (var subItem in productCategoryFromDB)
+                        foreach (var item in productCategoryFromModel)
                         {
-                            if(item.CategoryID != subItem.CategoryID && item.IsSelected==true)
+                            if (item.IsSelected == true)
                             {
-                                flag = 1;
+                                repository.SaveProductCategory(new ProductCategory { CategoryID = item.CategoryID, ProductID = productCategoryViewModel.ProductID });
                             }
-                            else
-                            {
-                                flag = 0;
-                                break;
-                            }
-                        }
-                        if(flag ==1)
-                        {
-                            repository.SaveProductCategory(new ProductCategory { CategoryID = item.CategoryID, ProductID = productCategoryViewModel.ProductID });
                         }
                     }
                     return RedirectToAction("Index", new { controller = "ProductAdmin" });
@@ -131,7 +146,7 @@ namespace SportsStore.WebUI.Admin.Controllers
                     return View(productCategoryViewModel);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

@@ -100,9 +100,9 @@ namespace SportsStore.WebUI.Controllers
             }
             ProductSpecificationViewModel productSpecificationViewModel = new ProductSpecificationViewModel();
             productSpecificationViewModel.ProductID = ProductID;
-            productSpecificationViewModel.ProductName = repository.Products.FirstOrDefault(p => p.ProductID == ProductID).Name;
             productSpecificationViewModel.lstProductSpecificationDetails = productSpecDetails;
             CombinedProductSpecificationViewModel combinedProductSpecificationViewModel = new CombinedProductSpecificationViewModel();
+            combinedProductSpecificationViewModel.Product = repository.Products.FirstOrDefault(p => p.ProductID == ProductID);
             combinedProductSpecificationViewModel.ProductSpecificationViewModel = productSpecificationViewModel;
             return combinedProductSpecificationViewModel;
         }
