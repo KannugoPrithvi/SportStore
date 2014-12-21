@@ -40,7 +40,7 @@ namespace SportsStore.WebUI.Controllers
         {
             if(ProductID == 0)
             {
-                return PartialView("Partial/_ProductFeature", null);
+                return PartialView("Partial/General/_ProductFeature", null);
             }
             else
             {
@@ -57,7 +57,7 @@ namespace SportsStore.WebUI.Controllers
                     lstFeatureHeaderBody = lstFeatureHeaderBody
                 };
 
-                return PartialView("Partial/_ProductFeature", productFeatureViewModel);
+                return PartialView("Partial/General/_ProductFeature", productFeatureViewModel);
             }
         }
         [ChildActionOnly]

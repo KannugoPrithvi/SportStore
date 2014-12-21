@@ -424,8 +424,15 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Nav\HorizontalMenu.cshtml" />
     <Content Include="Views\QuickView\ProductView.cshtml" />
-    <Content Include="Views\QuickView\Partial\_ProductSpecification.cshtml" />
-    <Content Include="Views\QuickView\Partial\_ProductFeature.cshtml" />
+    <Content Include="Views\QuickView\Partial\General\_ProductFeature.cshtml" />
+    <Content Include="Views\QuickView\Partial\General\_ProductSpecification.cshtml" />
+    <Content Include="Views\QuickView\Partial\General\_ProductMainInfoPallete.cshtml" />
+    <Content Include="Views\QuickView\Partial\Electronics\Laptops\_ProductMainInfoPallete.cshtml" />
+    <Content Include="Views\QuickView\Partial\BooksMedia\Media\_ProductMainInfoPallete.cshtml" />
+    <Content Include="Views\QuickView\Partial\BooksMedia\Books\_ProductMainInfoPallete.cshtml" />
+    <Content Include="Views\QuickView\Partial\Apparel\Womens\_ProductMainInfoPallete.cshtml" />
+    <Content Include="Views\QuickView\Partial\Apparel\Mens\_ProductMainInfoPallete.cshtml" />
+    <Content Include="Views\QuickView\Partial\Apparel\Baby\_ProductMainInfoPallete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

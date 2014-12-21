@@ -5,43 +5,62 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="panel col-md-12 col-xs-12" style="border:1px solid black;height:300px">
-    
+<div class="panel col-md-12 col-xs-12" style="height:300px;padding:0">
+    @Html.Partial("Partial/General/_ProductMainInfoPallete",Model.Product)
 </div>
 <div class="panel col-md-9 col-xs-9" style="border:1px solid black;height:auto;margin-right:15px;padding-bottom:15px">
     <div class="panel-heading">
-        Key features of the Product
+        Offers Panel
     </div>
     <div class="panel-body">
-        This div should be encapsulated in a partial view
+        <ul class="nav nav-tabs nav-justified">
+            @if (!String.IsNullOrEmpty(Model.Product.Description))
+            {
+                <li role="presentation"><a href="#Overview">Overview</a></li>
+            }
+            @if (Model.Product.ProductFeatures != null && Model.Product.ProductFeatures.Count !=0)
+            {
+                <li role="presentation"><a href="#ProductFeatures">Features</a></li>
+            }
+            @if (Model.Product.ProductSpecifications != null && Model.Product.ProductSpecifications.Count != 0)
+            {
+                <li role="presentation"><a href="#ProductSpecification">Specifications</a></li>
+            }
+        </ul>
     </div>
     <div class="panel-footer">
 
     </div>
     <hr />
-    <div class="panel-heading">
-        <span style="font-size:1.45em;color:#009688">@Model.Product.ShortDescription</span>
-    </div>
-    <div class="panel-body">
-        @Model.Product.Description
-    </div>
-    <hr />
-    @*Key features region*@
-    @Html.Action("ProductFeaturePartial", new { ProductID = Model.ProductSpecificationViewModel.ProductID})
-    @*Product Specification region*@
-    @if (Model.ProductSpecificationViewModel != null && Model.ProductSpecificationViewModel.lstProductSpecificationDetails.Count != 0)
-    {
+    <div id="Overview">
         <div class="panel-heading">
-            <span style="font-size:1.45em;color:#009688">Specifications of @Model.Product.Name</span>
+            <span style="font-size:1.45em;color:#009688">@Model.Product.ShortDescription</span>
         </div>
         <div class="panel-body">
-            @Html.Partial("Partial/_ProductSpecification", Model.ProductSpecificationViewModel)
-        </div>
-        <div class="panel-footer">
-            <a href="@Request.UrlReferrer.ToString()">Back to product page</a>
+            @Model.Product.Description
         </div>
         <hr />
-    }
+    </div>
+    @*Key features region*@
+    <div id="ProductFeatures">
+        @Html.Action("ProductFeaturePartial", new { ProductID = Model.ProductSpecificationViewModel.ProductID })
+    </div>
+    @*Product Specification region*@
+    <div id="ProductSpecification">
+        @if (Model.ProductSpecificationViewModel != null && Model.ProductSpecificationViewModel.lstProductSpecificationDetails.Count != 0)
+        {
+            <div class="panel-heading">
+                <span style="font-size:1.45em;color:#009688">Specifications of @Model.Product.Name</span>
+            </div>
+            <div class="panel-body">
+                @Html.Partial("Partial/General/_ProductSpecification", Model.ProductSpecificationViewModel)
+            </div>
+            <div class="panel-footer">
+                <a href="@Request.UrlReferrer.ToString()">Back to product page</a>
+            </div>
+            <hr />
+        }
+    </div>
     <div class="panel-heading">
         Reviews of the Product
     </div>

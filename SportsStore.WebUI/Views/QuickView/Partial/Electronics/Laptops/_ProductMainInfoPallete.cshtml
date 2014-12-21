@@ -1,0 +1,18 @@
+﻿@model SportsStore.Domain.Entities.Product
+
+<div class="panel-body product-pallete">
+    <div class="col-md-5" style="border-right:1px solid #5E0E0E;height:250px">
+        <div style="width:auto;height:200px"><img src="@Model.Images.FirstOrDefault().MediumImage" style="width:70%;height:100%" /></div>
+    </div>
+    <div class="col-md-7" style="height:inherit;padding-left:10px">
+        <p style="font-size:1.25em;">@Model.Name</p>
+        <p style="font-size:1em;">@Model.ShortDescription</p>
+        <p style="font-size:0.9em;"></p>
+        <div style="">
+            <p>MRP: <span style="text-decoration:line-through">@Model.UnitPrice</span></p>
+            <p>Offer Price: @Model.AltPrice</p>
+        </div>
+        <div><button class="btn btn-sharp btn-success">ADD TO CART</button></div>
+    </div>
+
+</div>
