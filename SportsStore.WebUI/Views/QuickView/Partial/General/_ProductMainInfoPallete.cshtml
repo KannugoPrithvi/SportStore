@@ -4,20 +4,26 @@
 @{
     SportsStore.Domain.Entities.Attribute attributeWarranty = null;
     IEnumerable<SportsStore.Domain.Entities.Attribute> lstKeyFeatures = null;
-    if(Model.Attributes != null)
+    if (Model.Attributes != null)
     {
         attributeWarranty = Model.Attributes.FirstOrDefault(p => p.AttributeType.Equals("Warranty"));
-        lstKeyFeatures = Model.Attributes.Where(p => p.AttributeType.Equals("KeyFeatures"));       
-    }   
- }
+        lstKeyFeatures = Model.Attributes.Where(p => p.AttributeType.Equals("KeyFeatures"));
+    }
+}
 <div class="panel-body product-pallete">
     <div class="col-md-5" style="height:250px">
         <div style="width:auto;height:200px"><img src="@Model.Images.FirstOrDefault().MediumImage" style="width:70%;height:100%" /></div>
     </div>
-    <div class="col-md-7" style="height:inherit;padding-left:10px;border-left:1px solid #5E0E0E;">
+    <div class="col-md-7" style="height:inherit;padding-left:10px;border-left:1px solid green;">
         <p style="font-size:1.25em;">@Model.Name</p>
         <p style="font-size:1em;">@Model.ShortDescription</p>
-        <div class="col-md-12">
+        <div class="col-md-12 product-pallete-reviewStrip">
+            <div class="col-md-5"><div class="col-md-6"><span class="stars">4.3</span></div><div class="col-md-6" style="padding-left:0">156 Ratings</div></div>
+            <div class="col-md-3">86 Reviews</div>
+            <div class="col-md-4">Write a Review</div>
+        </div>
+
+        <div class="col-md-12 row">
             <div class="col-md-6">
                 @if (lstKeyFeatures.Count() < 6)
                 {
@@ -34,18 +40,35 @@
 
             @if (attributeWarranty != null)
             {
-                <div class="col-md-6">
+                <div class="col-md-6" style="padding-top:10px">
                     <span style="font-size:1.2em">Warranty</span>
                     <p>@attributeWarranty.AttributeValue</p>
                 </div>
             }
         </div>
         <div class="col-md-12">
-            <p>MRP: <span style="text-decoration:line-through">@Model.UnitPrice</span></p>
-            <p>Discount: <span class="badge" style="color:white;background-color:#1b5e20">@((int)Model.UnitPrice / (int)Model.AltPrice)%</span></p>
-            <p>Offer Price: @Model.AltPrice</p>
+            <div class="col-md-5" style="padding:0">
+                @Html.Label("Check Availability at your place: ")
+            </div>
+            <div class="col-md-4" style="padding-left:0">
+                @Html.TextBox("Pincode", null, new { placeholder = "Enter your Pincode", @class = "form-control input-sm btn-sharp" })
+            </div>
+            <div class="col-md-3" style="padding-left:10px">
+                <input type="button" class="btn btn-sharp" style="background-color:#303030;color:white" value="Check" />
+            </div>
         </div>
-        <div class="col-md-12"><button class="btn btn-sharp btn-success">ADD TO CART</button></div>
+        <div class="col-md-12">
+            <div class="col-md-6" style="padding-left:0px">
+                <p>MRP: <span style="text-decoration:line-through">@Model.UnitPrice</span></p>
+                <p>Discount: <span class="badge" style="color:white;background-color:#1b5e20">@((int)Model.UnitPrice / (int)Model.AltPrice)%</span></p>
+                <p>Offer Price: @Model.AltPrice</p>
+                <div class="col-md-12" style="padding-left:0"><button class="btn btn-sharp btn-success">ADD TO CART</button></div>
+            </div>
+            <div class="col-md-6" style="padding:0">
+                <div class="col-md-12">DELIVERED BY: Usually Delivered in 2-3 business days.</div>
+            </div>
+        </div>
+
     </div>
 
 </div>

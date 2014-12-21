@@ -6,7 +6,7 @@
 }
 
 body {
-    padding-top: 70px;    
+    padding-top: 70px;
 }
 
 .entry-title {
@@ -139,6 +139,37 @@ body {
 }
 
 .product-pallete {
-    min-height:300px;
-    color:#004d40;
+    min-height: 300px;
+    color: #004d40;
+    border-bottom: 1px solid green;
+}
+/*CSS styles for the review ratings*/
+span.stars, span.stars > * {
+    display: inline-block;
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+    span.stars > * {
+        max-width: 80px;
+        background-position: 0 0;
+    }
+
+.product-pallete-reviewStrip {
+    /* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+    /* IE10 Consumer Preview */
+    background-image: -ms-linear-gradient(top left, #FF5722 0%, #BF360C 100%);
+    /* Mozilla Firefox */
+    background-image: -moz-linear-gradient(top left, #FF5722 0%, #BF360C 100%);
+    /* Opera */
+    background-image: -o-linear-gradient(top left, #FF5722 0%, #BF360C 100%);
+    /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FF5722), color-stop(1, #BF360C));
+    /* Webkit (Chrome 11+) */
+    background-image: -webkit-linear-gradient(top left, #FF5722 0%, #BF360C 100%);
+    /* W3C Markup, IE10 Release Preview */
+    background-image: linear-gradient(to bottom right, #FF5722 0%, #BF360C 100%);
+    padding: 5px;
+    color: white;
 }

@@ -41,5 +41,10 @@
     //These lines of code are to avoid resizing of the grid divs on the final page
     $('.thumbnail').css('height', '390px');
     $('.thumbnail').css('width', '230px');
-    $('.clampString').css('height','50px');
+    $('.clampString').css('height', '50px');
+    $.fn.stars = function () {
+        return this.each(function (i, e) { $(e).html($('<span/>').width($(e).text() * 16)); });
+    };
+    $('.stars').stars();
 });
+
