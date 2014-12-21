@@ -63,7 +63,40 @@ namespace SportsStore.Domain.Concrete
             return dbEntry;
         }
 
-
+        //Attribute related CRUD operations
+        public IEnumerable<SportsStore.Domain.Entities.Attribute> Attributes
+        {
+            get { return context.Attribute; }
+        }
+        public void SaveAttribute(SportsStore.Domain.Entities.Attribute attribute)
+        {
+            if (attribute.AttributeID == 0)
+            {
+                context.Attribute.Add(attribute);
+            }
+            else
+            {
+                SportsStore.Domain.Entities.Attribute dbEntry = context.Attribute.Find(attribute.AttributeID);
+                if (dbEntry != null)
+                {
+                    dbEntry.ProductID = attribute.ProductID;
+                    dbEntry.AttributeType = attribute.AttributeType;
+                    dbEntry.AttributeValue = attribute.AttributeValue;
+                    dbEntry.AttributeDescription = attribute.AttributeDescription;
+                }                 
+            }
+            context.SaveChanges();
+        }
+        public SportsStore.Domain.Entities.Attribute DeleteAttribute(int attributeID)
+        {
+            SportsStore.Domain.Entities.Attribute dbEntry = context.Attribute.Find(attributeID);
+            if (dbEntry != null)
+            {
+                context.Attribute.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
 
         //Categories related CRUD operations
         public IEnumerable<Category> Categories

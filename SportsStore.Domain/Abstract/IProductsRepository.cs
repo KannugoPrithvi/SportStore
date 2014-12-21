@@ -13,6 +13,12 @@ namespace SportsStore.Domain.Abstract
         IEnumerable<Product> Products { get; }
         void SaveProduct(Product product);
         Product DeleteProduct(int productID);
+        //Attributes
+
+        IEnumerable<SportsStore.Domain.Entities.Attribute> Attributes { get; }
+        void SaveAttribute(SportsStore.Domain.Entities.Attribute attribute);
+        SportsStore.Domain.Entities.Attribute DeleteAttribute(int attributeID);
+
 
         //Categories
         IEnumerable<Category> Categories { get; }

@@ -5,20 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="panel col-md-12 col-xs-12" style="height:300px;padding:0">
+<div class="panel col-md-12 col-xs-12" style="height:auto;padding:0">
     @Html.Partial("Partial/General/_ProductMainInfoPallete",Model.Product)
 </div>
-<div class="panel col-md-9 col-xs-9" style="border:1px solid black;height:auto;margin-right:15px;padding-bottom:15px">
+<div class="panel col-md-9 col-xs-9" style="border-bottom:1px solid black;height:auto;margin-right:15px;padding-bottom:15px">
     <div class="panel-heading">
-        Offers Panel
+        <span style="font-size:1.45em;color:#009688">Offers Panel</span>
+</div>
+    <hr />
+    @if (Model.Product.Attributes.Count > 5)
+    {
+        <div class="panel-heading">
+           Key Features
+        </div>
+    <div class="panel-body" style="font-size:0.8em">
+        <ul>
+            @foreach (var item in Model.Product.Attributes)
+            {
+                <li>@item.AttributeValue</li>
+            }
+        </ul>
     </div>
+    }
     <div class="panel-body">
-        <ul class="nav nav-tabs nav-justified">
+        <ul class="nav nav-tabs nav-justified nav-pills" >
             @if (!String.IsNullOrEmpty(Model.Product.Description))
             {
-                <li role="presentation"><a href="#Overview">Overview</a></li>
+                <li role="presentation" ><a href="#Overview">Overview</a></li>
             }
-            @if (Model.Product.ProductFeatures != null && Model.Product.ProductFeatures.Count !=0)
+            @if (Model.Product.ProductFeatures != null && Model.Product.ProductFeatures.Count != 0)
             {
                 <li role="presentation"><a href="#ProductFeatures">Features</a></li>
             }
@@ -27,11 +42,7 @@
                 <li role="presentation"><a href="#ProductSpecification">Specifications</a></li>
             }
         </ul>
-    </div>
-    <div class="panel-footer">
-
-    </div>
-    <hr />
+    </div>        
     <div id="Overview">
         <div class="panel-heading">
             <span style="font-size:1.45em;color:#009688">@Model.Product.ShortDescription</span>
@@ -55,10 +66,6 @@
             <div class="panel-body">
                 @Html.Partial("Partial/General/_ProductSpecification", Model.ProductSpecificationViewModel)
             </div>
-            <div class="panel-footer">
-                <a href="@Request.UrlReferrer.ToString()">Back to product page</a>
-            </div>
-            <hr />
         }
     </div>
     <div class="panel-heading">
@@ -66,21 +73,15 @@
     </div>
     <div class="panel-body">
         This div should be encapsulated in a partial view
-    </div>
-    <div class="panel-footer">
-
-    </div>
+    </div>    
 </div>
-<div class="panel col-md-3 col-xs-3" style="border:1px solid black;height:2000px;float:left">
+<div class="panel col-md-3 col-xs-3" style="background-color:#dcffdd;height:2000px;float:left">
     <div class="panel-heading">
         Related Products
     </div>
     <div class="panel-body">
         This div should be encapsulated in a partial view
-    </div>
-    <div class="panel-footer">
-
-    </div>
+    </div>    
 </div>
 
 
