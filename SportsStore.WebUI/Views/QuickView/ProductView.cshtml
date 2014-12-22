@@ -12,17 +12,18 @@
 <div class="panel col-md-12 col-xs-12" style="height:auto;padding:0">
     @Html.Partial("Partial/General/_ProductMainInfoPallete", Model.Product)
 </div>
-<div class="panel col-md-9 col-xs-9" style="border-bottom:1px solid black;height:auto;margin-right:15px;padding-bottom:15px">
-    @if (offerAttributes != null)
+<div class="panel col-md-9 col-xs-9" style="height:auto;margin-right:15px;padding-bottom:15px">
+    @if (offerAttributes != null && offerAttributes.Count() > 0)
     {
-        <div class="panel-body">
+        <div class="panel-body" style="border-bottom:1px solid grey">
             <p style="font-size:1.45em;color:#009688">Offers Panel</p>
-            <p><ul>
-            @foreach (var item in offerAttributes)
-            {
-                <li>@item.AttributeValue</li>
-            }
-            </ul>
+            <p>
+                <ul>
+                    @foreach (var item in offerAttributes)
+                    {
+                        <li>@item.AttributeValue</li>
+                    }
+                </ul>
             </p>
         </div>
     }
@@ -30,51 +31,56 @@
 
 
     <div class="panel-body">
-        <ul class="nav nav-tabs nav-justified nav-pills">
+        <ul id="myTab" class="nav nav-tabs">
             @if (!String.IsNullOrEmpty(Model.Product.Description))
             {
-                <li role="presentation"><a href="#Overview">Overview</a></li>
+            <li class="active"><a href="#Overview" data-toggle="tab" style="text-decoration:none !important">Overview</a></li>
             }
             @if (Model.Product.ProductFeatures != null && Model.Product.ProductFeatures.Count != 0)
             {
-                <li role="presentation"><a href="#ProductFeatures">Features</a></li>
+            <li><a href="#ProductFeatures" data-toggle="tab" style="text-decoration:none !important">Features</a></li>
             }
             @if (Model.Product.ProductSpecifications != null && Model.Product.ProductSpecifications.Count != 0)
             {
-                <li role="presentation"><a href="#ProductSpecification">Specifications</a></li>
+            <li><a href="#ProductSpecification" data-toggle="tab" style="text-decoration:none !important">Specifications</a></li>
             }
+            <li><a href="#Reviews" data-toggle="tab" style="text-decoration:none !important">Reviews <span class='badge' style="margin-left:3px;background-color:#009688;color:white">17</span></a></li>
         </ul>
     </div>
-    <div id="Overview">
-        <div class="panel-heading">
-            <span style="font-size:1.45em;color:#009688">@Model.Product.ShortDescription</span>
-        </div>
-        <div class="panel-body">
-            @Model.Product.Description
-        </div>
-        <hr />
-    </div>
-    @*Key features region*@
-    <div id="ProductFeatures">
-        @Html.Action("ProductFeaturePartial", new { ProductID = Model.ProductSpecificationViewModel.ProductID })
-    </div>
-    @*Product Specification region*@
-    <div id="ProductSpecification">
-        @if (Model.ProductSpecificationViewModel != null && Model.ProductSpecificationViewModel.lstProductSpecificationDetails.Count != 0)
-        {
+    <div id="myTabContent" class="tab-content">
+        <div id="Overview" class="tab-pane fade in active">
             <div class="panel-heading">
-                <span style="font-size:1.45em;color:#009688">Specifications of @Model.Product.Name</span>
+                <span style="font-size:1.45em;color:#009688">@Model.Product.ShortDescription</span>
             </div>
             <div class="panel-body">
-                @Html.Partial("Partial/General/_ProductSpecification", Model.ProductSpecificationViewModel)
+                @Model.Product.Description
             </div>
-        }
-    </div>
-    <div class="panel-heading">
-        Reviews of the Product
-    </div>
-    <div class="panel-body">
-        This div should be encapsulated in a partial view
+            <hr />
+        </div>
+        @*Key features region*@
+        <div id="ProductFeatures" class="tab-pane fade">
+            @Html.Action("ProductFeaturePartial", new { ProductID = Model.ProductSpecificationViewModel.ProductID })
+        </div>
+        @*Product Specification region*@
+        <div id="ProductSpecification" class="tab-pane fade">
+            @if (Model.ProductSpecificationViewModel != null && Model.ProductSpecificationViewModel.lstProductSpecificationDetails.Count != 0)
+            {
+                <div class="panel-heading">
+                    <span style="font-size:1.45em;color:#009688">Specifications of @Model.Product.Name</span>
+                </div>
+                <div class="panel-body">
+                    @Html.Partial("Partial/General/_ProductSpecification", Model.ProductSpecificationViewModel)
+                </div>
+            }
+        </div>
+        <div id="Reviews" class="tab-pane fade">
+            <div class="panel-heading">
+                <span style="font-size:1.45em;color:#009688"> Reviews of @Model.Product.Name</span>
+            </div>
+            <div class="panel-body">
+                This div should be encapsulated in a partial view
+            </div>
+        </div>
     </div>
 </div>
 <div class="panel col-md-3 col-xs-3" style="background-color:#dcffdd;height:2000px;float:left">
