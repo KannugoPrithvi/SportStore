@@ -144,17 +144,6 @@ body {
     border-bottom: 1px solid green;
 }
 /*CSS styles for the review ratings*/
-span.stars, span.stars > * {
-    display: inline-block;
-    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
-    width: 80px;
-    height: 16px;
-}
-
-    span.stars > * {
-        max-width: 80px;
-        background-position: 0 0;
-    }
 
 .product-pallete-reviewStrip {
     /* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */

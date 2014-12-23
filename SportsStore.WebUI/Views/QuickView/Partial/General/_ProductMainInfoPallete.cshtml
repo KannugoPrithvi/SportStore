@@ -18,9 +18,9 @@
         <p style="font-size:1.25em;">@Model.Name</p>
         <p style="font-size:1em;">@Model.ShortDescription</p>
         <div class="col-md-12 product-pallete-reviewStrip">
-            <div class="col-md-5"><div class="col-md-6"><span class="stars">4.3</span></div><div class="col-md-6" style="padding-left:0">156 Ratings</div></div>
-            <div class="col-md-3">86 Reviews</div>
-            <div class="col-md-4">Write a Review</div>
+            <div class="col-md-5"><div id="stars-existing" class="starrr col-md-6" data-rating='4'></div><div class="col-md-6" style="padding-left:0">156 Ratings</div></div>
+            <div class="col-md-3"><i class="fa fa-comments"></i> 86 Reviews</div>
+            <div class="col-md-4"><i class="fa fa-pencil fa-rotate-270"></i> Write a Review</div>
         </div>
 
         <div class="col-md-12 row">
@@ -28,10 +28,10 @@
                 @if (lstKeyFeatures.Count() < 6)
                 {
                     <p>
-                        <ul>
+                        <ul class="fa-ul">
                             @foreach (var item in lstKeyFeatures)
                             {
-                                <li style="font-size:0.9em">@item.AttributeValue</li>
+                                <li style="font-size:0.9em"><i class="fa-li fa fa-chevron-right"></i>@item.AttributeValue</li>
                             }
                         </ul>
                     </p>
@@ -54,14 +54,14 @@
                 @Html.TextBox("Pincode", null, new { placeholder = "Enter your Pincode", @class = "form-control input-sm btn-sharp" })
             </div>
             <div class="col-md-3" style="padding-left:10px">
-                <input type="button" class="btn btn-sharp" style="background-color:#303030;color:white" value="Check" />
+                <button type="submit" class="btn btn-sharp" style="background-color:#303030;color:white;line-height:1;padding:7px 10px"><i class="fa fa-check"></i> Check</button>
             </div>
         </div>
         <div class="col-md-12">
             <div class="col-md-6" style="padding-left:0px">
-                <p>MRP: <span style="text-decoration:line-through">@Model.UnitPrice</span></p>
+                <p>MRP: <span style="text-decoration:line-through"><i class="fa fa-inr"></i> @Model.UnitPrice</span></p>
                 <p>Discount: <span class="badge" style="color:white;background-color:#1b5e20">@((int)Model.UnitPrice / (int)Model.AltPrice)%</span></p>
-                <p>Offer Price: @Model.AltPrice</p>
+                <p>Offer Price: <i class="fa fa-inr"></i> @Model.AltPrice</p>
                 <div class="col-md-12" style="padding-left:0"><button class="btn btn-sharp btn-success">ADD TO CART</button></div>
             </div>
             <div class="col-md-6" style="padding:0">

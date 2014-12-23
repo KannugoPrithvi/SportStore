@@ -18,10 +18,10 @@
         <div class="panel-body" style="border-bottom:1px solid grey">
             <p style="font-size:1.45em;color:#009688">Offers Panel</p>
             <p>
-                <ul>
+                <ul class="fa-ul">
                     @foreach (var item in offerAttributes)
                     {
-                        <li>@item.AttributeValue</li>
+                        <li><i class="fa-li fa fa-gift" style="font-size:35px;color:teal"></i> @item.AttributeValue</li>
                     }
                 </ul>
             </p>
@@ -83,7 +83,7 @@
         </div>
     </div>
 </div>
-<div class="panel col-md-3 col-xs-3" style="background-color:#dcffdd;height:2000px;float:left">
+<div class="panel col-md-3 col-xs-3" style="background-color:#dcffdd;height:500px;float:left">
     <div class="panel-heading">
         Related Products
     </div>
