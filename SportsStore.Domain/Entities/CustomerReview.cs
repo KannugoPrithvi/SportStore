@@ -10,7 +10,7 @@ namespace SportsStore.Domain.Entities
     {
         public int CustomerReviewID { get; set; }
         public int ProductID { get; set; }
-        public int CustomerID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
         public string Author { get; set; }
         public string ReviewSubject { get; set; }
         public string ReviewText { get; set; }

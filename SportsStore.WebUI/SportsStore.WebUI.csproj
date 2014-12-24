@@ -440,6 +440,8 @@
     <Content Include="Views\QuickView\Partial\Apparel\Womens\_ProductMainInfoPallete.cshtml" />
     <Content Include="Views\QuickView\Partial\Apparel\Mens\_ProductMainInfoPallete.cshtml" />
     <Content Include="Views\QuickView\Partial\Apparel\Baby\_ProductMainInfoPallete.cshtml" />
+    <Content Include="Views\QuickView\Partial\General\_CustomerReviewForm.cshtml" />
+    <Content Include="Views\QuickView\Partial\General\_CustomerReviewDisplay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

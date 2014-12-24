@@ -104,8 +104,8 @@ namespace SportsStore.WebUI.Admin.Controllers
                 if (imageUploadViewModel.SmallImage != null)
                 {
                     string smallImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.SmallImage.FileName);
-                    string smallImageFilePath = Path.Combine(applicationPath, smallImageFileName);
-                    image.SmallImage = smallImageFilePath;
+                    string smallImageFilePath = Path.Combine(Server.MapPath(applicationPath), smallImageFileName);
+                    image.SmallImage = string.Format(@"http://localhost:49217/Content/images/cart-image-icons/{0}", smallImageFileName);
                     imageUploadViewModel.SmallImage.SaveAs(smallImageFilePath);
                 }
                 else
@@ -134,8 +134,8 @@ namespace SportsStore.WebUI.Admin.Controllers
                 if (imageUploadViewModel.LargeImage != null)
                 {
                     string largeImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.LargeImage.FileName);
-                    string largeImageFilePath = Path.Combine(applicationPath, largeImageFileName);
-                    image.LargeImage = largeImageFilePath;
+                    string largeImageFilePath = Path.Combine(Server.MapPath(applicationPath), largeImageFileName);
+                    image.LargeImage = string.Format(@"http://localhost:49217/Content/images/cart-image-icons/{0}",largeImageFileName);
                     imageUploadViewModel.LargeImage.SaveAs(largeImageFilePath);
                 }
                 else
@@ -147,8 +147,8 @@ namespace SportsStore.WebUI.Admin.Controllers
                 if (imageUploadViewModel.ExtraImage != null)
                 {
                     string extraImageFileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.ExtraImage.FileName);
-                    string extraImageFilePath = Path.Combine(applicationPath, extraImageFileName);
-                    image.ExtraImage0 = extraImageFilePath;
+                    string extraImageFilePath = Path.Combine(Server.MapPath(applicationPath), extraImageFileName);
+                    image.ExtraImage0 = string.Format(@"http://localhost:49217/Content/images/cart-image-icons/{0}", extraImageFileName);
                     imageUploadViewModel.ExtraImage.SaveAs(extraImageFilePath);
                 }
                 else
@@ -160,8 +160,8 @@ namespace SportsStore.WebUI.Admin.Controllers
                 if (imageUploadViewModel.ExtraImage1 != null)
                 {
                     string extraImage1FileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.ExtraImage1.FileName);
-                    string extraImage1FilePath = Path.Combine(applicationPath, extraImage1FileName);
-                    image.ExtraImage1 = extraImage1FilePath;
+                    string extraImage1FilePath = Path.Combine(Server.MapPath(applicationPath), extraImage1FileName);
+                    image.ExtraImage1 = string.Format(@"http://localhost:49217/Content/images/cart-image-icons/{0}", extraImage1FileName);
                     imageUploadViewModel.ExtraImage1.SaveAs(extraImage1FilePath);
                 }
                 else 
@@ -174,8 +174,8 @@ namespace SportsStore.WebUI.Admin.Controllers
                 if (imageUploadViewModel.ExtraImage2 != null)
                 {
                     string extraImage2FileName = Guid.NewGuid().ToString() + Path.GetFileName(imageUploadViewModel.ExtraImage2.FileName);
-                    string extraImage2FilePath = Path.Combine(applicationPath, extraImage2FileName);
-                    image.ExtraImage2 = extraImage2FilePath;
+                    string extraImage2FilePath = Path.Combine(Server.MapPath(applicationPath), extraImage2FileName);
+                    image.ExtraImage2 = string.Format(@"http://localhost:49217/Content/images/cart-image-icons/{0}", extraImage2FileName);
                     imageUploadViewModel.ExtraImage2.SaveAs(extraImage2FilePath);
                 }
                 else
