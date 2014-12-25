@@ -1,6 +1,6 @@
 ﻿#CenteredContent {
     max-width: 1280px;
-    min-height:800px;
+    min-height: 800px;
     margin: auto;
     background: none repeat scroll 0% 0% rgb(255, 255, 255);
     margin-bottom: 70px;
@@ -183,9 +183,35 @@ body {
 .auto-height {
     height: auto;
 }
-.no-top-margin{
-    margin-top:0px !important;
+
+.no-top-margin {
+    margin-top: 0px !important;
 }
-.no-margin{
-    margin:0px !important;
+
+.no-margin {
+    margin: 0px !important;
+}
+
+/*Footer styles*/
+.footer-color {
+    background-color: #0d47a1;
+    padding: 20px;
+    color: white !important;
+}
+
+.footer-container {
+    margin-left: 0px;
+    margin-right: 0px;
+    width:100%;
+}
+
+/*Custom button colors*/
+.btn-addtocart {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn-quickview {
+    background-color: #01579b;
+    color: white;
 }

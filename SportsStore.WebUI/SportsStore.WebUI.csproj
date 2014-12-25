@@ -443,6 +443,7 @@
     <Content Include="Views\QuickView\Partial\General\_CustomerReviewForm.cshtml" />
     <Content Include="Views\QuickView\Partial\General\_CustomerReviewDisplay.cshtml" />
     <Content Include="Views\QuickView\Partial\General\_ProductImageSlider.cshtml" />
+    <Content Include="Views\Shared\_FooterGeneralContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

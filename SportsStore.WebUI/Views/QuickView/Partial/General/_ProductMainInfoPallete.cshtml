@@ -28,23 +28,23 @@
             <div class="col-md-6">
                 @if (lstKeyFeatures.Count() < 6)
                 {
-                <p>
-                    <ul class="fa-ul">
-                        @foreach (var item in lstKeyFeatures)
+                    <p>
+                        <ul class="fa-ul">
+                            @foreach (var item in lstKeyFeatures)
                             {
-                            <li style="font-size:0.9em"><i class="fa-li fa fa-chevron-right"></i>@item.AttributeValue</li>
+                                <li style="font-size:0.9em"><i class="fa-li fa fa-chevron-right"></i>@item.AttributeValue</li>
                             }
-                    </ul>
-                </p>
+                        </ul>
+                    </p>
                 }
             </div>
 
             @if (attributeWarranty != null)
             {
-            <div class="col-md-6" style="padding-top:10px">
-                <span style="font-size:1.2em">Warranty</span>
-                <p>@attributeWarranty.AttributeValue</p>
-            </div>
+                <div class="col-md-6" style="padding-top:10px">
+                    <span style="font-size:1.2em">Warranty</span>
+                    <p>@attributeWarranty.AttributeValue</p>
+                </div>
             }
         </div>
         <div class="col-md-12">
@@ -63,7 +63,13 @@
                 <p>MRP: <span style="text-decoration:line-through"><i class="fa fa-inr"></i> @Model.UnitPrice</span></p>
                 <p>Discount: <span class="badge" style="color:white;background-color:#1b5e20">@((int)Model.UnitPrice / (int)Model.AltPrice)%</span></p>
                 <p>Offer Price: <i class="fa fa-inr"></i> @Model.AltPrice</p>
-                <div class="col-md-12" style="padding-left:0"><button class="btn btn-sharp btn-success">ADD TO CART</button></div>
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    @Html.HiddenFor(x => x.ProductID)
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    <div class="col-md-12" style="padding-left:0"><button class="btn btn-sharp btn-addtocart">ADD TO CART</button></div>
+                }
+
             </div>
             <div class="col-md-6" style="padding:0">
                 <div class="col-md-12">DELIVERED BY: Usually Delivered in 2-3 business days.</div>
