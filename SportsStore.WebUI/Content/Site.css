@@ -1,5 +1,6 @@
 ﻿#CenteredContent {
     max-width: 1280px;
+    min-height:800px;
     margin: auto;
     background: none repeat scroll 0% 0% rgb(255, 255, 255);
     margin-bottom: 70px;
@@ -113,7 +114,7 @@ body {
 .item {
     background: #00B5E2;
     text-align: center;
-    height: 300px !important;
+    height: 300px;
 }
 
 .carousel {
@@ -178,3 +179,13 @@ body {
     .item .thumb img, .item img {
         width: 100%;
     }
+
+.auto-height {
+    height: auto;
+}
+.no-top-margin{
+    margin-top:0px !important;
+}
+.no-margin{
+    margin:0px !important;
+}

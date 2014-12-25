@@ -442,6 +442,7 @@
     <Content Include="Views\QuickView\Partial\Apparel\Baby\_ProductMainInfoPallete.cshtml" />
     <Content Include="Views\QuickView\Partial\General\_CustomerReviewForm.cshtml" />
     <Content Include="Views\QuickView\Partial\General\_CustomerReviewDisplay.cshtml" />
+    <Content Include="Views\QuickView\Partial\General\_ProductImageSlider.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
