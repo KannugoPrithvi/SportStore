@@ -202,7 +202,13 @@ body {
 .footer-container {
     margin-left: 0px;
     margin-right: 0px;
-    width:100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+}
+
+.footer-container-content {
+    padding: 0px 10px 10px 20px;
 }
 
 /*Custom button colors*/
@@ -214,4 +220,276 @@ body {
 .btn-quickview {
     background-color: #01579b;
     color: white;
+}
+/*Experimental Slider CSS Rules starts here*/
+aside #myCarousel {
+    margin-top: -1px;
+}
+
+.carousel-caption {
+    position: absolute;
+    z-index: 10;
+    top: 10%;
+    right: 0;
+    bottom: 0;
+    left: 20%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 0;
+    padding-bottom: 80px;
+    color: #fff;
+    text-shadow: none;
+    text-align: left;
+}
+
+.carousel-inner {
+    z-index: 9;
+    height: 300px;
+}
+
+.carousel-content-wrapper {
+    display: table;
+    width: 100%;
+    height: 45%;
+    vertical-align: middle;
+}
+
+.carousel-content {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.carousel {
+    background-color: #116a97;
+}
+
+    .carousel.normal {
+        background-color: transparent;
+    }
+
+    .carousel .item img {
+        opacity: .9;
+        filter: alpha(opacity=90);
+    }
+
+    .carousel .item {
+        -webkit-transition: opacity .5s ease-in-out;
+        -moz-transition: opacity .5s ease-in-out;
+        -ms-transition: opacity .5s ease-in-out;
+        -o-transition: opacity .5s ease-in-out;
+        transition: opacity .5s ease-in-out;
+    }
+
+    .carousel .active.left,
+    .carousel .active.right {
+        z-index: 1;
+        left: 0;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
+    .carousel .carousel-control {
+        z-index: 999;
+    }
+
+    .carousel .next,
+    .carousel .prev {
+        z-index: 999;
+        left: 0;
+    }
+/* Carousel Control */
+
+.carousel-control {
+    top: 43%;
+    font-size: 48px;
+}
+/* Animation */
+
+.carousel-indicators {
+    bottom: 50px;
+}
+
+/* Removing BS background */
+
+.carousel .control-box {
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+a.carousel-control.left {
+    left: 0;
+    display: table;
+    width: 60px;
+    height: 60px;
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 60px;
+    text-shadow: none;
+    font-size: 26px;
+    line-height: 0;
+    text-align: center;
+}
+
+    a.carousel-control.left i {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+a.carousel-control.right {
+    right: 0;
+    display: table;
+    width: 60px;
+    height: 60px;
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 60px;
+    text-shadow: none;
+    font-size: 26px;
+    line-height: 0;
+    text-align: center;
+}
+
+    a.carousel-control.right i {
+        display: table-cell;
+        vertical-align: middle;
+    }
+/* Hover animation */
+
+.carousel:hover .control-box {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.carousel a.carousel-control.left,
+.carousel a.carousel-control.right {
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.carousel:hover a.carousel-control.left {
+    left: 10%;
+}
+
+.carousel:hover a.carousel-control.right {
+    right: 10%;
+}
+/* Carouse Indicator */
+
+.carousel-indicators li.active {
+    width: 14px;
+    height: 14px;
+    margin: 1px 2px;
+    background: transparent;
+}
+
+.carousel-indicators li {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: 1px 2px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 0;
+    text-indent: -999px;
+    cursor: pointer;
+}
+
+    .carousel-indicators li .carousel-indicators-inner {
+        display: none;
+    }
+
+    .carousel-indicators li.active .carousel-indicators-inner {
+        display: block;
+        width: 10px;
+        height: 10px;
+        margin-top: 1px;
+        margin-left: 1px;
+        background: #fff;
+    }
+/* slider content */
+.slide-content h1,
+.slide-content h6,
+.slide-content p {
+    margin: 0;
+    line-height: 65px;
+}
+
+.slide-content h1 {
+    font-size: 51px;
+}
+
+.slide-content p,
+.slide-content h6 {
+    font-size: 28px;
+}
+
+    .slide-content h1 strong,
+    .slide-content h6 strong,
+    .slide-content p strong {
+        font-weight: 900;
+    }
+
+.slide-content a.btn {
+    margin-top: 20px;
+}
+
+/*Category slide content */
+#myCarousel_shop .carousel-caption .slide-content h4 {
+    font-size: 50px;
+    font-weight: 900;
+    line-height: 48px;
+}
+
+#myCarousel_shop .carousel-caption .slide-content p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+#myCarousel_shop .carousel-caption .slide-content h6 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/*Boxed Version Slider Content */
+.main-wrap .carousel-caption {
+    left: 12%;
+}
+
+.main-wrap .carousel:hover a.carousel-control.left {
+    left: 5%;
+}
+
+.main-wrap .carousel:hover a.carousel-control.right {
+    right: 5%;
+}
+
+.main-wrap a.carousel-control.left,
+.main-wrap a.carousel-control.right {
+    width: 30px;
+    height: 30px;
+}
+
+#thumbcarousel .carousel-inner {
+    height: auto;
+}
+
+.quickview-carousel-control {
+    color: blue;
+}
+/*Experimental Slider CSS Rules ends here*/
+
+/*Related products advertisement style*/
+.related-product-pallete {
+    border: 2px solid white;
+    height: 125px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color:#f44336;
+    color:white;
+    text-align:center;
 }

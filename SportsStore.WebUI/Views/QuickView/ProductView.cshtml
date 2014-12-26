@@ -34,15 +34,15 @@
         <ul id="myTab" class="nav nav-tabs">
             @if (!String.IsNullOrEmpty(Model.Product.Description))
             {
-            <li class="active"><a href="#Overview" data-toggle="tab" style="text-decoration:none !important">Overview</a></li>
+                <li class="active"><a href="#Overview" data-toggle="tab" style="text-decoration:none !important">Overview</a></li>
             }
             @if (Model.Product.ProductFeatures != null && Model.Product.ProductFeatures.Count != 0)
             {
-            <li><a href="#ProductFeatures" data-toggle="tab" style="text-decoration:none !important">Features</a></li>
+                <li><a href="#ProductFeatures" data-toggle="tab" style="text-decoration:none !important">Features</a></li>
             }
             @if (Model.Product.ProductSpecifications != null && Model.Product.ProductSpecifications.Count != 0)
             {
-            <li><a href="#ProductSpecification" data-toggle="tab" style="text-decoration:none !important">Specifications</a></li>
+                <li><a href="#ProductSpecification" data-toggle="tab" style="text-decoration:none !important">Specifications</a></li>
             }
             <li><a href="#Reviews" data-toggle="tab" style="text-decoration:none !important">Reviews <span class='badge' style="margin-left:3px;background-color:#009688;color:white">17</span></a></li>
         </ul>
@@ -55,7 +55,6 @@
             <div class="panel-body">
                 @Model.Product.Description
             </div>
-            <hr />
         </div>
         @*Key features region*@
         <div id="ProductFeatures" class="tab-pane fade">
@@ -83,13 +82,11 @@
         </div>
     </div>
 </div>
-<div class="panel col-md-3 col-xs-3" style="background-color:#dcffdd;height:500px;float:left">
-    <div class="panel-heading">
-        Related Products
-    </div>
-    <div class="panel-body">
-        This div should be encapsulated in a partial view
-    </div>
+<div class="panel col-md-3 col-xs-3 container" style="background-color:#f44336;height:600px;float:left">
+    <div class="col-md-12 col-xs-12 related-product-pallete"><h4>Related Product 1</h4></div>
+    <div class="col-md-12 col-xs-12 related-product-pallete"><h4>Related Product 2</h4></div>
+    <div class="col-md-12 col-xs-12 related-product-pallete"><h4>Related Product 3</h4></div>
+    <div class="col-md-12 col-xs-12 related-product-pallete"><h4>Related Product 4</h4></div>
 </div>
 
 
