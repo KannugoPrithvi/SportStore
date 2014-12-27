@@ -1,4 +1,5 @@
 ﻿using SportsStore.Domain.Abstract;
+using SportsStore.Domain.Entities;
 using SportsStore.Domain.ViewModels;
 using SportsStore.WebUI.Models;
 using System;
@@ -105,6 +106,44 @@ namespace SportsStore.WebUI.Controllers
             combinedProductSpecificationViewModel.Product = repository.Products.FirstOrDefault(p => p.ProductID == ProductID);
             combinedProductSpecificationViewModel.ProductSpecificationViewModel = productSpecificationViewModel;
             return combinedProductSpecificationViewModel;
+        }
+        [HttpGet]
+        public PartialViewResult _CustomerReviewWithForm(int customerReviewID = 0)
+        {
+            if(customerReviewID == 0)
+            {
+                return PartialView("Partial/General/_CustomerReviewForm", new CustomerReview());
+            }
+            else
+            {
+                CustomerReview customerReview = repository.CustomerReviews.FirstOrDefault(p => p.CustomerReviewID == customerReviewID);
+                return PartialView("Partial/General/_CustomerReviewForm", customerReview);
+            }
+        }
+        [HttpPost]
+        public ActionResult _CustomerReviewWithForm(CustomerReview customerReview)
+        {
+            if(ModelState.IsValid)
+            {
+                repository.SaveCustomerReview(customerReview);
+            }
+            else
+            {
+                ModelState.AddModelError("Binding Error","Binding not acheived properly");
+            }
+            return Redirect(Request.Url.PathAndQuery.ToString());
+        }
+        public PartialViewResult _CustomerReviewForDisplay(int ProductID = 0)
+        {
+            if(ProductID == 0)
+            {
+                return PartialView("Partial/General/_CustomerReviewDisplay",null);
+            }
+            else
+            {
+                List<CustomerReview> lstCustomerReviews = (repository.CustomerReviews.Where(p => p.ProductID == ProductID)).ToList<CustomerReview>();
+                return PartialView("Partial/General/_CustomerReviewDisplay", lstCustomerReviews);
+            }
         }
     }
 }

@@ -329,6 +329,7 @@ a.carousel-control.left {
     font-size: 26px;
     line-height: 0;
     text-align: center;
+    left:5%;
 }
 
     a.carousel-control.left i {
@@ -348,6 +349,7 @@ a.carousel-control.right {
     font-size: 26px;
     line-height: 0;
     text-align: center;
+    right:5%;
 }
 
     a.carousel-control.right i {
@@ -371,11 +373,11 @@ a.carousel-control.right {
 }
 
 .carousel:hover a.carousel-control.left {
-    left: 10%;
+    left: 15%;
 }
 
 .carousel:hover a.carousel-control.right {
-    right: 10%;
+    right: 15%;
 }
 /* Carouse Indicator */
 
