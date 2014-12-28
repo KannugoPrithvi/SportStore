@@ -1,20 +1,30 @@
 ﻿@model SportsStore.Domain.Entities.CustomerReview
 
-@using (Html.BeginForm("Edit", "ProductAdmin", FormMethod.Post))
+@using (Html.BeginForm("_CustomerReviewWithForm", "QuickView", FormMethod.Post))
 {
-    <div class="panel-body">
+    @Html.HiddenFor(model => model.ProductID)
+    <div class="panel-body" style="padding-left:0px;padding-right:0px">
         <div class="form-group">
-            <label for="inputEmail">Email</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+            <label for="Author">Name</label>
+            @Html.TextBoxFor(model => model.Author, new { @class="form-control btn-sharp",placeholder="FirstName, LastName"})
         </div>
         <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+            <label for="Author">Email</label>
+            @Html.TextBoxFor(model => model.Customer.Email, new { @class = "form-control btn-sharp", placeholder = "example@example.com" })
         </div>
-        <div class="checkbox">
-            <label><input type="checkbox"> Remember me</label>
+        <div class="form-group">
+            <label for="ReviewSubject">Subject</label>
+            @Html.TextBoxFor(model => model.ReviewSubject, new { @class = "form-control btn-sharp", placeholder = "One Liner Subject" })
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <div class="form-group">
+            <label for="Ratings">Ratings</label>
+            @Html.TextBoxFor(model => model.Rating, new { @class = "form-control btn-sharp", placeholder = "Upon Five" })
+        </div>
+        <div class="form-group">
+            <label for="ReviewText">Review Text</label>
+            @Html.TextArea("ReviewText", new { @class = "form-control btn-sharp", placeholder = "Review Text" })
+        </div>
+        <button type="submit" class="btn btn-quickview btn-sharp">SUBMIT</button>
     </div>
 }
 

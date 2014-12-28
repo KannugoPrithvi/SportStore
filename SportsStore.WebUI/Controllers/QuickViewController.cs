@@ -108,11 +108,11 @@ namespace SportsStore.WebUI.Controllers
             return combinedProductSpecificationViewModel;
         }
         [HttpGet]
-        public PartialViewResult _CustomerReviewWithForm(int customerReviewID = 0)
+        public PartialViewResult _CustomerReviewWithForm(int customerReviewID = 0,int productID = 0)
         {
             if(customerReviewID == 0)
             {
-                return PartialView("Partial/General/_CustomerReviewForm", new CustomerReview());
+                return PartialView("Partial/General/_CustomerReviewForm", new CustomerReview { ProductID = productID});
             }
             else
             {
@@ -125,6 +125,16 @@ namespace SportsStore.WebUI.Controllers
         {
             if(ModelState.IsValid)
             {
+                customerReview.Customer.UserName = customerReview.Author;
+                if(customerReview.CustomerReviewID == 0)
+                {
+                    customerReview.AddedDate = DateTime.Now;
+                    customerReview.ModifiedDate = DateTime.Now;
+                }
+                else
+                {
+                    customerReview.ModifiedDate = DateTime.Now;
+                }
                 repository.SaveCustomerReview(customerReview);
             }
             else

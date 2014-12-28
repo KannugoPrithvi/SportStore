@@ -44,7 +44,10 @@
             {
                 <li><a href="#ProductSpecification" data-toggle="tab" style="text-decoration:none !important">Specifications</a></li>
             }
-            <li><a href="#Reviews" data-toggle="tab" style="text-decoration:none !important">Reviews <span class='badge' style="margin-left:3px;background-color:#009688;color:white">17</span></a></li>
+            @if (Model.Product.CustomerReviews != null)
+            {
+                <li><a href="#Reviews" data-toggle="tab" style="text-decoration:none !important">Reviews <span class='badge' style="margin-left:3px;background-color:#009688;color:white">@Model.Product.CustomerReviews.Count</span></a></li>
+            }
         </ul>
     </div>
     <div id="myTabContent" class="tab-content">
@@ -77,7 +80,24 @@
                 <span style="font-size:1.45em;color:#009688"> Reviews of @Model.Product.Name</span>
             </div>
             <div class="panel-body">
-                This div should be encapsulated in a partial view
+                <div class="ratings">
+                    <div id="stars-existing" class="starrr col-md-4" data-rating='5'></div><div class="col-md-4"></div>
+                    <div id="stars-existing" class="starrr col-md-12" data-rating='4'></div>
+                    <div id="stars-existing" class="starrr col-md-12" data-rating='3'></div>
+                    <div id="stars-existing" class="starrr col-md-12" data-rating='2'></div>
+                    <div id="stars-existing" class="starrr col-md-12" data-rating='1'></div>
+                </div>
+                <div class="reviews">
+                    @if (Model.Product.CustomerReviews == null || Model.Product.CustomerReviews.Count == 0)
+                    {
+                        <span>No reviews yet. Be the first to review the Product</span>
+                        @Html.Action("_CustomerReviewWithForm", new { productID = Model.Product.ProductID })
+                    }
+                    else
+                    {
+                        @Html.Action("_CustomerReviewForDisplay", Model.Product.CustomerReviews)
+                    }
+                </div>
             </div>
         </div>
     </div>

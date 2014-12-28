@@ -20,8 +20,15 @@
         <p style="font-size:1em;">@Model.ShortDescription</p>
         <div class="col-md-12 product-pallete-reviewStrip">
             <div class="col-md-5"><div id="stars-existing" class="starrr col-md-6" data-rating='4'></div><div class="col-md-6" style="padding-left:0">156 Ratings</div></div>
-            <div class="col-md-3"><i class="fa fa-comments"></i> 86 Reviews</div>
-            <div class="col-md-4"><i class="fa fa-pencil fa-rotate-270"></i> Write a Review</div>
+            @if (Model.CustomerReviews.Count == 0)
+            {
+                <div class="col-md-3"><i class="fa fa-comments"></i> No Reviews</div>
+            }
+            else
+            {
+                <div class="col-md-3"><i class="fa fa-comments"></i> @Model.CustomerReviews.Count</div>
+            }
+            <div class="col-md-4"><i class="fa fa-pencil fa-rotate-270"></i><a href="#Reviews" style="color:white">Write a Review</a></div>
         </div>
 
         <div class="col-md-12 row">

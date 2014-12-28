@@ -579,6 +579,7 @@ namespace SportsStore.Domain.Concrete
                 {
                     dbEntry.UserName = customer.UserName;
                     dbEntry.Password = customer.Password;
+                    dbEntry.Email = customer.Email;
                     dbEntry.CreatedDate = customer.CreatedDate;
                     dbEntry.LastLogin = customer.LastLogin;
                     dbEntry.Status = customer.Status;
