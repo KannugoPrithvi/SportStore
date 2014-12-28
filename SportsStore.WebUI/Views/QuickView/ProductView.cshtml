@@ -80,17 +80,25 @@
                 <span style="font-size:1.45em;color:#009688"> Reviews of @Model.Product.Name</span>
             </div>
             <div class="panel-body">
-                <div class="ratings">
-                    <div id="stars-existing" class="starrr col-md-4" data-rating='5'></div><div class="col-md-4"></div>
-                    <div id="stars-existing" class="starrr col-md-12" data-rating='4'></div>
-                    <div id="stars-existing" class="starrr col-md-12" data-rating='3'></div>
-                    <div id="stars-existing" class="starrr col-md-12" data-rating='2'></div>
-                    <div id="stars-existing" class="starrr col-md-12" data-rating='1'></div>
+                <div class="ratings container col-md-12">
+                    <div class="col-md-6">
+                        <div class="col-md-12">5 star reviews <span class="starratings-color-blue"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>(@Model.Product.CustomerReviews.Count(p => p.Rating == 5))</div>
+                        <div class="col-md-12">4 star reviews <span class="starratings-color-blue"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>(@Model.Product.CustomerReviews.Count(p => p.Rating == 4))</div>
+                        <div class="col-md-12">3 star reviews <span class="starratings-color-blue"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>(@Model.Product.CustomerReviews.Count(p => p.Rating == 3))</div>
+                        <div class="col-md-12">2 star reviews <span class="starratings-color-blue"><i class="fa fa-star"></i><i class="fa fa-star"></i></span>(@Model.Product.CustomerReviews.Count(p => p.Rating == 2))</div>
+                        <div class="col-md-12">1 star reviews <span class="starratings-color-blue"><i class="fa fa-star"></i></span>(@Model.Product.CustomerReviews.Count(p => p.Rating == 1))</div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <p style="font-size:1.45em;color:#009688"> Average Rating</p>
+                        <span class="badge" style="font-size:1.45em;color:white;background-color:#1b5e20"> @Model.Product.CustomerReviews.Average(p => p.Rating)</span>
+                        <div class="col-md-12" style="margin-top:10px"><button class="btn btn-sharp" style="background-color:#3F51B5;color:white" data-toggle="modal" data-target="#exampleModal">Write Review</button></div>
+                    </div>
+                    
                 </div>
                 <div class="reviews">
                     @if (Model.Product.CustomerReviews == null || Model.Product.CustomerReviews.Count == 0)
                     {
-                        <span>No reviews yet. Be the first to review the Product</span>
+                        <span style="font-size:1.20em;color:#009688">No reviews yet. Be the first to review the Product</span>
                         @Html.Action("_CustomerReviewWithForm", new { productID = Model.Product.ProductID })
                     }
                     else
@@ -107,6 +115,21 @@
     <div class="col-md-12 col-xs-12 related-product-pallete"><h4>Related Product 2</h4></div>
     <div class="col-md-12 col-xs-12 related-product-pallete"><h4>Related Product 3</h4></div>
     <div class="col-md-12 col-xs-12 related-product-pallete"><h4>Related Product 4</h4></div>
+</div>
+@* Modal Window Code below *@
+<div class="modal fade in" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content  btn-sharp">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">ADD REVIEW</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("_CustomerReviewWithForm", new { productID = Model.Product.ProductID })
+            </div>
+
+        </div>
+    </div>
 </div>
 
 

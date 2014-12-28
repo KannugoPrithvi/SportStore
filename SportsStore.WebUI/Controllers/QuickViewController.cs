@@ -23,7 +23,7 @@ namespace SportsStore.WebUI.Controllers
         //Need to create a combined view model to send to this View,as of now only sending productspecification but would change overtime
         public ActionResult ProductView(int ProductID = 0)
         {
-            if(ProductID == 0)
+            if (ProductID == 0)
             {
                 TempData["Message"] = "No such product exists";
                 return View();
@@ -32,14 +32,14 @@ namespace SportsStore.WebUI.Controllers
             {
                 //The below model is for ProductSpecification
                 CombinedProductSpecificationViewModel combinedProductSpecificationViewModel = ReturnProductSpecification(ProductID);
-                return View("ProductView",combinedProductSpecificationViewModel);
+                return View("ProductView", combinedProductSpecificationViewModel);
             }
-            
+
         }
         [ChildActionOnly]
         public PartialViewResult ProductFeaturePartial(int ProductID = 0)
         {
-            if(ProductID == 0)
+            if (ProductID == 0)
             {
                 return PartialView("Partial/General/_ProductFeature", null);
             }
@@ -108,11 +108,11 @@ namespace SportsStore.WebUI.Controllers
             return combinedProductSpecificationViewModel;
         }
         [HttpGet]
-        public PartialViewResult _CustomerReviewWithForm(int customerReviewID = 0,int productID = 0)
+        public PartialViewResult _CustomerReviewWithForm(int customerReviewID = 0, int productID = 0)
         {
-            if(customerReviewID == 0)
+            if (customerReviewID == 0)
             {
-                return PartialView("Partial/General/_CustomerReviewForm", new CustomerReview { ProductID = productID});
+                return PartialView("Partial/General/_CustomerReviewForm", new CustomerReview { ProductID = productID });
             }
             else
             {
@@ -123,10 +123,10 @@ namespace SportsStore.WebUI.Controllers
         [HttpPost]
         public ActionResult _CustomerReviewWithForm(CustomerReview customerReview)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 customerReview.Customer.UserName = customerReview.Author;
-                if(customerReview.CustomerReviewID == 0)
+                if (customerReview.CustomerReviewID == 0)
                 {
                     customerReview.AddedDate = DateTime.Now;
                     customerReview.ModifiedDate = DateTime.Now;
@@ -136,18 +136,20 @@ namespace SportsStore.WebUI.Controllers
                     customerReview.ModifiedDate = DateTime.Now;
                 }
                 repository.SaveCustomerReview(customerReview);
+                return RedirectToAction("ProductView", new { ProductID = customerReview.ProductID });
             }
             else
             {
-                ModelState.AddModelError("Binding Error","Binding not acheived properly");
+                ModelState.AddModelError("Binding Error", "Binding not acheived properly");
+                return RedirectToAction("Index", new { controller="Product"});
             }
-            return Redirect(Request.Url.PathAndQuery.ToString());
+
         }
         public PartialViewResult _CustomerReviewForDisplay(int ProductID = 0)
         {
-            if(ProductID == 0)
+            if (ProductID == 0)
             {
-                return PartialView("Partial/General/_CustomerReviewDisplay",null);
+                return PartialView("Partial/General/_CustomerReviewDisplay", null);
             }
             else
             {

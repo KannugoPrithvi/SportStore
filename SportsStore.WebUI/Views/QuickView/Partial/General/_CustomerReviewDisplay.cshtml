@@ -1,6 +1,6 @@
 ﻿@model List<SportsStore.Domain.Entities.CustomerReview>
 
-@if(Model == null || Model.Count == 0)
+@if (Model == null || Model.Count == 0)
 {
     <span>No Review yet, Be the first one to review</span>
 }
@@ -8,11 +8,22 @@ else
 {
     foreach (var item in Model)
     {
-     <div class="panel-body">
-         <p><span>@item.Author</span></p>
-         <p><div id="stars-existing" class="starrr col-md-6" data-rating='@item.Rating'></div></p>
-         <p>@item.ReviewSubject</p>
-         <p>@item.ReviewText</p>
-     </div>
+        <div class="panel-body">
+            <div class="col-md-12" style="background-color:#009688;color:white;padding:5px">
+                <div class="col-md-7 text-left"><b>@item.ReviewSubject</b></div>
+                <div class="col-md-5 text-right">
+                    @for (int i = 0; i < item.Rating; i++)
+                    {
+                        <i class="fa fa-star"></i>
+                    }
+                    
+                </div>
+            </div>
+            <div class="col-md-12" style="padding:5px;border:1px solid #009688;margin-bottom:10px">
+                <div class="col-md-12" style="color:#009688;padding:5px">@item.Author</div>
+                <div class="col-md-12" style="padding:10px">@item.ReviewText</div>
+            </div>
+
+        </div>
     }
 }
