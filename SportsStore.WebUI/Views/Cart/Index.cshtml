@@ -10,22 +10,26 @@
 <h2>Your cart</h2>
 <table id="cartTable" class="table">
     <thead>
-        <tr>
-            <th>Quantity</th>
+        <tr class="cart-table-header">
             <th>Item</th>
+            <th>Quantity</th>
             <th class="text-right">Price</th>
             <th class="text-right">Subtotal</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var line in Model.Cart.Lines)
         {
             <tr>
-                <td class="text-center">@line.Quantity</td>
                 <td class="text-left">@line.Product.Name</td>
+                <td class="text-center">@line.Quantity</td>
                 <td class="text-right">
                     @line.Product.AltPrice.ToString("c")
                 </td>
+
+
+
                 <td class="text-right">
                     @((line.Quantity * line.Product.AltPrice).ToString("c"))
                 </td>
@@ -34,7 +38,7 @@
                     {
                         @Html.Hidden("ProductId", line.Product.ProductID)
                         @Html.HiddenFor(x => x.ReturnUrl)
-                        <input class="btn btn-sm btn-warning btn-sharp" type="submit" value="Remove" />
+                        <input class="btn btn-sm btn-red btn-sharp" type="submit" value="Remove" />
                     }
                 </td>
             </tr>
@@ -49,10 +53,40 @@
         </tr>
     </tfoot>
 </table>
-<div class="text-center">
-    <a class="btn btn-primary btn-sharp" href="@Model.ReturnUrl">
-        Continue
-        shopping
-    </a>
-    @Html.ActionLink("Checkout now", "Checkout", null, new { @class = "btn btn-primary btn-sharp" })
+<div class="cart-action-control container">
+    <div class="col-md-6 col-xs-6 no-padding">
+        <div class="col-md-6 no-padding">
+            <div class="col-md-8 no-padding">
+                <input type="text" placeholder="Coupon Code" class="form-control btn-sharp" />
+            </div>
+            <div class="col-md-4" style="padding:0px;margin-left:-2px">
+                <button class="btn btn-sharp btn-addtocart">
+                    APPLY COUPON
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-6 text-right">
+        <a class="btn btn-quickview btn-sharp" href="#">
+            UPDATE CART
+        </a>
+        <a class="btn btn-quickview btn-sharp" href="@Model.ReturnUrl">
+            CONTINUE SHOPPING
+        </a>
+        @Html.ActionLink("CHECKOUT NOW", "Checkout", null, new { @class = "btn btn-quickview btn-sharp" })
+    </div>
 </div>
+<hr />
+<div class="col-md-12 col-xs-12 no-padding">
+    <div class="col-md-6 col-xs-6">
+        <div class="col-md-12 text-left btn-addtocart">
+            <h4>CART SUMMARY</h4>
+        </div>
+        <table class="table table-bordered table-condensed table-hover table-striped">
+            <tr><td>Cart Subtotal</td><td>@Model.Cart.ComputeTotalValue().ToString()</td></tr>
+            <tr><td>Handling and Shipping</td><td>Free Shipping</td></tr>
+            <tr><td>Order Total</td><td>@Model.Cart.ComputeTotalValue().ToString()</td></tr>
+                </table>
+                </div>
+
+            </div>
