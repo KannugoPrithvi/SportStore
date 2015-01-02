@@ -3,11 +3,161 @@
 @{
     ViewBag.Title = "SportStore: Checkout";
 }
-
+@helper CheckoutInformationForm()
+{
+    <div class="col-md-12 col-xs-12 padding-10">
+        <label>Country</label>
+        <div class="col-md-12 no-padding">
+            @Html.TextBox("Country", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <div class=" col-md-6 no-padding">
+            <label>First Name</label>
+            <div class="col-md-12" style="padding-left:0px">
+                @Html.TextBox("Firstname", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+            </div>
+        </div>
+        <div class="col-md-6 no-padding">
+            <div class="col-md-12"><label>Last Name</label></div>
+            <div class="col-md-12" style="padding-right:0px">
+                @Html.TextBox("Lastname", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <label>Company Name</label>
+        <div class="col-md-12  no-padding">
+            @Html.TextBox("Companyname", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <label>Address</label>
+        <div class="col-md-12 no-padding">
+            @Html.TextArea("Address", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <label>Postcode/Zip</label>
+        <div class="col-md-12 no-padding">
+            @Html.TextBox("Zipcode", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <label>Town/City</label>
+        <div class="col-md-12 no-padding">
+            @Html.TextBox("Towncity", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <div class="col-md-6 no-padding">
+            <label>Email Address</label>
+            <div class="col-md-12" style="padding-left:0px">
+                @Html.TextBox("Email", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+            </div>
+        </div>
+        <div class="col-md-6 no-padding">
+            <div class="col-md-12"><label>Phone</label></div>
+            <div class="col-md-12" style="padding-right:0px">
+                @Html.TextBox("Phone", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+            </div>
+        </div>
+    </div>
+}
 <h2>Check out now</h2>
-
 @using (Html.BeginForm())
 {
+    <div class="col-md-12" style="background-color:#F4F4F4;padding:10px 10px 10px 15px">
+        <span>Returning customer? <a>Click here to login</a></span>
+    </div>
+    <div class="col-md-12 col-xs-12" style="margin-top:10px;margin-bottom:20px">
+        <div class="col-md-6 col-xs-6">
+            <div class="col-md-12"><h4>Billing Details</h4></div>
+            @CheckoutInformationForm()
+            <div class="col-md-12">@Html.CheckBox("CreateAccount")<span style="padding:10px 0px 5px 5px">Create an account?</span></div>
+
+        </div>
+        <div class="col-md-6 col-xs-6" style="border-left:1px solid #EDECEC">
+            <div class="col-md-12"><h4>Ship to a different address?</h4></div>
+            <div class="col-md-12">
+                @Html.CheckBox("differentAddress")
+            </div>
+            @CheckoutInformationForm()
+            <div class="col-md-12 col-xs-12 padding-10">
+                <label>Order Notes</label>
+                <div class="col-md-12 no-padding">
+                    @Html.TextArea("OrderNotes", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <div class="col-md-6"><h4>Your order</h4></div>
+        <div class="col-md-12 col-xs-12 no-padding">
+            <div class="col-md-6 col-xs-6">
+                <div class="col-md-12 text-left btn-quickview">
+                    <h4>ORDER SUMMARY</h4>
+                </div>
+                <table class="table table-bordered table-condensed table-hover table-striped">
+                    <tr><td>Order Subtotal</td><td><i class="fa fa-rupee"></i>25,248.00</td></tr>
+                    <tr><td>Handling and Shipping</td><td>Free Shipping</td></tr>
+                    <tr><td>Order Total</td><td><i class="fa fa-rupee"></i>25,248.00</td></tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-12">
+        <div class="bs-example">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Direct Bank Transfer</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Cheque Payment</a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">PayPal <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png" /></a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 text-center">
+        <button class="btn btn-sharp btn-quickview">
+            PLACE ORDER
+        </button>
+    </div>
+}
+
+
+@*Outdated textbook code
     @Html.ValidationSummary()
     <h3>Ship to</h3>
     <div class="form-group">
@@ -34,45 +184,4 @@
     </div>
     <div class="text-center">
         <input class="btn btn-primary btn-sharp" type="submit" value="Complete order" />
-    </div>
-}
-<div class="bs-example">
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. What is HTML?</a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <p>HTML stands for HyperText Markup Language. HTML is the main markup language for describing the structure of Web pages. <a href="http://www.tutorialrepublic.com/html-tutorial/" target="_blank">Learn more.</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. What is Twitter Bootstrap?</a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <p>Twitter Bootstrap is a powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank">Learn more.</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. What is CSS?</a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <p>CSS stands for Cascading Style Sheet. CSS allows you to specify various style properties for a given HTML element such as colors, backgrounds, fonts etc. <a href="http://www.tutorialrepublic.com/css-tutorial/" target="_blank">Learn more.</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    </div>*@

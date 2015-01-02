@@ -507,7 +507,7 @@ a.carousel-control.right {
     margin-bottom:10px;
     height:auto;
 }
-.cart-table-header
+.grey-background
 {
     background-color:#F6F6F6;
 }
@@ -524,6 +524,9 @@ a.carousel-control.right {
 .no-padding{
     padding:0px;
 }
+.padding-10{
+    padding:10px;
+}
 /*Disable number spinner*/
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -533,3 +536,4 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance:textfield;
 }
+
