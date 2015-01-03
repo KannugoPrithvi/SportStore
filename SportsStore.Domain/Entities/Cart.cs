@@ -10,7 +10,7 @@ namespace SportsStore.Domain.Entities
     {
         private List<CartLine> lineCollection = new List<CartLine>();
 
-        public void AddItem(Product product, int quantity)
+        public void AddItem(Product product, int quantity,int isUpdate = 0)
         {
             CartLine line = lineCollection.
                 Where(p => p.Product.ProductID == product.ProductID)
@@ -20,9 +20,13 @@ namespace SportsStore.Domain.Entities
             {
                 lineCollection.Add(new CartLine { Product = product, Quantity = quantity });
             }
-            else
+            else if(isUpdate == 0)
             {
                 line.Quantity += quantity;
+            }
+            else
+            {
+                line.Quantity = quantity;
             }
         }
 

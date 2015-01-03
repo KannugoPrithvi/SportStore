@@ -181,5 +181,4 @@ $(function () {
 
 
 //Code for Product Quick view page ends
-//Code for number spinner for cart page
 

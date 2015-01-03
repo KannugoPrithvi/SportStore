@@ -42,7 +42,7 @@ namespace SportsStore.WebUI.Controllers
             Product product = repository.Products.Where(p => p.ProductID == productId).FirstOrDefault();
             if (product != null)
             {
-                cart.AddItem(product, 1);
+                cart.AddItem(product, 1,0);
             }
             return RedirectToAction("Index", new { returnUrl });
         }
@@ -52,6 +52,15 @@ namespace SportsStore.WebUI.Controllers
             if (product != null)
             {
                 cart.RemoveLine(product);
+            }
+            return RedirectToAction("Index", new { returnUrl });
+        }
+        public RedirectToRouteResult UpdateCart(Cart cart, int productId, int quantity, string returnUrl)
+        {
+            Product product = repository.Products.Where(p => p.ProductID == productId).FirstOrDefault();
+            if (product != null)
+            {
+                cart.AddItem(product, 1,1);
             }
             return RedirectToAction("Index", new { returnUrl });
         }

@@ -3,12 +3,37 @@
 @{
     ViewBag.Title = "SportStore: Checkout";
 }
+
 @helper CheckoutInformationForm()
 {
     <div class="col-md-12 col-xs-12 padding-10">
         <label>Country</label>
         <div class="col-md-12 no-padding">
-            @Html.TextBox("Country", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+            <select class="form-control btn-sharp combobox">
+                <option value="">Select one...</option>
+                <option value="ActionScript">ActionScript</option>
+                <option value="AppleScript">AppleScript</option>
+                <option value="Asp">Asp</option>
+                <option value="BASIC">BASIC</option>
+                <option value="C">C</option>
+                <option value="C++">C++</option>
+                <option value="Clojure">Clojure</option>
+                <option value="COBOL">COBOL</option>
+                <option value="ColdFusion">ColdFusion</option>
+                <option value="Erlang">Erlang</option>
+                <option value="Fortran">Fortran</option>
+                <option value="Groovy">Groovy</option>
+                <option value="Haskell">Haskell</option>
+                <option value="Java">Java</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Lisp">Lisp</option>
+                <option value="Perl">Perl</option>
+                <option value="PHP">PHP</option>
+                <option value="Python">Python</option>
+                <option value="Ruby">Ruby</option>
+                <option value="Scala">Scala</option>
+                <option value="Scheme">Scheme</option>
+            </select>
         </div>
     </div>
     <div class="col-md-12 col-xs-12 padding-10">
@@ -81,7 +106,7 @@
             <div class="col-md-12"><h4>Ship to a different address?</h4></div>
             <div class="col-md-12">
                 @Html.CheckBox("differentAddress")
-            </div>
+            </div>            
             @CheckoutInformationForm()
             <div class="col-md-12 col-xs-12 padding-10">
                 <label>Order Notes</label>
@@ -137,7 +162,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">PayPal <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png" /></a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                PayPal
+                                <img src="~/Content/images/cart-image-icons/paypal_objects.png" />
+                            </a>
                         </h4>
                     </div>
                     <div id="collapseThree" class="panel-collapse collapse">
@@ -185,3 +213,4 @@
     <div class="text-center">
         <input class="btn btn-primary btn-sharp" type="submit" value="Complete order" />
     </div>*@
+

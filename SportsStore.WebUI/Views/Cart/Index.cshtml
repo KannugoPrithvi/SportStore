@@ -27,7 +27,7 @@
                 <td class="text-center col-md-4">
                     <div class="col-xs-12">
                         <div class="col-xs-3 text-right" style="padding:0px;margin-right:-2px;color:#0D47A1"><button id="numberStepDown" class="input-sm btn btn-sharp" style="line-height:1;vertical-align:middle"><i class="fa fa-minus"></i></button></div>
-                        <div class="col-xs-6 text-left" style="padding:0px;margin-left:-2px"><input type="number" step="1" min="0" name="" value="2" title="Qty" class="form-control btn-sharp input-sm"></div>
+                        <div class="col-xs-6 text-left" style="padding:0px;margin-left:-2px"><input id="cartQuantity" type="number" step="1" min="0" name="" value="2" title="Qty" class="form-control btn-sharp input-sm"></div>
                         <div class="col-xs-3 text-left" style="padding:0px;color:#042981"><button id="numberStepDown" class="input-sm btn btn-sharp" style="line-height:1"><i class="fa fa-plus"></i></button></div>
                     </div>
                 </td>
@@ -74,8 +74,8 @@
         </div>
     </div>
     <div class="col-md-7 col-xs-7 text-right">
-        <a class="btn btn-quickview btn-sharp" href="#">
-            UPDATE CART
+        <a class="btn btn-quickview btn-sharp" href="@Url.Action("UpdateCart", new { controller = "Cart", returnUrl = Request.Url.PathAndQuery, quantity = 7, productID = line.Product.ProductID })">
+        UPDATE CART
         </a>
         <a class="btn btn-quickview btn-sharp" href="@Model.ReturnUrl">
             CONTINUE SHOPPING
