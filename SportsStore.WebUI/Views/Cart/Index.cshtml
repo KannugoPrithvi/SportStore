@@ -19,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-        @using (Html.BeginForm("UpdateCart", "Cart", FormMethod.Post, new { id="ProductCartForm"}))
+        @using (Html.BeginForm("UpdateCart", "Cart", FormMethod.Post, new { id = "ProductCartForm" }))
         {
             int i = 0;
             foreach (var line in Model.Cart.Lines)
@@ -27,12 +27,27 @@
                 @Html.Hidden("lstProductCartList[" + i + "].ProductID", line.Product.ProductID)
                 <tr>
                     <td class="text-left">@line.Product.Name</td>
-                    @*<td class="text-center">@line.Quantity</td>*@
+                    @{ string numberStepDownID = "numberStepDown" + i;
+                     string numberStepUpID = "numberStepUp" + i;
+                     string cartQuantity = "cartQuantity" + i;
+
+                    }
                     <td class="text-center col-md-4">
                         <div class="col-xs-12">
-                            <div class="col-xs-3 text-right" style="padding:0px;margin-right:-2px;color:#0D47A1"><button id="numberStepDown" class="input-sm btn btn-sharp" style="line-height:1;vertical-align:middle"><i class="fa fa-minus"></i></button></div>
-                            <div class="col-xs-6 text-left" style="padding:0px;margin-left:-2px">@Html.TextBox("lstProductCartList[" + i + "].Quantity", line.Quantity, new { type = "number", id = "cartQuantity", step = "1", min = "0", @class = "form-control btn-sharp input-sm" })</div>
-                            <div class="col-xs-3 text-left" style="padding:0px;color:#042981"><button id="numberStepDown" class="input-sm btn btn-sharp" style="line-height:1"><i class="fa fa-plus"></i></button></div>
+                            <div class="col-xs-3 text-right" style="padding:0px;margin-right:-2px;color:#0D47A1"><button id="@numberStepDownID" class="input-sm btn btn-sharp" style="line-height:1;vertical-align:middle"><i class="fa fa-minus"></i></button></div>
+                            <div class="col-xs-6 text-left" style="padding:0px;margin-left:-2px">@Html.TextBox("lstProductCartList[" + i + "].Quantity", line.Quantity, new { type = "number", id = cartQuantity, step = "1", min = "0", @class = "form-control btn-sharp input-sm" })</div>
+                            <div class="col-xs-3 text-left" style="padding:0px;color:#042981"><button id="@numberStepUpID" class="input-sm btn btn-sharp" style="line-height:1"><i class="fa fa-plus"></i></button></div>
+                            <script type="text/javascript">
+                                $("#@numberStepDownID").click(function () {                                    
+                                    var val = $('#@cartQuantity').val();
+                                    $('#@cartQuantity').val((val * 1) - 1);
+                                });
+                                $("#@numberStepUpID").click(function () {                                    
+                                    var val = $('#@cartQuantity').val();
+                                    $('#@cartQuantity').val((val * 1) + 1);
+                                });
+                            </script>
+
                         </div>
                     </td>
                     <td class="text-right col-md-2">
@@ -45,9 +60,9 @@
                         @Html.ActionLink("Remove", "RemoveFromCart", new { controller = "Cart", ProductID = line.Product.ProductID, returnUrl = Model.ReturnUrl }, new { @class = "btn btn-sm btn-red btn-sharp" })
                     </td>
                 </tr>
-            {i++;}
+                     { i++; }
             }
-            @Html.Hidden("ReturnURL",Request.Url.PathAndQuery)
+            @Html.Hidden("ReturnURL", Request.Url.PathAndQuery)
         }
     </tbody>
     <tfoot>
@@ -97,6 +112,10 @@
 </div>
 <script>
     $("#UpdateCart").click(function () {
-        $("#ProductCartForm").submit();        
+        $("#ProductCartForm").submit();
     });
+
 </script>
+
+
+
