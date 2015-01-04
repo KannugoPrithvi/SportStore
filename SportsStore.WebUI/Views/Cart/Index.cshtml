@@ -19,36 +19,35 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var line in Model.Cart.Lines)
+        @using (Html.BeginForm("UpdateCart", "Cart", FormMethod.Post, new { id="ProductCartForm"}))
         {
-            <tr>
-                <td class="text-left">@line.Product.Name</td>
-                @*<td class="text-center">@line.Quantity</td>*@
-                <td class="text-center col-md-4">
-                    <div class="col-xs-12">
-                        <div class="col-xs-3 text-right" style="padding:0px;margin-right:-2px;color:#0D47A1"><button id="numberStepDown" class="input-sm btn btn-sharp" style="line-height:1;vertical-align:middle"><i class="fa fa-minus"></i></button></div>
-                        <div class="col-xs-6 text-left" style="padding:0px;margin-left:-2px"><input id="cartQuantity" type="number" step="1" min="0" name="" value="2" title="Qty" class="form-control btn-sharp input-sm"></div>
-                        <div class="col-xs-3 text-left" style="padding:0px;color:#042981"><button id="numberStepDown" class="input-sm btn btn-sharp" style="line-height:1"><i class="fa fa-plus"></i></button></div>
-                    </div>
-                </td>
-                <td class="text-right col-md-2">
-                    @line.Product.AltPrice.ToString("c")
-                </td>
-
-
-
-                <td class="text-right col-md-2">
-                    @((line.Quantity * line.Product.AltPrice).ToString("c"))
-                </td>
-                <td class="col-md-4">
-                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
-                    {
-                        @Html.Hidden("ProductId", line.Product.ProductID)
-                        @Html.HiddenFor(x => x.ReturnUrl)
-                        <input class="btn btn-sm btn-red btn-sharp" type="submit" value="Remove" />
-                    }
-                </td>
-            </tr>
+            int i = 0;
+            foreach (var line in Model.Cart.Lines)
+            {
+                @Html.Hidden("lstProductCartList[" + i + "].ProductID", line.Product.ProductID)
+                <tr>
+                    <td class="text-left">@line.Product.Name</td>
+                    @*<td class="text-center">@line.Quantity</td>*@
+                    <td class="text-center col-md-4">
+                        <div class="col-xs-12">
+                            <div class="col-xs-3 text-right" style="padding:0px;margin-right:-2px;color:#0D47A1"><button id="numberStepDown" class="input-sm btn btn-sharp" style="line-height:1;vertical-align:middle"><i class="fa fa-minus"></i></button></div>
+                            <div class="col-xs-6 text-left" style="padding:0px;margin-left:-2px">@Html.TextBox("lstProductCartList[" + i + "].Quantity", line.Quantity, new { type = "number", id = "cartQuantity", step = "1", min = "0", @class = "form-control btn-sharp input-sm" })</div>
+                            <div class="col-xs-3 text-left" style="padding:0px;color:#042981"><button id="numberStepDown" class="input-sm btn btn-sharp" style="line-height:1"><i class="fa fa-plus"></i></button></div>
+                        </div>
+                    </td>
+                    <td class="text-right col-md-2">
+                        @line.Product.AltPrice.ToString("c")
+                    </td>
+                    <td class="text-right col-md-2">
+                        @((line.Quantity * line.Product.AltPrice).ToString("c"))
+                    </td>
+                    <td class="col-md-4">
+                        @Html.ActionLink("Remove", "RemoveFromCart", new { controller = "Cart", ProductID = line.Product.ProductID, returnUrl = Model.ReturnUrl }, new { @class = "btn btn-sm btn-red btn-sharp" })
+                    </td>
+                </tr>
+            {i++;}
+            }
+            @Html.Hidden("ReturnURL",Request.Url.PathAndQuery)
         }
     </tbody>
     <tfoot>
@@ -74,9 +73,9 @@
         </div>
     </div>
     <div class="col-md-7 col-xs-7 text-right">
-        <a class="btn btn-quickview btn-sharp" href="@Url.Action("UpdateCart", new { controller = "Cart", returnUrl = Request.Url.PathAndQuery, quantity = 7, productID = line.Product.ProductID })">
-        UPDATE CART
-        </a>
+        <button class="btn btn-quickview btn-sharp" id="UpdateCart">
+            UPDATE CART
+        </button>
         <a class="btn btn-quickview btn-sharp" href="@Model.ReturnUrl">
             CONTINUE SHOPPING
         </a>
@@ -96,3 +95,8 @@
         </table>
     </div>
 </div>
+<script>
+    $("#UpdateCart").click(function () {
+        $("#ProductCartForm").submit();        
+    });
+</script>

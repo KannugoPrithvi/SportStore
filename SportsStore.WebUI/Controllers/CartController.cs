@@ -13,16 +13,17 @@ namespace SportsStore.WebUI.Controllers
     {
         private IProductRepository repository;
         private IOrderProcessor orderProcessor;
-        public CartController(IProductRepository repo,IOrderProcessor proc)
+        public CartController(IProductRepository repo, IOrderProcessor proc)
         {
             repository = repo;
             orderProcessor = proc;
         }
-        public ViewResult Index(Cart cart,string returnUrl)
+        public ViewResult Index(Cart cart, string returnUrl)
         {
-            return View(new CartIndexViewModel { 
-            Cart = cart,
-            ReturnUrl = returnUrl
+            return View(new CartIndexViewModel
+            {
+                Cart = cart,
+                ReturnUrl = returnUrl
             });
         }
 
@@ -37,16 +38,16 @@ namespace SportsStore.WebUI.Controllers
         //    }
         //    return cart;
         //}
-        public RedirectToRouteResult AddToCart(Cart cart,int productId, string returnUrl)
+        public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
         {
             Product product = repository.Products.Where(p => p.ProductID == productId).FirstOrDefault();
             if (product != null)
             {
-                cart.AddItem(product, 1,0);
+                cart.AddItem(product, 1, 0);
             }
             return RedirectToAction("Index", new { returnUrl });
         }
-        public RedirectToRouteResult RemoveFromCart(Cart cart,int productId, string returnUrl)
+        public RedirectToRouteResult RemoveFromCart(Cart cart, int productId, string returnUrl)
         {
             Product product = repository.Products.Where(p => p.ProductID == productId).FirstOrDefault();
             if (product != null)
@@ -55,13 +56,19 @@ namespace SportsStore.WebUI.Controllers
             }
             return RedirectToAction("Index", new { returnUrl });
         }
-        public RedirectToRouteResult UpdateCart(Cart cart, int productId, int quantity, string returnUrl)
+        public RedirectToRouteResult UpdateCart(Cart cart, string returnUrl, List<ProductCartList> lstProductCartList)
         {
-            Product product = repository.Products.Where(p => p.ProductID == productId).FirstOrDefault();
-            if (product != null)
+            if(lstProductCartList != null || lstProductCartList.Count != 0)
             {
-                cart.AddItem(product, 1,1);
-            }
+                foreach (var item in lstProductCartList)
+                {
+                    Product product = repository.Products.Where(p => p.ProductID == item.ProductID).FirstOrDefault();
+                    if (product != null)
+                    {
+                        cart.AddItem(product, item.Quantity, 1);
+                    }
+                }
+            }   
             return RedirectToAction("Index", new { returnUrl });
         }
         public PartialViewResult Summary(Cart cart)
@@ -74,14 +81,14 @@ namespace SportsStore.WebUI.Controllers
             return View(new ShippingDetails());
         }
         [HttpPost]
-        public ViewResult Checkout(Cart cart,ShippingDetails shippingDetails)
+        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {
-            if(cart.Lines.Count() == 0)
+            if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Sorry your cart is empty!");
             }
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 orderProcessor.ProcessOrder(cart, shippingDetails);
                 cart.Clear();
