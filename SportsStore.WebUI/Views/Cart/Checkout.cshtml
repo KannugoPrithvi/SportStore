@@ -3,7 +3,26 @@
 @{
     ViewBag.Title = "SportStore: Checkout";
 }
-
+<script>
+    $(document).ready(function () {
+        $('#AccountCreateCheckBox').click(function () {
+            if ($(this).prop("checked") == true) {
+                $("#AccountCreation").fadeIn(300);
+            }
+            else if ($(this).prop("checked") == false) {
+                $("#AccountCreation").fadeOut("slow");
+            }
+        });
+        $('#ShippingDetailsCheckBox').click(function () {
+            if ($(this).prop("checked") == true) {
+                $("#ShippingDetails").fadeIn(300);
+            }
+            else if ($(this).prop("checked") == false) {
+                $("#ShippingDetails").fadeOut("slow");
+            }
+        });
+    });
+</script>
 @helper CheckoutInformationForm()
 {
     <div class="col-md-12 col-xs-12 padding-10">
@@ -40,51 +59,51 @@
         <div class=" col-md-6 no-padding">
             <label>First Name</label>
             <div class="col-md-12" style="padding-left:0px">
-                @Html.TextBox("Firstname", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+                @Html.TextBox("Firstname", null, new { @class = "form-control btn-sharp", placeholder = "First Name" })
             </div>
         </div>
         <div class="col-md-6 no-padding">
             <div class="col-md-12"><label>Last Name</label></div>
             <div class="col-md-12" style="padding-right:0px">
-                @Html.TextBox("Lastname", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+                @Html.TextBox("Lastname", null, new { @class = "form-control btn-sharp", placeholder = "Last Name" })
             </div>
         </div>
     </div>
     <div class="col-md-12 col-xs-12 padding-10">
         <label>Company Name</label>
         <div class="col-md-12  no-padding">
-            @Html.TextBox("Companyname", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+            @Html.TextBox("Companyname", null, new { @class = "form-control btn-sharp", placeholder = "Company Name" })
         </div>
     </div>
     <div class="col-md-12 col-xs-12 padding-10">
         <label>Address</label>
         <div class="col-md-12 no-padding">
-            @Html.TextArea("Address", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+            @Html.TextArea("Address", null, new { @class = "form-control btn-sharp", placeholder = "Address" })
         </div>
     </div>
     <div class="col-md-12 col-xs-12 padding-10">
         <label>Postcode/Zip</label>
         <div class="col-md-12 no-padding">
-            @Html.TextBox("Zipcode", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+            @Html.TextBox("Zipcode", null, new { @class = "form-control btn-sharp", placeholder = "Post/Zip Code" })
         </div>
     </div>
     <div class="col-md-12 col-xs-12 padding-10">
         <label>Town/City</label>
         <div class="col-md-12 no-padding">
-            @Html.TextBox("Towncity", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+            @Html.TextBox("Towncity", null, new { @class = "form-control btn-sharp", placeholder = "Town/City" })
         </div>
     </div>
     <div class="col-md-12 col-xs-12 padding-10">
         <div class="col-md-6 no-padding">
             <label>Email Address</label>
             <div class="col-md-12" style="padding-left:0px">
-                @Html.TextBox("Email", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+                @Html.TextBox("Email", null, new { @class = "form-control btn-sharp", placeholder = "example@example.com" })
             </div>
         </div>
         <div class="col-md-6 no-padding">
             <div class="col-md-12"><label>Phone</label></div>
             <div class="col-md-12" style="padding-right:0px">
-                @Html.TextBox("Phone", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+                @Html.TextBox("Phone", null, new { @class = "form-control btn-sharp", placeholder = "Phone" })
             </div>
         </div>
     </div>
@@ -96,39 +115,54 @@
         <span>Returning customer? <a>Click here to login</a></span>
     </div>
     <div class="col-md-12 col-xs-12" style="margin-top:10px;margin-bottom:20px">
-        <div class="col-md-6 col-xs-6">
-            <div class="col-md-12"><h4>Billing Details</h4></div>
+        <div class="col-md-6 col-xs-6" style="border-right:1px solid #EDECEC">
+            <div class="col-md-12"><h3>BILLING DETAILS</h3></div>
             @CheckoutInformationForm()
-            <div class="col-md-12">@Html.CheckBox("CreateAccount")<span style="padding:10px 0px 5px 5px">Create an account?</span></div>
+            <div class="col-md-12">
+                <p>@Html.CheckBox("CreateAccount", false, new { id = "AccountCreateCheckBox" })<span style="padding:10px 0px 5px 5px">Create an account?</span></p>
+                <div id="AccountCreation">
+                    <p>
+                        Create an account by entering the information below. If you are a returning customer please login at the top of the page.
+                    </p>
+                    <label>Account password *</label>
+                    <div class="col-md-12 no-padding">
+                        @Html.TextBox("Password", null, new { @class = "form-control btn-sharp" })
+                    </div>
+                </div>
+
+            </div>
 
         </div>
-        <div class="col-md-6 col-xs-6" style="border-left:1px solid #EDECEC">
-            <div class="col-md-12"><h4>Ship to a different address?</h4></div>
+        <div class="col-md-6 col-xs-6">
+            <div class="col-md-12"><h3>SHIPPING DETAILS</h3></div>
             <div class="col-md-12">
-                @Html.CheckBox("differentAddress")
-            </div>            
+                <h4>Ship to a different address? <span class="padding-10"> @Html.CheckBox("differentAddress", false, new { id = "ShippingDetailsCheckBox" })</span></h4>
+                
+            </div>
+            <div id="ShippingDetails">
             @CheckoutInformationForm()
-            <div class="col-md-12 col-xs-12 padding-10">
-                <label>Order Notes</label>
-                <div class="col-md-12 no-padding">
-                    @Html.TextArea("OrderNotes", null, new { @class = "form-control btn-sharp", placeholder = "India" })
+                <div class="col-md-12 col-xs-12 padding-10">
+                    <label>Order Notes</label>
+                    <div class="col-md-12 no-padding">
+                        @Html.TextArea("OrderNotes", null, new { @class = "form-control btn-sharp", placeholder = "Order Notes" })
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-12 col-xs-12">
-        <div class="col-md-6"><h4>Your order</h4></div>
+        <div class="col-md-12 text-left"><h3>YOUR ORDER</h3></div>
         <div class="col-md-12 col-xs-12 no-padding">
-            <div class="col-md-6 col-xs-6">
+            @*<div class="col-md-6 col-xs-6">*@
                 <div class="col-md-12 text-left btn-quickview">
-                    <h4>ORDER SUMMARY</h4>
+                    <h5>ORDER SUMMARY</h5>
                 </div>
                 <table class="table table-bordered table-condensed table-hover table-striped">
-                    <tr><td>Order Subtotal</td><td><i class="fa fa-rupee"></i>25,248.00</td></tr>
-                    <tr><td>Handling and Shipping</td><td>Free Shipping</td></tr>
-                    <tr><td>Order Total</td><td><i class="fa fa-rupee"></i>25,248.00</td></tr>
+                    <tr><td class="col-md-6">Order Subtotal</td><td><i class="fa fa-rupee"></i>25,248.00</td></tr>
+                    <tr><td class="col-md-6">Handling and Shipping</td><td>Free Shipping</td></tr>
+                    <tr><td class="col-md-6">Order Total</td><td><i class="fa fa-rupee"></i>25,248.00</td></tr>
                 </table>
-            </div>
+            @*</div>*@
         </div>
 
     </div>
