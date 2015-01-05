@@ -442,6 +442,7 @@
     <Compile Include="Infrastructure\IProductRepository.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\CartIndexViewModel.cs" />
+    <Compile Include="Models\CheckOutViewModel.cs" />
     <Compile Include="Models\CombinedProductSpecificationViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
