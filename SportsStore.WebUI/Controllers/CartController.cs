@@ -78,6 +78,18 @@ namespace SportsStore.WebUI.Controllers
 
         public ViewResult Checkout()
         {
+            IEnumerable<SelectListItem> lstOfCountries = new List<SelectListItem>
+            {
+                new SelectListItem{Text="India",Value="IN"},
+                new SelectListItem{Text="China",Value="CN"},
+                new SelectListItem{Text="USA",Value="USA"},
+                new SelectListItem{Text="Russia",Value="RU"},
+                new SelectListItem{Text="Britain",Value="UK"},
+                new SelectListItem{Text="France",Value="FRN"},
+                new SelectListItem{Text="Vietnam",Value="VN"},
+
+            };
+            ViewData["Countries"] = lstOfCountries;
             return View(new ShippingDetails());
         }
         //[HttpPost]

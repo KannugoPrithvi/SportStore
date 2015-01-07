@@ -1,100 +1,78 @@
-﻿@model SportsStore.Domain.Entities.ShippingDetails
-
+﻿@helper CommonFormElements(string TypeOfShipping)
+{
+    <div class="col-md-12 col-xs-12 padding-10">
+        <label>Country</label>
+        <div class="col-md-12 no-padding">
+            @Html.DropDownList(TypeOfShipping+".Country", ViewData["Countries"] as IEnumerable<SelectListItem>, "Select Country....", new { @class = "form-control btn-sharp" })
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <div class=" col-md-6 no-padding">
+            <label>First Name</label>
+            <div class="col-md-12" style="padding-left:0px">
+                @Html.TextBox(TypeOfShipping + ".FirstName", null, new { @class = "form-control btn-sharp", placeholder = "First Name" })
+            </div>
+        </div>
+        <div class="col-md-6 no-padding">
+            <div class="col-md-12"><label>Last Name</label></div>
+            <div class="col-md-12" style="padding-right:0px">
+                @Html.TextBox(TypeOfShipping + ".LastName", null, new { @class = "form-control btn-sharp", placeholder = "Last Name" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <label>Company Name</label>
+        <div class="col-md-12  no-padding">
+            @Html.TextBox(TypeOfShipping + ".Company", null, new { @class = "form-control btn-sharp", placeholder = "Company Name" })
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <div class="col-md-6 col-xs-6 no-padding">
+            <label>State/Province</label>
+            <div class="col-md-12" style="padding-left:0px">
+                @Html.TextBox(TypeOfShipping + ".StateProvince", null, new { @class = "form-control btn-sharp", placeholder = "State/Province" })
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-6 no-padding">
+            <label>Town/City</label>
+            <div class="col-md-12" style="padding-right:0px">
+                @Html.TextBox(TypeOfShipping + ".TownCity", null, new { @class = "form-control btn-sharp", placeholder = "Town/City" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <label>Address</label>
+        <div class="col-md-12 no-padding">
+            @Html.TextArea(TypeOfShipping + ".Address", null, new { @class = "form-control btn-sharp", placeholder = "Address" })
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <div class="col-md-6 no-padding">
+            <label>Postcode/Zip</label>
+            <div class="col-md-12 no-padding">
+                @Html.TextBox(TypeOfShipping + ".ZipCode", null, new { @class = "form-control btn-sharp", placeholder = "Post/Zip Code" })
+            </div>
+        </div>
+        <div class="col-md-6 no-padding">
+            <div class="col-md-12"><label>Phone</label></div>
+            <div class="col-md-12" style="padding-right:0px">
+                @Html.TextBox(TypeOfShipping + ".Phone", null, new { @class = "form-control btn-sharp", placeholder = "Phone" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 padding-10">
+        <label>Email Address</label>
+        <div class="col-md-12 no-padding">
+            @Html.TextBox(TypeOfShipping + ".Email", null, new { @class = "form-control btn-sharp", placeholder = "example@example.com" })
+        </div>
+    </div>
+}
 <div class="col-md-12 col-xs-12" style="margin-top:10px;margin-bottom:20px">
     <div class="col-md-6 col-xs-6" style="border-right:1px solid #EDECEC">
         <div class="col-md-12"><h3>BILLING DETAILS</h3></div>
-        <div class="col-md-12 col-xs-12 padding-10">
-            <label>Country</label>
-            <div class="col-md-12 no-padding">
-                <select name="BillingAddressDetails.Country" class="form-control btn-sharp">
-                    <option value="">Select one...</option>
-                    <option value="ActionScript">ActionScript</option>
-                    <option value="AppleScript">AppleScript</option>
-                    <option value="Asp">Asp</option>
-                    <option value="BASIC">BASIC</option>
-                    <option value="C">C</option>
-                    <option value="C++">C++</option>
-                    <option value="Clojure">Clojure</option>
-                    <option value="COBOL">COBOL</option>
-                    <option value="ColdFusion">ColdFusion</option>
-                    <option value="Erlang">Erlang</option>
-                    <option value="Fortran">Fortran</option>
-                    <option value="Groovy">Groovy</option>
-                    <option value="Haskell">Haskell</option>
-                    <option value="Java">Java</option>
-                    <option value="JavaScript">JavaScript</option>
-                    <option value="Lisp">Lisp</option>
-                    <option value="Perl">Perl</option>
-                    <option value="PHP">PHP</option>
-                    <option value="Python">Python</option>
-                    <option value="Ruby">Ruby</option>
-                    <option value="Scala">Scala</option>
-                    <option value="Scheme">Scheme</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-12 col-xs-12 padding-10">
-            <div class=" col-md-6 no-padding">
-                <label>First Name</label>
-                <div class="col-md-12" style="padding-left:0px">
-                    @Html.TextBox("BillingAddressDetails.FirstName", null, new { @class = "form-control btn-sharp", placeholder = "First Name" })
-                </div>
-            </div>
-            <div class="col-md-6 no-padding">
-                <div class="col-md-12"><label>Last Name</label></div>
-                <div class="col-md-12" style="padding-right:0px">
-                    @Html.TextBox("BillingAddressDetails.LastName", null, new { @class = "form-control btn-sharp", placeholder = "Last Name" })
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-xs-12 padding-10">
-            <label>Company Name</label>
-            <div class="col-md-12  no-padding">
-                @Html.TextBox("BillingAddressDetails.Company", null, new { @class = "form-control btn-sharp", placeholder = "Company Name" })
-            </div>
-        </div>
-        <div class="col-md-12 col-xs-12 padding-10">
-            <div class="col-md-6 col-xs-6 no-padding">
-                <label>State/Province</label>
-                <div class="col-md-12" style="padding-left:0px">
-                    @Html.TextBox("BillingAddressDetails.StateProvince", null, new { @class = "form-control btn-sharp", placeholder = "State/Province" })
-                </div>
-            </div>
-            <div class="col-md-6 col-xs-6 no-padding">
-                <label>Town/City</label>
-                <div class="col-md-12" style="padding-right:0px">
-                    @Html.TextBox("BillingAddressDetails.TownCity", null, new { @class = "form-control btn-sharp", placeholder = "Town/City" })
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-xs-12 padding-10">
-            <label>Address</label>
-            <div class="col-md-12 no-padding">
-                @Html.TextArea("BillingAddressDetails.Address", null, new { @class = "form-control btn-sharp", placeholder = "Address" })
-            </div>
-        </div>
-        <div class="col-md-12 col-xs-12 padding-10">
-            <label>Postcode/Zip</label>
-            <div class="col-md-12 no-padding">
-                @Html.TextBox("BillingAddressDetails.ZipCode", null, new { @class = "form-control btn-sharp", placeholder = "Post/Zip Code" })
-            </div>
-        </div>
-        <div class="col-md-12 col-xs-12 padding-10">
-            <div class="col-md-6 no-padding">
-                <label>Email Address</label>
-                <div class="col-md-12" style="padding-left:0px">
-                    @Html.TextBox("BillingAddressDetails.Email", null, new { @class = "form-control btn-sharp", placeholder = "example@example.com" })
-                </div>
-            </div>
-            <div class="col-md-6 no-padding">
-                <div class="col-md-12"><label>Phone</label></div>
-                <div class="col-md-12" style="padding-right:0px">
-                    @Html.TextBox("BillingAddressDetails.Phone", null, new { @class = "form-control btn-sharp", placeholder = "Phone" })
-                </div>
-            </div>
-        </div>
+   @CommonFormElements("BillingAddressDetails")
 
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 padding-10">
             <p>@Html.CheckBox("IsCreateAccountChecked", false, new { id = "AccountCreateCheckBox" })<span style="padding:10px 0px 5px 5px">Create an account?</span></p>
             <div id="AccountCreation">
                 <p>
@@ -102,7 +80,7 @@
                 </p>
                 <label>Account password *</label>
                 <div class="col-md-12 no-padding">
-                    @Html.TextBox("Password", null, new { @class = "form-control btn-sharp" })
+                    @Html.TextBox("Password", null, new { @class = "form-control btn-sharp", placeholder = "Password",type="password" })
                 </div>
             </div>
         </div>
@@ -114,101 +92,12 @@
 
         </div>
         <div id="ShippingDetails">
-            <div class="col-md-12 col-xs-12 padding-10">
-                <label>Country</label>
-                <div class="col-md-12 no-padding">
-                    <select name="ShippingAddressDetails.Country" class="form-control btn-sharp">
-                        <option value="">Select one...</option>
-                        <option value="ActionScript">ActionScript</option>
-                        <option value="AppleScript">AppleScript</option>
-                        <option value="Asp">Asp</option>
-                        <option value="BASIC">BASIC</option>
-                        <option value="C">C</option>
-                        <option value="C++">C++</option>
-                        <option value="Clojure">Clojure</option>
-                        <option value="COBOL">COBOL</option>
-                        <option value="ColdFusion">ColdFusion</option>
-                        <option value="Erlang">Erlang</option>
-                        <option value="Fortran">Fortran</option>
-                        <option value="Groovy">Groovy</option>
-                        <option value="Haskell">Haskell</option>
-                        <option value="Java">Java</option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Lisp">Lisp</option>
-                        <option value="Perl">Perl</option>
-                        <option value="PHP">PHP</option>
-                        <option value="Python">Python</option>
-                        <option value="Ruby">Ruby</option>
-                        <option value="Scala">Scala</option>
-                        <option value="Scheme">Scheme</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-12 col-xs-12 padding-10">
-                <div class=" col-md-6 no-padding">
-                    <label>First Name</label>
-                    <div class="col-md-12" style="padding-left:0px">
-                        @Html.TextBox("ShippingAddressDetails.FirstName", null, new { @class = "form-control btn-sharp", placeholder = "First Name" })
-                    </div>
-                </div>
-                <div class="col-md-6 no-padding">
-                    <div class="col-md-12"><label>Last Name</label></div>
-                    <div class="col-md-12" style="padding-right:0px">
-                        @Html.TextBox("ShippingAddressDetails.LastName", null, new { @class = "form-control btn-sharp", placeholder = "Last Name" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-xs-12 padding-10">
-                <label>Company Name</label>
-                <div class="col-md-12  no-padding">
-                    @Html.TextBox("ShippingAddressDetails.Company", null, new { @class = "form-control btn-sharp", placeholder = "Company Name" })
-                </div>
-            </div>
-            <div class="col-md-12 col-xs-12 padding-10">
-                <div class="col-md-6 col-xs-6 no-padding">
-                    <label>State/Province</label>
-                    <div class="col-md-12" style="padding-left:0px">
-                        @Html.TextBox("ShippingAddressDetails.StateProvince", null, new { @class = "form-control btn-sharp", placeholder = "State/Province" })
-                    </div>
-                </div>
-                <div class="col-md-6 col-xs-6 no-padding">
-                    <label>Town/City</label>
-                    <div class="col-md-12" style="padding-right:0px">
-                        @Html.TextBox("ShippingAddressDetails.TownCity", null, new { @class = "form-control btn-sharp", placeholder = "Town/City" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-xs-12 padding-10">
-                <label>Address</label>
-                <div class="col-md-12 no-padding">
-                    @Html.TextArea("ShippingAddressDetails.Address", null, new { @class = "form-control btn-sharp", placeholder = "Address" })
-                </div>
-            </div>
-            <div class="col-md-12 col-xs-12 padding-10">
-                <label>Postcode/Zip</label>
-                <div class="col-md-12 no-padding">
-                    @Html.TextBox("ShippingAddressDetails.ZipCode", null, new { @class = "form-control btn-sharp", placeholder = "Post/Zip Code" })
-                </div>
-            </div>
-            <div class="col-md-12 col-xs-12 padding-10">
-                <div class="col-md-6 no-padding">
-                    <label>Email Address</label>
-                    <div class="col-md-12" style="padding-left:0px">
-                        @Html.TextBox("ShippingAddressDetails.Email", null, new { @class = "form-control btn-sharp", placeholder = "example@example.com" })
-                    </div>
-                </div>
-                <div class="col-md-6 no-padding">
-                    <div class="col-md-12"><label>Phone</label></div>
-                    <div class="col-md-12" style="padding-right:0px">
-                        @Html.TextBox("ShippingAddressDetails.Phone", null, new { @class = "form-control btn-sharp", placeholder = "Phone" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-xs-12 padding-10">
-                <label>Order Notes</label>
-                <div class="col-md-12 no-padding">
-                    @Html.TextArea("OrderNotes", null, new { @class = "form-control btn-sharp", placeholder = "Order Notes" })
-                </div>
+            @CommonFormElements("ShippingAddressDetails")
+        </div>
+        <div class="col-md-12 col-xs-12 padding-10">
+            <label>Order Notes</label>
+            <div class="col-md-12 no-padding">
+                @Html.TextArea("OrderNotes", null, new { @class = "form-control btn-sharp", placeholder = "Notes about your order, e.g. special notes for delivery." })
             </div>
         </div>
     </div>
