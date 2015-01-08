@@ -12,5 +12,6 @@ namespace SportsStore.WebUI.Models
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
+        public bool Rememberme { get; set; }
     }
 }

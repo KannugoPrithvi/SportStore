@@ -40,5 +40,10 @@ namespace SportsStore.WebUI.Controllers
                 return View();
             }
         }
+        [HttpPost]
+        public ActionResult RegisterUser(LoginViewModel model, String returnUrl, CheckOutViewModel checkOutViewModel = null)
+        {
+            return Redirect(returnUrl ?? Url.Action("Checkout", new { controller = "Cart", checkOutViewModel = checkOutViewModel }));
+        }
 	}
 }

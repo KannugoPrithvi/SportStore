@@ -5,7 +5,8 @@ using System.Web;
 
 namespace SportsStore.WebUI.Models
 {
-    public class CheckOutViewModel
+    public class
+      CheckOutViewModel
     {
         public CustomerDetails BillingAddressDetails { get; set; }
         public CustomerDetails ShippingAddressDetails { get; set; }

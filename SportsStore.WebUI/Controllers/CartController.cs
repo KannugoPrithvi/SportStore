@@ -90,7 +90,7 @@ namespace SportsStore.WebUI.Controllers
 
             };
             ViewData["Countries"] = lstOfCountries;
-            return View(new ShippingDetails());
+            return View(new CheckOutViewModel());
         }
         //[HttpPost]
         //public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
@@ -114,6 +114,7 @@ namespace SportsStore.WebUI.Controllers
         [HttpPost]
         public ActionResult Checkout(Cart cart,CheckOutViewModel checkOutViewModel)
         {
+
             var request = Request.Form;
             return null;
         }
