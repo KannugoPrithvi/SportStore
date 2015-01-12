@@ -48,31 +48,39 @@
         </a>
     </div>
 </div>
-<div class="entry-title">
-    <h5>
-        @if (ViewBag.SelectedCategory == null)
-        {
-            <span>
-                <strong>Products for 'All' category</strong>
-            </span>
-        }
-        else
-        {
+@if (ViewBag.SelectedCategory == null)
+{
+    @Html.Action("_HomeProductCategorySlider", new { controller = "Product"})
+}
+else
+{
+    <div class="entry-title">
+        <h5>
+            @if (ViewBag.SelectedCategory == null)
+            {
+                <span>
+                    <strong>Products for 'All' category</strong>
+                </span>
+            }
+            else
+            {
 
-            <span>
-                <strong>Products for '@ViewBag.SelectedCategory' category</strong>
-        </span>
-        }
-</h5>
-</div>
-<div class="container" style="margin:auto">
-    <div class="container" style="width:auto;padding-left:5%">
-        @foreach (var p in Model.ProductsAndImages)
-        {
-            @Html.Partial("ProductSummary", p)
-        }
+                <span>
+                    <strong>Products for '@ViewBag.SelectedCategory' category</strong>
+                </span>
+            }
+        </h5>
     </div>
-</div>
-<div class="btn-group pull-right panel">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { CategoryID = Model.CurrentCategoryID, page = x }))
-</div>
+    <div class="container" style="margin:auto">
+        <div class="container" style="width:auto;padding-left:5%">
+            @foreach (var p in Model.ProductsAndImages)
+            {
+                @Html.Partial("ProductSummary", p)
+            }
+        </div>
+    </div>
+    <div class="btn-group pull-right panel">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { CategoryID = Model.CurrentCategoryID, page = x }))
+    </div>
+}
+

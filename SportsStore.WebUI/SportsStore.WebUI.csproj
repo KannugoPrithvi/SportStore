@@ -488,6 +488,7 @@
     <Content Include="Views\Shared\_FooterGeneralContent.cshtml" />
     <Content Include="Views\Cart\Partial\_GuestCheckoutForm.cshtml" />
     <Content Include="Views\Cart\Partial\_AuthenticatedCheckoutForm.cshtml" />
+    <Content Include="Views\Product\Partial\_HomePageProductSliders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

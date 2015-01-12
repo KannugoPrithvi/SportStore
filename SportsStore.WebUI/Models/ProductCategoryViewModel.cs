@@ -19,4 +19,9 @@ namespace SportsStore.WebUI.Models
         public string Name { get; set; }
         public string ImagePath { get; set; }
     }
+    public class ProductSliderPartialViewModel
+    {
+        public ProductImageViewModel productImageViewModel { get; set; }
+        public ProductCategoryViewModel productCategoryViewModel { get; set; }
+    }
 }

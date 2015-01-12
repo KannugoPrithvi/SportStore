@@ -10,11 +10,11 @@
                 <span style="font-size:medium;font-weight:bold">@Model.AltPrice.ToString("c")</span>
             </span>
         </div>
-        <a href='@Url.Action("ProductView", new { controller = "QuickView", ProductID = Model.ProductID })' class="btn btn-quickview pull-left btn-sharp">Quick View</a>
+        <a href='@Url.Action("ProductView", new { controller = "QuickView", ProductID = @Model.ProductID })' class="btn btn-quickview pull-left btn-sharp">Quick View</a>
         @using (Html.BeginForm("AddToCart", "Cart"))
         {
             <div class="pull-right">
-                @Html.HiddenFor(x => x.ProductID)
+                @Html.Hidden("ProductID", Model.ProductID)
                 @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
                 <input type="submit" class="btn btn-sharp btn-addtocart" value="Add to cart" />
             </div>

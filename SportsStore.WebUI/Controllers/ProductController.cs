@@ -44,7 +44,7 @@ namespace SportsStore.WebUI.Controllers
             else
             {
                 //You need to do Left out join in future
-
+                //The below code shows all the product irrespective of their categories
                 result = from P in repository.Products
                          join I in repository.Images
                          on
@@ -74,6 +74,36 @@ namespace SportsStore.WebUI.Controllers
             };
             ViewBag.SelectedCategory = CategoryName;
             return View(model);
+        }
+        public PartialViewResult _HomeProductCategorySlider()
+        {
+            ViewBag.SelectedCategory = null;
+            List<ProductSliderPartialViewModel> lstProductSliderPartialViewModel = null;
+
+            lstProductSliderPartialViewModel = (from P in repository.Products
+                                              join
+                                                  I in repository.Images on
+                                                  P.ProductID equals I.ProductID
+                                              join PC in repository.ProductCategories
+                                              on P.ProductID equals PC.ProductID
+                                              select new ProductSliderPartialViewModel
+                                              {
+                                                  productImageViewModel = new ProductImageViewModel
+                                                  {
+                                                      ProductID = P.ProductID,
+                                                      AltPrice = P.AltPrice,
+                                                      ImagePath = I.MediumImage,
+                                                      Name = P.Name,
+                                                      ShortDescription = P.ShortDescription
+                                                  },
+                                                  productCategoryViewModel = new ProductCategoryViewModel
+                                                  {
+                                                      CategoryID = PC.CategoryID,
+                                                      CategoryName = repository.Categories.FirstOrDefault(p => p.CategoryID == PC.CategoryID).Name
+                                                  }
+                                              }).ToList<ProductSliderPartialViewModel>();
+            TempData["Categories"] = repository.Categories.ToList<Category>();
+            return PartialView("Partial/_HomePageProductSliders", lstProductSliderPartialViewModel);
         }
 
     }
