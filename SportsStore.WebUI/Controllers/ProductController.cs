@@ -75,7 +75,7 @@ namespace SportsStore.WebUI.Controllers
             ViewBag.SelectedCategory = CategoryName;
             return View(model);
         }
-        public PartialViewResult _HomeProductCategorySlider()
+        public PartialViewResult HomeProductCategorySlider()
         {
             ViewBag.SelectedCategory = null;
             List<ProductSliderPartialViewModel> lstProductSliderPartialViewModel = null;
@@ -102,7 +102,7 @@ namespace SportsStore.WebUI.Controllers
                                                       CategoryName = repository.Categories.FirstOrDefault(p => p.CategoryID == PC.CategoryID).Name
                                                   }
                                               }).ToList<ProductSliderPartialViewModel>();
-            TempData["Categories"] = repository.Categories.ToList<Category>();
+            ViewData["Categories"] = repository.Categories.ToList<Category>();
             return PartialView("Partial/_HomePageProductSliders", lstProductSliderPartialViewModel);
         }
 

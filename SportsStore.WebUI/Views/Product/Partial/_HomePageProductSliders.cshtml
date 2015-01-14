@@ -1,64 +1,7 @@
 ﻿@model List<SportsStore.WebUI.Models.ProductSliderPartialViewModel>
 @using System.Linq
-<style>   
+@using SportsStore.Domain.Entities
 
-    
-    /*.carousel-control.left, .carousel-control.right {
-        background-image: none !important;
-    }*/
-    .sliderItem
-    {
-        background: white;
-    }
-    .carousel-control {
-        color: black;
-        top: 40%;
-        color: #428BCA;
-        bottom: auto;
-        padding-top: 4px;
-        width: 30px;
-        height: 30px;
-        text-shadow: none;
-        opacity: 1;
-    }
-
-        .carousel-control:hover {
-            color: #d9534f;
-        }
-
-        .carousel-control.left, .carousel-control.right {
-            background-image: none !important;
-        }
-
-        .carousel-control.right {
-            left: auto;
-            right: -32px;
-        }
-
-        .carousel-control.left {
-            right: auto;
-            left: -32px;
-        }
-
-    /*.carousel-indicators {
-        bottom: -30px;
-    }
-
-        .carousel-indicators li {
-            border-radius: 0;
-            width: 10px;
-            height: 10px;
-            background: #ccc;
-            border: 1px solid #ccc;
-        }
-
-        .carousel-indicators .active {
-            width: 12px;
-            height: 12px;
-            background: #3276b1;
-            border-color: #3276b1;
-        }*/
-</style>
 @helper ThumbnailSection(string imagePath,string name,string shortDescription,int productID,decimal altPrice)
 {
     <div class="col-sm-3 col-md-3 thumbnail btn-sharp" style="margin: 5px">
@@ -83,84 +26,53 @@
         </div>
     </div>
 }
-@helper ProductSlider(SportsStore.WebUI.Models.ProductSliderPartialViewModel productSliderViewModel,int carouselNumber = 0, string CarouselID = null)
-{
-    CarouselID = "myCarousel" + carouselNumber;
-    <div class="container no-padding">
-        <div class="row">
-            <div class="well">
-                <!-- Carousel
-                ================================================== -->
-                <div id=@CarouselID class="carousel slide">
-                    <div class="carousel-inner">
-                        <div class="item active sliderItem">
-                            <div class="panel panel-danger">
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item sliderItem">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item sliderItem">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                                <div class="col-md-3">
-                                    @ThumbnailSection(productSliderViewModel.productImageViewModel.ImagePath, productSliderViewModel.productImageViewModel.Name, productSliderViewModel.productImageViewModel.ShortDescription, productSliderViewModel.productImageViewModel.ProductID, productSliderViewModel.productImageViewModel.AltPrice)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="left carousel-control" href="#@CarouselID" data-slide="prev"><i class="fa fa-chevron-left fa-2x"></i></a>
-                    <a class="right carousel-control" href="#@CarouselID" data-slide="next"><i class="fa fa-chevron-right fa-2x"></i></a>
 
-                    <ol class="carousel-indicators">
-                        <li data-target="#@CarouselID" data-slide-to="0" class="active"></li>
-                        <li data-target="#@CarouselID" data-slide-to="1"></li>
-                        <li data-target="#@CarouselID" data-slide-to="2"></li>
-                    </ol>
-                </div><!-- End Carousel -->
-            </div><!-- End Well -->
-        </div>
-    </div>
-}
 
 <div>
-    @for (int i = 0; i < Model.Count(); i++)
+    @foreach (var item in ViewData["Categories"] as List<Category>)
     {
-        <hr />
-        @ProductSlider(Model[i],i)
-        <hr />
+        var lstProductSliderPartialViewModel = (from result in Model where result.productCategoryViewModel.CategoryID == item.CategoryID select result).ToList<SportsStore.WebUI.Models.ProductSliderPartialViewModel>();
+        if (lstProductSliderPartialViewModel.Count > 0)
+        {
+            string carousel_class = item.Name;
+            string carousel_script_class= "."+carousel_class;
+            string next_button = carousel_class + "_next";
+            string next_button_class = "." + next_button;
+            string previous_button = carousel_class + "_previous";
+            string previous_button_class = "." + previous_button;
+            <script>
+                $(function () {
+                    $("@carousel_script_class").jCarouselLite({
+                        btnNext: "@next_button_class",
+                        btnPrev: "@previous_button_class",
+                        visible: 4,
+                        easing: "easeOutBounce",
+                        speed: 1000,
+                        circular:false
+                    });
+                });
+            </script>
+            <div class="panel-body col-md-12 no-padding" style="margin-bottom:20px">
+                <div class="col-md-12" style="background-color:#009688;color:white;padding:5px">
+                    <div class="col-md-6 text-left text-uppercase"><b>@item.Name</b></div>
+                   <div class="col-md-6 text-right"><span class="text-center  @previous_button product-slider-controls"><i class="fa fa-chevron-left"></i></span><i class="fa fa-arrows-h"></i><span class="text-center @next_button product-slider-controls"><i class="fa fa-chevron-right "></i></span></div>
+                </div>
+
+                <div class="col-md-12" style="border:1px solid #009688;height:450px">
+                    <div class="@carousel_class">
+                        <ul>
+                            @foreach (var subItem in lstProductSliderPartialViewModel)
+                            {
+                                <li style="margin:20px">
+
+                                    @ThumbnailSection(subItem.productImageViewModel.ImagePath,subItem.productImageViewModel.Name,subItem.productImageViewModel.ShortDescription,subItem.productImageViewModel.ProductID,subItem.productImageViewModel.AltPrice)
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        }
     }
 </div>
