@@ -546,8 +546,15 @@ input[type=number] {
 .product-slider-controls {
     width: 25px;
     color: white;
-    font-size:15px;
+    font-size: 15px;
     padding: 5px;
     margin: 5px;
     cursor: pointer;
+}
+
+.product-slider-controls:hover {
+    color:#43a047;
+    -moz-box-shadow: 0 0 5px #eeff41;
+    -webkit-box-shadow: 0 0 5px #eeff41;
+    box-shadow: 0 0 5px #eeff41;
 }

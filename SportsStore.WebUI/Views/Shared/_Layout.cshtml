@@ -23,8 +23,8 @@
             SHOPPING STORE
         </a>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Register</a></li>
+            <li>@Html.ActionLink("Log in", "Login", new { controller = "Account" })</li>
+            <li>@Html.ActionLink("Register", "Register", new { controller = "Account" })</li>
         </ul>
         @Html.Action("Summary", "Cart")
         <form role="search" class="navbar-form navbar-right">

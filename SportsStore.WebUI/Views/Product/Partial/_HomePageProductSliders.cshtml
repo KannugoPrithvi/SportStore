@@ -53,12 +53,12 @@
                 });
             </script>
             <div class="panel-body col-md-12 no-padding" style="margin-bottom:20px">
-                <div class="col-md-12" style="background-color:#009688;color:white;padding:5px">
-                    <div class="col-md-6 text-left text-uppercase"><b>@item.Name</b></div>
-                   <div class="col-md-6 text-right"><span class="text-center  @previous_button product-slider-controls"><i class="fa fa-chevron-left"></i></span><i class="fa fa-arrows-h"></i><span class="text-center @next_button product-slider-controls"><i class="fa fa-chevron-right "></i></span></div>
+                <div class="col-md-12" style="background-color:#0d47a1;color:white;padding:5px">
+                    <div class="col-md-6 text-left text-uppercase"><span style="font-size:15px">@item.Name</span></div>
+                   <div class="col-md-6 text-right"><span class="text-center @previous_button product-slider-controls"><i class="fa fa-step-backward"></i></span><span class="text-center @next_button product-slider-controls"><i class="fa fa-step-forward "></i></span></div>
                 </div>
 
-                <div class="col-md-12" style="border:1px solid #009688;height:450px">
+                <div class="col-md-12" style="border:1px solid #0d47a1;height:450px">
                     <div class="@carousel_class">
                         <ul>
                             @foreach (var subItem in lstProductSliderPartialViewModel)
