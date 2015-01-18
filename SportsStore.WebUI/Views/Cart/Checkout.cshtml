@@ -13,8 +13,7 @@
                 $("#AccountCreation").fadeOut(200);
             }
         });
-        if ($('#ShippingDetailsCheckBox').prop("checked"))
-        {
+        if ($('#ShippingDetailsCheckBox').prop("checked")) {
             $("#ShippingDetails").show();
         }
         else {
@@ -28,8 +27,7 @@
                 $("#ShippingDetails").fadeOut(200);
             }
         });
-        if($('#AccountCreateCheckBox').prop("checked"))
-        {
+        if ($('#AccountCreateCheckBox').prop("checked")) {
             $('#AccountCreation').show();
         }
         else {
@@ -51,7 +49,31 @@
 <h2>Check out now</h2>
 @if (User.Identity.IsAuthenticated)
 {
-
+    //Temporary Code here
+    <div class="col-md-12 col-xs-12" style="background-color:#F4F4F4;padding:10px 10px 10px 15px">
+        <span>Returning customer? <span id="LoginFormToggle" style="color:#01579b;padding-left:5px;cursor:pointer">Click here to login</span></span>
+    </div>
+    using (Html.BeginForm("RegisterUser", "Account", FormMethod.Post))
+    {
+        <div id="LoginForm" class="col-md-12 col-xs-12">
+            <div class="padding-10">If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing & Shipping section.</div>
+            <div class="col-md-12 col-xs-12 padding-10">
+                <div class="col-md-6 col-xs-12">
+                    <label>Username or email *</label>
+                    @Html.TextBox("Username", null, new { @class = "form-control btn-sharp", placeholder = "Username/E-mail" })
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <label>Password *</label>
+                    @Html.TextBox("Password", null, new { @class = "form-control btn-sharp", placeholder = "Password" })
+                </div>
+                <div class="col-md-12 col-xs-12 text-left" style="padding:10px 10px 10px 15px">
+                    @Html.Hidden("ReturnUrl", Request.Url.PathAndQuery)
+                    <button id="Login" class="btn-addtocart btn btn-sharp" type="submit">LOGIN</button>
+                    <div class="col-md-12 no-padding">@Html.CheckBox("Rememberme")<span style="padding-left:5px">Remember me</span></div>
+                </div>
+            </div>
+        </div>
+    }
 }
 else
 {
@@ -82,18 +104,19 @@ else
 }
 
 
-@using (Html.BeginForm("Checkout","Cart",FormMethod.Post))
+@using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
 {
     if (User.Identity.IsAuthenticated)
     {
-
+        //Temporary Code here
+        @Html.Partial("Partial/_GuestCheckoutForm", Model)
     }
     else
     {
         @Html.Partial("Partial/_GuestCheckoutForm", Model)
     }
-   
-    
+
+
     <div class="col-md-12 col-xs-12">
         <div class="col-md-12 text-left"><h3>YOUR ORDER</h3></div>
         <div class="col-md-12 col-xs-12 no-padding">

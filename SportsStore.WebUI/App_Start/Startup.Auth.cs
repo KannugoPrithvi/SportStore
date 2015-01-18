@@ -58,11 +58,11 @@ namespace SportsStore.WebUI
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "981987756092-j34pgj04hqu94nlr8sdvaa9g3prqo64p.apps.googleusercontent.com",
+                ClientSecret = "ezpw3sZOrcfsbAbtES-Y9iDf"
+            });
         }
     }
 }
