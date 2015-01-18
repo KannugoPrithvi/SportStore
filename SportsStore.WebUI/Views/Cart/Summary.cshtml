@@ -1,10 +1,40 @@
 ﻿@model SportsStore.Domain.Entities.Cart
 
+@helper cart_button_content()
+{
+    <table>
+        <tbody>
+            <tr>
+                <td class="text-center">
+                    @Model.Lines.Sum(x => x.Quantity) ITEMS IN THE CART
+                </td>
+            </tr>
+            <tr>
+                <td class="cart-button-padding text-center">
+                    @Html.ActionLink("VIEW CART", "Index", new { controller = "Cart", returnUrl = @Request.Url.PathAndQuery }, new { @class = "btn btn-blue btn-sharp" })
+                </td>
+            </tr>
+            <tr>
+                <td class="cart-button-padding text-center">
+                    @Html.ActionLink("CHECKOUT", "Checkout", new { controller = "Cart", returnUrl = @Request.Url.PathAndQuery }, new { @class = "btn btn-blue btn-sharp" })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+}
+<div class="navbar-right hidden-xs" style="margin-left:10px">
+    <button class="btn btn-sharp btn-red navbar-btn" data-popover="true" data-html=true
+     data-content='@cart_button_content()'>
+        <span>
+            <i class="fa fa-shopping-cart">
+            </i>
+        </span><span> @Model.ComputeTotalValue().ToString("c")</span>
+    </button>
 
-<div class="navbar-right hidden-xs">
-    @Html.ActionLink("CheckOut", "Index", "Cart",
-                 new { returnUrl = Request.Url.PathAndQuery },
-                 new { @class = "btn btn-warning btn-sharp navbar-btn" })
+    @*@Html.ActionLink("CheckOut", "Index", "Cart",
+        new { returnUrl = Request.Url.PathAndQuery },
+        new { @class = "btn btn-warning btn-sharp navbar-btn", ID = "btnCheckout" })*@
 </div>
 <div class="navbar-right visible-xs">
     <a href=@Url.Action("Index", "Cart", new { returnUrl =
@@ -13,8 +43,36 @@ Request.Url.PathAndQuery })
         <span class="glyphicon glyphicon-shopping-cart"></span>
     </a>
 </div>
-<div class="navbar-text navbar-right" style="padding-right:10px">
+@*<div class="navbar-text navbar-right" style="padding-right:10px">
     <b class="hidden-xs">Your cart:</b>
     @Model.Lines.Sum(x => x.Quantity) item(s),
     @Model.ComputeTotalValue().ToString("c")
-</div>
+</div>*@
+
+<script>
+    var originalLeave = $.fn.popover.Constructor.prototype.leave;
+    $.fn.popover.Constructor.prototype.leave = function (obj) {
+        var self = obj instanceof this.constructor ?
+            obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+        var container, timeout;
+
+        originalLeave.call(this, obj);
+
+        if (obj.currentTarget) {
+            container = $(obj.currentTarget).siblings('.popover')
+            timeout = self.timeout;
+            container.one('mouseenter', function () {
+                //We entered the actual popover – call off the dogs
+                clearTimeout(timeout);
+                //Let's monitor popover content instead
+                container.one('mouseleave', function () {
+                    $.fn.popover.Constructor.prototype.leave.call(self, self);
+                });
+            })
+        }
+    };
+
+
+    $('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'auto', delay: { show: 50, hide: 400 } });
+
+</script>

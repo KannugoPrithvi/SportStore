@@ -524,13 +524,27 @@ a.carousel-control.right {
     background-color: #F44336;
     color: white;
 }
-
+.btn-blue{
+    background-color:#0D47A1;
+    color:white;
+}
+.btn-green{
+    background-color:#43A047;
+    color:white;
+}
+.btn-lightblue{
+    background-color:#2196F3;
+    color:white;
+}
 .no-padding {
     padding: 0px;
 }
 
 .padding-10 {
     padding: 10px;
+}
+.cart-button-padding{
+    padding:3px 0px 3px 0px;
 }
 /*Disable number spinner*/
 input[type=number]::-webkit-inner-spin-button,

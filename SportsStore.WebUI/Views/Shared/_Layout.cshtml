@@ -22,10 +22,11 @@
         <a class="navbar-brand" href="#">
             SHOPPING STORE
         </a>
-        <ul class="nav navbar-nav navbar-right">
+        @*<ul class="nav navbar-nav navbar-right">
             <li>@Html.ActionLink("Log in", "Login", new { controller = "Account" })</li>
             <li>@Html.ActionLink("Register", "Register", new { controller = "Account" })</li>
-        </ul>
+        </ul>*@
+        @Html.Partial("_LoginPartial")
         @Html.Action("Summary", "Cart")
         <form role="search" class="navbar-form navbar-right">
             <div class="form-group">

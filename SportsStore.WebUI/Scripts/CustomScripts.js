@@ -180,5 +180,7 @@ $(function () {
 })(jQuery);
 
 
-//Code for Product Quick view page ends
+
+
+
 
