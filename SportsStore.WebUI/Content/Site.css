@@ -608,19 +608,19 @@ input[type=number] {
 }
 
 #navbar-brand-container {
-    background:#4CAF50;
+    background:#4ED864;
     width:calc(50% + 15px);
 }
 #navbar-brand-container:after {
     content:"";
     position:absolute;
     right:0;
-    border-right:50px solid #0D47A1 ;
+    border-right:50px solid #3ec151 ;
     border-top:60px solid transparent;
 }
 
 #navbar-user-info {
-    background:#0D47A1;
+    background:#3ec151;
     width:calc(50% - 15px);
 }
 /*Custom Navigation bar ends*/
