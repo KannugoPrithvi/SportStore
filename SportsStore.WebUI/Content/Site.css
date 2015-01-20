@@ -524,18 +524,22 @@ a.carousel-control.right {
     background-color: #F44336;
     color: white;
 }
-.btn-blue{
-    background-color:#0D47A1;
-    color:white;
+
+.btn-blue {
+    background-color: #0D47A1;
+    color: white;
 }
-.btn-green{
-    background-color:#43A047;
-    color:white;
+
+.btn-green {
+    background-color: #43A047;
+    color: white;
 }
-.btn-lightblue{
-    background-color:#2196F3;
-    color:white;
+
+.btn-lightblue {
+    background-color: #2196F3;
+    color: white;
 }
+
 .no-padding {
     padding: 0px;
 }
@@ -543,8 +547,9 @@ a.carousel-control.right {
 .padding-10 {
     padding: 10px;
 }
-.cart-button-padding{
-    padding:3px 0px 3px 0px;
+
+.cart-button-padding {
+    padding: 3px 0px 3px 0px;
 }
 /*Disable number spinner*/
 input[type=number]::-webkit-inner-spin-button,
@@ -566,9 +571,56 @@ input[type=number] {
     cursor: pointer;
 }
 
-.product-slider-controls:hover {
-    color:#43a047;
-    -moz-box-shadow: 0 0 5px #eeff41;
-    -webkit-box-shadow: 0 0 5px #eeff41;
-    box-shadow: 0 0 5px #eeff41;
+    .product-slider-controls:hover {
+        color: #43a047;
+        -moz-box-shadow: 0 0 5px #eeff41;
+        -webkit-box-shadow: 0 0 5px #eeff41;
+        box-shadow: 0 0 5px #eeff41;
+    }
+/*Custom Navigation bar start*/
+.navbar-custom {
+    background-color: #fff;
+    color: white;
 }
+
+    .navbar-custom .navbar-nav > .active > a {
+        background-color:white;
+        -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, .25);
+        box-shadow: inset 0 3px 9px rgba(0, 0, 0, .25);
+    }
+
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-nav > li > a {
+        color:white;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    }
+
+    #navbar-container {
+    width:100%;
+    height:50px;
+    margin:0 auto;
+}
+
+#navbar-container div {
+    position:relative;
+    height:100%;
+    float:left;
+}
+
+#navbar-brand-container {
+    background:#4CAF50;
+    width:calc(50% + 15px);
+}
+#navbar-brand-container:after {
+    content:"";
+    position:absolute;
+    right:0;
+    border-right:50px solid #0D47A1 ;
+    border-top:60px solid transparent;
+}
+
+#navbar-user-info {
+    background:#0D47A1;
+    width:calc(50% - 15px);
+}
+/*Custom Navigation bar ends*/

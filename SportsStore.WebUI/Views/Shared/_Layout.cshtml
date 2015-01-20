@@ -18,22 +18,22 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <a class="navbar-brand" href="#">
-            SHOPPING STORE
-        </a>
-        @*<ul class="nav navbar-nav navbar-right">
-            <li>@Html.ActionLink("Log in", "Login", new { controller = "Account" })</li>
-            <li>@Html.ActionLink("Register", "Register", new { controller = "Account" })</li>
-        </ul>*@
-        @Html.Partial("_LoginPartial")
-        @Html.Action("Summary", "Cart")
-        <form role="search" class="navbar-form navbar-right">
-            <div class="form-group">
-                <input type="text" placeholder="Search" class="form-control btn-sharp">
-                <button type="submit" class="btn btn-success btn-sharp"><span class="glyphicon glyphicon-search"></span></button>
-            </div>
-        </form>
+    <div id="navbar-container" class="navbar navbar-custom navbar-fixed-top no-padding" role="navigation">
+        <div id="navbar-brand-container" class="col-md-6">
+            <a class="navbar-brand" href="#">
+                <span style="font-family:'Comic Sans MS';font-size:25px">SHOPPING STORE</span>
+            </a>
+        </div>
+        <div id="navbar-user-info" class="col-md-6">
+            @Html.Partial("_LoginPartial")
+            @Html.Action("Summary", "Cart")
+            <form role="search" class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" placeholder="Search" class="form-control btn-sharp">
+                    <button type="submit" class="btn btn-green btn-sharp"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+            </form>
+        </div>
     </div>
     <div style="max-width: 1000px" class="navbar center-block" role="navigation">
         <div id="navbarCollapse" class="collapse navbar-collapse">
