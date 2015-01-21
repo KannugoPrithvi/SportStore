@@ -4,14 +4,15 @@
 
 @helper ThumbnailSection(string imagePath, string name, string shortDescription, int productID, decimal altPrice)
 {
-    <div class="col-sm-3 col-md-3 showcase-thumbnail btn-sharp" style="margin: 5px">
+    <div class="col-sm-3 col-md-3 showcase-thumbnail btn-sharp">
         <div>
             <img src="@imagePath" width="100%" height="200px" alt="..." />
             <div class="showcase-caption">
                 <div style="font-size:medium;font-weight:bold" class="clampString">@name</div>
-                <div style="text-align: center">
-                    <span style="color:#4CAF50"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span>
-                    <span style="font-size:medium;font-weight:bold">@altPrice.ToString("c")</span>
+                <div class="col-md-12 no-padding">
+                    <div class="col-md-4 no-padding text-left"><span style="color:#4CAF50"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span></div>
+                    
+                    <div class="col-md-8 no-padding text-right"><span style="font-size:medium;font-weight:bold">@altPrice.ToString("c")</span></div>
                 </div>
             </div>
             <div class="col-md-12 no-padding">
@@ -58,13 +59,13 @@
                     });
                 });
             </script>
-            <div class="panel-body col-md-12 no-padding" style="margin-bottom:20px">
+            <div class="panel-body col-md-12 no-padding" style="margin-bottom:10px">
                 <div class="col-md-12" style="background-color:#E0E0E0;color:white;padding:6px 0px 5px 0px">
                     <div class="col-md-6 text-left text-uppercase no-padding"><span style="font-size:18px;background-color:#4CAF50;padding:7px 15px 7px 15px">@item.Name</span></div>
                     <div class="col-md-6 text-right" style="padding-top:2px;padding-right:0px"><span class="text-center @previous_button product-slider-controls"><i class="fa fa-play fa-rotate-180"></i></span><span class="text-center @next_button product-slider-controls"><i class="fa fa-play"></i></span></div>
                 </div>
 
-                <div class="col-md-12" style="height:450px">
+                <div class="col-md-12" style="height:390px">
                     <div class="@carousel_class">
                         <ul>
                             @foreach (var subItem in lstProductSliderPartialViewModel)
