@@ -563,20 +563,30 @@ input[type=number] {
 }
 
 .product-slider-controls {
-    width: 25px;
+    width: 30px;
+    background-color:#4CAF50;
     color: white;
     font-size: 15px;
-    padding: 5px;
-    margin: 5px;
+    padding:9px 10px 9px 10px;
     cursor: pointer;
 }
+.showcase-thumbnail {
+    padding:5px;
+    border: 2px solid #ddd;
+    height: 350px;
+    width: 230px;
+}
 
-    .product-slider-controls:hover {
-        color: #43a047;
-        -moz-box-shadow: 0 0 5px #eeff41;
-        -webkit-box-shadow: 0 0 5px #eeff41;
-        box-shadow: 0 0 5px #eeff41;
+    .showcase-thumbnail:hover {
+        border: 2px solid #f09614;
     }
+
+    .showcase-thumbnail .showcase-caption {
+        height: 90px;
+        width: 100%;
+        overflow: hidden;
+    }
+ 
 /*Custom Navigation bar start*/
 .navbar-custom {
     background-color: #fff;
@@ -608,19 +618,20 @@ input[type=number] {
 }
 
 #navbar-brand-container {
-    background:#4ED864;
+    background:#1565C0;
     width:calc(50% + 15px);
 }
 #navbar-brand-container:after {
     content:"";
     position:absolute;
     right:0;
-    border-right:50px solid #3ec151 ;
+    border-right:50px solid #0D47A1 ;
     border-top:60px solid transparent;
 }
 
 #navbar-user-info {
-    background:#3ec151;
+    background:#0D47A1;
     width:calc(50% - 15px);
 }
+
 /*Custom Navigation bar ends*/

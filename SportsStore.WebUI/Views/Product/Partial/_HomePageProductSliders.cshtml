@@ -2,27 +2,33 @@
 @using System.Linq
 @using SportsStore.Domain.Entities
 
-@helper ThumbnailSection(string imagePath,string name,string shortDescription,int productID,decimal altPrice)
+@helper ThumbnailSection(string imagePath, string name, string shortDescription, int productID, decimal altPrice)
 {
-    <div class="col-sm-3 col-md-3 thumbnail btn-sharp" style="margin: 5px">
+    <div class="col-sm-3 col-md-3 showcase-thumbnail btn-sharp" style="margin: 5px">
         <div>
             <img src="@imagePath" width="100%" height="200px" alt="..." />
-            <div class="caption">
+            <div class="showcase-caption">
                 <div style="font-size:medium;font-weight:bold" class="clampString">@name</div>
-                <div class="clampString">@shortDescription</div>
-                <span style="text-align: center">
+                <div style="text-align: center">
+                    <span style="color:#4CAF50"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span>
                     <span style="font-size:medium;font-weight:bold">@altPrice.ToString("c")</span>
-                </span>
-            </div>
-            <a href='@Url.Action("ProductView", new { controller = "QuickView", ProductID = @productID })' class="btn btn-quickview pull-left btn-sharp">Quick View</a>
-            @using (Html.BeginForm("AddToCart", "Cart"))
-            {
-                <div class="pull-right">
-                    @Html.Hidden("ProductID", productID)
-                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                    <input type="submit" class="btn btn-sharp btn-addtocart" value="Add to cart" />
                 </div>
-            }
+            </div>
+            <div class="col-md-12 no-padding">
+                <div class="col-md-6 no-padding">
+                    <a href='@Url.Action("ProductView", new { controller = "QuickView", ProductID = @productID })' class="btn btn-quickview btn-sharp">Quick View</a>
+                </div>
+                <div class="col-md-6 no-padding">
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        <div class="pull-right">
+                            @Html.Hidden("ProductID", productID)
+                            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                            <input type="submit" class="btn btn-sharp btn-addtocart" value="Add to cart" />
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 }
@@ -35,7 +41,7 @@
         if (lstProductSliderPartialViewModel.Count > 0)
         {
             string carousel_class = item.Name;
-            string carousel_script_class= "."+carousel_class;
+            string carousel_script_class = "." + carousel_class;
             string next_button = carousel_class + "_next";
             string next_button_class = "." + next_button;
             string previous_button = carousel_class + "_previous";
@@ -48,31 +54,31 @@
                         visible: 4,
                         easing: "easeOutBounce",
                         speed: 1000,
-                        circular:false
+                        circular: false
                     });
                 });
             </script>
             <div class="panel-body col-md-12 no-padding" style="margin-bottom:20px">
-                <div class="col-md-12" style="background-color:#0d47a1;color:white;padding:5px">
-                    <div class="col-md-6 text-left text-uppercase"><span style="font-size:15px">@item.Name</span></div>
-                   <div class="col-md-6 text-right"><span class="text-center @previous_button product-slider-controls"><i class="fa fa-play fa-rotate-180"></i></span><span class="text-center @next_button product-slider-controls"><i class="fa fa-play"></i></span></div>
+                <div class="col-md-12" style="background-color:#E0E0E0;color:white;padding:6px 0px 5px 0px">
+                    <div class="col-md-6 text-left text-uppercase no-padding"><span style="font-size:18px;background-color:#4CAF50;padding:7px 15px 7px 15px">@item.Name</span></div>
+                    <div class="col-md-6 text-right" style="padding-top:2px;padding-right:0px"><span class="text-center @previous_button product-slider-controls"><i class="fa fa-play fa-rotate-180"></i></span><span class="text-center @next_button product-slider-controls"><i class="fa fa-play"></i></span></div>
                 </div>
 
-                <div class="col-md-12" style="border:1px solid #0d47a1;height:450px">
+                <div class="col-md-12" style="height:450px">
                     <div class="@carousel_class">
                         <ul>
                             @foreach (var subItem in lstProductSliderPartialViewModel)
                             {
                                 <li style="margin:20px">
 
-                                    @ThumbnailSection(subItem.productImageViewModel.ImagePath,subItem.productImageViewModel.Name,subItem.productImageViewModel.ShortDescription,subItem.productImageViewModel.ProductID,subItem.productImageViewModel.AltPrice)
+                                    @ThumbnailSection(subItem.productImageViewModel.ImagePath, subItem.productImageViewModel.Name, subItem.productImageViewModel.ShortDescription, subItem.productImageViewModel.ProductID, subItem.productImageViewModel.AltPrice)
                                 </li>
                             }
                         </ul>
                     </div>
                 </div>
             </div>
-            
+
         }
     }
 </div>
