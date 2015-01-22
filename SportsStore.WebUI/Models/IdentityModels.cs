@@ -26,7 +26,11 @@ namespace SportsStore.WebUI.Models
             : base("EFDbContext", throwIfV1Schema: false)
         {
         }
+        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+        }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

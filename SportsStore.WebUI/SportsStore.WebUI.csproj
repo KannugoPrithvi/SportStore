@@ -557,7 +557,7 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml">
+    <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Account\Register.cshtml" />

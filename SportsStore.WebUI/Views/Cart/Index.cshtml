@@ -104,9 +104,9 @@
             <h4>CART SUMMARY</h4>
         </div>
         <table class="table table-bordered table-condensed table-hover table-striped">
-            <tr><td>Cart Subtotal</td><td>@Model.Cart.ComputeTotalValue().ToString()</td></tr>
+            <tr><td>Cart Subtotal</td><td>@Model.Cart.ComputeTotalValue().ToString("c")</td></tr>
             <tr><td>Handling and Shipping</td><td>Free Shipping</td></tr>
-            <tr><td>Order Total</td><td>@Model.Cart.ComputeTotalValue().ToString()</td></tr>
+            <tr><td>Order Total</td><td>@Model.Cart.ComputeTotalValue().ToString("c")</td></tr>
         </table>
     </div>
 </div>

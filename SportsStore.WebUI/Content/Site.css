@@ -589,7 +589,6 @@ input[type=number] {
  
 /*Custom Navigation bar start*/
 .navbar-custom {
-    background-color: #fff;
     color: white;
 }
 
@@ -602,7 +601,7 @@ input[type=number] {
     .navbar-custom .navbar-brand,
     .navbar-custom .navbar-nav > li > a {
         color:white;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+        
     }
 
     #navbar-container {
