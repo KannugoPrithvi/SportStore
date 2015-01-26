@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace SportsStore.WebUI.Controllers
 {
@@ -125,7 +126,16 @@ namespace SportsStore.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                customerReview.Customer.UserName = customerReview.Author;
+                if(User.Identity.IsAuthenticated)
+                {
+                    int CustomerID;
+                    var user = Int32.TryParse(User.Identity.GetUserId(),out CustomerID);
+                    customerReview.CustomerID = CustomerID;                   
+                }
+                else
+                {
+                    customerReview.CustomerID = null;
+                }
                 if (customerReview.CustomerReviewID == 0)
                 {
                     customerReview.AddedDate = DateTime.Now;
@@ -143,7 +153,6 @@ namespace SportsStore.WebUI.Controllers
                 ModelState.AddModelError("Binding Error", "Binding not acheived properly");
                 return RedirectToAction("Index", new { controller="Product"});
             }
-
         }
         public PartialViewResult _CustomerReviewForDisplay(int ProductID = 0)
         {

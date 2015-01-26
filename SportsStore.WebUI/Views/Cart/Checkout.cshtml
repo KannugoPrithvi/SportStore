@@ -1,18 +1,10 @@
 ﻿@model SportsStore.WebUI.Models.CheckOutViewModel
-
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "SportStore: Checkout";
 }
 <script>
     $(document).ready(function () {
-        $('#AccountCreateCheckBox').click(function () {
-            if ($(this).prop("checked") == true) {
-                $("#AccountCreation").fadeIn(200);
-            }
-            else if ($(this).prop("checked") == false) {
-                $("#AccountCreation").fadeOut(200);
-            }
-        });
         if ($('#ShippingDetailsCheckBox').prop("checked")) {
             $("#ShippingDetails").show();
         }
@@ -27,43 +19,31 @@
                 $("#ShippingDetails").fadeOut(200);
             }
         });
-        if ($('#AccountCreateCheckBox').prop("checked")) {
-            $('#AccountCreation').show();
-        }
-        else {
-            $('#AccountCreation').hide();
-        }
-        $('#AccountCreateCheckBox').click(function () {
-            if ($(this).prop("checked") == true) {
-                $("#AccountCreation").fadeIn(200);
-            }
-            else if ($(this).prop("checked") == false) {
-                $("#AccountCreation").fadeOut(200);
-            }
-        });
     });
 </script>
 <h2>CHECK OUT</h2>
-@if (!User.Identity.IsAuthenticated)
-{
-    <div class="col-md-12 col-xs-12" style="background-color:#4CAF50;color:white;padding:10px 10px 10px 15px">
-        <span>Returning customer? @Html.ActionLink("Click here to login", "Login", new { controller = "Account", returnUrl = Request.Url.PathAndQuery }, new { style="color:yellow"}) or else you can continue to checkout as guest</span>
-    </div>
-}
-else
-{
-    <div class="col-md-12 col-xs-12" style="background-color:#4CAF50;color:white;padding:10px 10px 10px 15px">
-        <span>Just enough !! Please fill out the below details to get the product shipped :)</span>
-    </div>
-}
-
 @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
 {
-    @Html.Partial("Partial/_GuestCheckoutForm", Model)
+    if (!User.Identity.IsAuthenticated)
+    {
+        <div class="col-md-12 col-xs-12" style="background-color:#4CAF50;color:white;padding:10px 10px 10px 15px">
+            <span>Returning customer? @Html.ActionLink("Click here to login", "Login", new { controller = "Account", returnUrl = Request.Url.PathAndQuery }, new { style = "color:yellow" }) or else you can continue to checkout as guest</span>
+        </div>
+        @Html.Partial("Partial/_GuestCheckoutForm", Model)
+    }
+    else
+    {
+        <div class="col-md-12 col-xs-12" style="background-color:#4CAF50;color:white;padding:10px 10px 10px 15px">
+            <span>Please select/enter the delivery address</span>
+        </div>
+
+        @Html.Action("AuthenticatedAddressCheckoutForm", new { CustomerID = User.Identity.GetUserId() })
+    }
+
     <div class="col-md-12 col-xs-12">
         <div class="col-md-12 text-left"><h3>YOUR ORDER</h3></div>
         <div class="col-md-12 col-xs-12 no-padding">
-            <div class="col-md-12 text-left btn-quickview">
+            <div class="col-md-12 text-left btn-green">
                 <h5>ORDER SUMMARY</h5>
             </div>
             <table class="table table-bordered table-condensed table-hover table-striped">
@@ -127,32 +107,4 @@ else
 }
 
 
-@*Outdated textbook code
-    @Html.ValidationSummary()
-    <h3>Ship to</h3>
-    <div class="form-group">
-        <label>Name:</label>
-        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
-    </div>
-    <h3>Address</h3>
-    foreach (var property in ViewData.ModelMetadata.Properties)
-    {
-        if (property.PropertyName != "Name" && property.PropertyName != "GiftWrap")
-        {
-            <div class="form-group">
-                <label>@(property.DisplayName ?? property.PropertyName)</label>
-                @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
-            </div>
-        }
-    }
-    <h3>Options</h3>
-    <div class="checkbox">
-        <label>
-            @Html.EditorFor(x => x.GiftWrap)
-            Gift wrap these items
-        </label>
-    </div>
-    <div class="text-center">
-        <input class="btn btn-primary btn-sharp" type="submit" value="Complete order" />
-    </div>*@
 

@@ -58,7 +58,7 @@ namespace SportsStore.WebUI.Controllers
         }
         public RedirectToRouteResult UpdateCart(Cart cart, string returnUrl, List<ProductCartList> lstProductCartList)
         {
-            if(lstProductCartList != null || lstProductCartList.Count != 0)
+            if (lstProductCartList != null || lstProductCartList.Count != 0)
             {
                 foreach (var item in lstProductCartList)
                 {
@@ -68,7 +68,7 @@ namespace SportsStore.WebUI.Controllers
                         cart.AddItem(product, item.Quantity, 1);
                     }
                 }
-            }   
+            }
             return RedirectToAction("Index", new { returnUrl });
         }
         public PartialViewResult Summary(Cart cart)
@@ -111,12 +111,57 @@ namespace SportsStore.WebUI.Controllers
         //        return View(shippingDetails);
         //    }
         //}
-        [HttpPost]
-        public ActionResult Checkout(Cart cart,CheckOutViewModel checkOutViewModel)
+        public PartialViewResult AuthenticatedAddressCheckoutForm(int CustomerID = 0)
         {
-
-            var request = Request.Form;
+            if (CustomerID != 0)
+            {
+                var allCustomerAddresses = repository.CustomerAddresses.Where(p => p.CustomerID == CustomerID).ToList<CustomerAddress>();
+                return PartialView("Partial/_AuthenticatedCheckoutForm",allCustomerAddresses);
+            }
+            else
+            {
+                return null;
+            }
+        }
+       
+        [HttpPost]
+        public ActionResult Checkout(Cart cart, CheckOutViewModel checkOutViewModel)
+        {
             return null;
+            var request = Request.Form;
+            if (cart.Lines.Count() == 0)
+            {
+                ModelState.AddModelError("", "Sorry your cart is empty!");
+            }
+            if (ModelState.IsValid)
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    AccountController accountController = new AccountController();
+                    CartUser user = new CartUser
+                    {
+                        FirstName = checkOutViewModel.BillingAddressDetails.FirstName,
+                        LastName = checkOutViewModel.BillingAddressDetails.LastName,
+                        Email = checkOutViewModel.BillingAddressDetails.Email,
+                        UserName = checkOutViewModel.BillingAddressDetails.FirstName + " ," + checkOutViewModel.BillingAddressDetails.LastName,
+                    };
+                    if (checkOutViewModel.IsShippingAddressChecked == false)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                    orderProcessor.ProcessOrder(cart, new ShippingDetails());
+                    cart.Clear();
+                    return View("Completed");
+                }
+            }
+            else
+            {
+                return View(checkOutViewModel);
+            }
         }
     }
 }

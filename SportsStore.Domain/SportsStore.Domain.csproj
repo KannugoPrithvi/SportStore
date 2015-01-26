@@ -96,6 +96,7 @@
     <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Option.cs" />
     <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderAddress.cs" />
     <Compile Include="Entities\OrderDelivery.cs" />
     <Compile Include="Entities\OrderDiscount.cs" />
     <Compile Include="Entities\OrderItem.cs" />

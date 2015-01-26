@@ -1,1 +1,26 @@
-﻿
+﻿@model List<SportsStore.Domain.Entities.CustomerAddress>
+
+<div class="col-md-12 col-xs-12">
+    @foreach (var item in Model)
+    {
+        
+        <div class="col-md-5 no-padding" style="border:1px solid #0D47A1;margin-bottom:10px;margin:10px">
+            <div class="col-md-12" style="background-color:#0D47A1;color:white;padding:5px">
+                @item.Name
+            </div>
+            <div class="col-md-12">
+                @item.Address<br />
+                @item.City.Name<br />
+                @item.State.Name<br />
+                @item.Country.Name<br />
+                @item.PostalCode
+            </div>
+            <div class="col-md-12" style="background-color:#0D47A1;color:white;padding:5px">
+               <span style="padding-left:5px;padding-right:5px"><i class="fa fa-edit"></i></span>Edit
+                <span style="padding-left:5px;padding-right:5px"><i class="fa fa-trash"></i></span>Delete
+                <span style="padding-left:5px;padding-right:5px"><i class="fa fa-gift"></i></span>Ship to this place
+            </div>
+        </div>
+
+    }
+</div>

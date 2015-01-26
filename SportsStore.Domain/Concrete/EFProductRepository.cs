@@ -394,8 +394,6 @@ namespace SportsStore.Domain.Concrete
                     dbEntry.CountryID = state.CountryID;
                     dbEntry.Name = state.Name;
                     dbEntry.Code = state.Code;
-                    dbEntry.StateOrder = state.StateOrder;
-                    dbEntry.IsActive = state.IsActive;
                 }
             }
             context.SaveChanges();
@@ -506,8 +504,6 @@ namespace SportsStore.Domain.Concrete
                     dbEntry.StateID = city.StateID;
                     dbEntry.Name = city.Name;
                     dbEntry.Code = city.Code;
-                    dbEntry.CityOrder = city.CityOrder;
-                    dbEntry.IsActive = city.IsActive;
                 }
             }
             context.SaveChanges();
@@ -543,7 +539,6 @@ namespace SportsStore.Domain.Concrete
                 {
                     dbEntry.Name = country.Name;
                     dbEntry.Code = country.Code;
-                    dbEntry.IsActive = country.IsActive;
                 }
             }
             context.SaveChanges();
@@ -620,17 +615,17 @@ namespace SportsStore.Domain.Concrete
                 if (dbEntry != null)
                 {
                     dbEntry.CustomerID = customerAddress.CustomerID;
-                    dbEntry.Address1 = customerAddress.Address1;
-                    dbEntry.Address2 = customerAddress.Address2;
+                    dbEntry.Name = customerAddress.Name;
+                    dbEntry.Address = customerAddress.Address;
                     dbEntry.CityID = customerAddress.CityID;
                     dbEntry.StateID = customerAddress.StateID;
                     dbEntry.PostalCode = customerAddress.PostalCode;
                     dbEntry.CountryID = customerAddress.CountryID;
                     dbEntry.HomePhone = customerAddress.HomePhone;
                     dbEntry.WorkPhone = customerAddress.WorkPhone;
-                    dbEntry.PrimaryEmail = customerAddress.PrimaryEmail;
-                    dbEntry.AlternativeEmail = customerAddress.AlternativeEmail;
                     dbEntry.Notes = customerAddress.Notes;
+                    dbEntry.IsBillingAddress = customerAddress.IsBillingAddress;
+                    dbEntry.IsShippingAddress = customerAddress.IsShippingAddress;
                 }
             }
             context.SaveChanges();

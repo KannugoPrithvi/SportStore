@@ -11,8 +11,6 @@ namespace SportsStore.Domain.Entities
         public int CountryID { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }       
-        public bool IsActive { get; set; }
-        public string Group { get; set; }
 
         public virtual ICollection<BasicTaxRate> BasicTaxRates { get; set; }
         public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; }

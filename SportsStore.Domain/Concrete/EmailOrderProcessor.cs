@@ -11,11 +11,11 @@ namespace SportsStore.Domain.Concrete
 {
     public class EmailSettings
     {
-        public string MailToAddress = "kannugo@gmail.com";
+        public string MailToAddress = "kannugo.developer@gmail.com";
         public string MailFromAddress = "kannugo@gmail.com";
         public bool UseSsl = true;
-        public string Username = "kannugo@gmail.com";
-        public string Password = "!Mig29mkisu30";
+        public string Username = "kannugo.developer@gmail.com";
+        public string Password = "@Su30mkimig29";
         public string ServerName = "smtp.gmail.com";
         public int ServerPort = 587;
         public bool WriteAsFile = false;

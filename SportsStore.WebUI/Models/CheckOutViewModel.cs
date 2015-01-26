@@ -12,8 +12,6 @@ namespace SportsStore.WebUI.Models
         public CustomerDetails ShippingAddressDetails { get; set; }
         public bool IsShippingAddressChecked { get; set; }
         public String OrderNotes { get; set; }
-        public bool IsCreateAccountChecked { get; set; }
-        public String Password { get; set; }
         public String PaymentMode { get; set; }
     }
     public class CustomerDetails

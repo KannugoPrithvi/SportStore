@@ -68,6 +68,11 @@ namespace SportsStore.WebUI.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(50,ErrorMessage="User name cannot be more than 50 characters long")]
+        [Display(Name = "User Name *")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email Address *")]
         public string Email { get; set; }
