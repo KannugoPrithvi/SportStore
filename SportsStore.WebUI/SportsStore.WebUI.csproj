@@ -549,7 +549,7 @@
     <Content Include="Views\QuickView\Partial\General\_CustomerReviewDisplay.cshtml" />
     <Content Include="Views\QuickView\Partial\General\_ProductImageSlider.cshtml" />
     <Content Include="Views\Shared\_FooterGeneralContent.cshtml" />
-    <Content Include="Views\Cart\Partial\_GuestCheckoutForm.cshtml" />
+    <Content Include="Views\Cart\Partial\_CustomerAddressFillForm.cshtml" />
     <Content Include="Views\Cart\Partial\_AuthenticatedCheckoutForm.cshtml" />
     <Content Include="Views\Product\Partial\_HomePageProductSliders.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
