@@ -9,8 +9,10 @@ namespace SportsStore.Domain.Entities
     public class Country
     {
         public int CountryID { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }       
+        public string CountryFIPS { get; set; }
+        public string CountryISO { get; set; }
+        public string CountryTLD { get; set; }
+        public string CountryName { get; set; }
 
         public virtual ICollection<BasicTaxRate> BasicTaxRates { get; set; }
         public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; }

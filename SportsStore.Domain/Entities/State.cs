@@ -10,8 +10,8 @@ namespace SportsStore.Domain.Entities
     {
         public int StateID { get; set; }
         public int CountryID { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
+        public string StateName { get; set; }
+        public string StateCode { get; set; }
 
         public virtual ICollection<BasicTaxRate> BasicTaxRates { get; set; }
         public virtual ICollection<City> Cities { get; set; }

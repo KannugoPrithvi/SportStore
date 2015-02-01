@@ -56,6 +56,27 @@ namespace SportsStore.WebUI.Controllers
             }
             return RedirectToAction("Index", new { returnUrl });
         }
+        public RedirectToRouteResult DeleteAddress(string returnURL, int CustomerAddressID = 0)
+        {
+            if (CustomerAddressID != 0)
+            {
+                repository.DeleteCustomerAddress(CustomerAddressID);
+                return RedirectToAction("Index", new { returnURL });
+            }
+            else
+            {
+                return RedirectToRoute(new { controller = "Product", action = "Index" });
+            }
+        }
+        [HttpPost]
+        public RedirectToRouteResult CreateEditAddress(CustomerAddress customerAddress, string returnURL)
+        {
+            if (ModelState.IsValid && customerAddress != null)
+            {
+                repository.SaveCustomerAddress(customerAddress);
+            }
+            return RedirectToAction("Checkout");
+        }
         public RedirectToRouteResult UpdateCart(Cart cart, string returnUrl, List<ProductCartList> lstProductCartList)
         {
             if (lstProductCartList != null || lstProductCartList.Count != 0)
@@ -75,21 +96,16 @@ namespace SportsStore.WebUI.Controllers
         {
             return PartialView(cart);
         }
-
+        [HttpGet]
         public ViewResult Checkout()
         {
-            IEnumerable<SelectListItem> lstOfCountries = new List<SelectListItem>
+            var lstOfCountries = repository.Countries.ToList<Country>();
+            List<SelectListItem> selectCountryList = new List<SelectListItem>();
+            foreach (var item in lstOfCountries)
             {
-                new SelectListItem{Text="India",Value="IN"},
-                new SelectListItem{Text="China",Value="CN"},
-                new SelectListItem{Text="USA",Value="USA"},
-                new SelectListItem{Text="Russia",Value="RU"},
-                new SelectListItem{Text="Britain",Value="UK"},
-                new SelectListItem{Text="France",Value="FRN"},
-                new SelectListItem{Text="Vietnam",Value="VN"},
-
-            };
-            ViewData["Countries"] = lstOfCountries;
+                selectCountryList.Add(new SelectListItem { Text = item.CountryName, Value = item.CountryID.ToString() });
+            }
+            TempData["Countries"] = selectCountryList;
             return View(new CheckOutViewModel());
         }
         //[HttpPost]
@@ -116,14 +132,14 @@ namespace SportsStore.WebUI.Controllers
             if (CustomerID != 0)
             {
                 var allCustomerAddresses = repository.CustomerAddresses.Where(p => p.CustomerID == CustomerID).ToList<CustomerAddress>();
-                return PartialView("Partial/_AuthenticatedCheckoutForm",allCustomerAddresses);
+                return PartialView("Partial/_AuthenticatedCheckoutForm", allCustomerAddresses);
             }
             else
             {
                 return null;
             }
         }
-       
+
         [HttpPost]
         public ActionResult Checkout(Cart cart, CheckOutViewModel checkOutViewModel)
         {
@@ -163,5 +179,44 @@ namespace SportsStore.WebUI.Controllers
                 return View(checkOutViewModel);
             }
         }
+        public JsonResult GetStates(int CountryID = 0)
+        {
+            if (CountryID != 0)
+            {
+                List<State> lstOfStates = repository.States.Where(p => p.CountryID == CountryID).OrderBy(p => p.StateName).ToList<State>();
+                List<SelectListItem> selectStatesList = new List<SelectListItem>();
+                foreach (var item in lstOfStates)
+                {
+                    selectStatesList.Add(new SelectListItem { Text=item.StateName,Value=item.StateID.ToString()});
+                }
+                return Json(new SelectList(selectStatesList,"Value","Text"));
+            }
+            else
+            {
+                return null;
+            }
+
+
+        }
+        public JsonResult GetCities(int StateID = 0)
+        {
+            if (StateID != 0)
+            {
+                List<City> lstOfCities = repository.Cities.Where(p => p.StateID == StateID).OrderBy(p => p.CityName).ToList<City>();
+                List<SelectListItem> selectCitiesList = new List<SelectListItem>();
+                foreach (var item in lstOfCities)
+                {
+                    selectCitiesList.Add(new SelectListItem { Text = item.CityName, Value = item.CityID.ToString() });
+                }
+                return Json(new SelectList(selectCitiesList, "Value", "Text"));
+            }
+            else
+            {
+                return null;
+            }
+
+
+        }
+
     }
 }

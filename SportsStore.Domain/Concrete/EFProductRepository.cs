@@ -392,8 +392,8 @@ namespace SportsStore.Domain.Concrete
                 if (dbEntry != null)
                 {
                     dbEntry.CountryID = state.CountryID;
-                    dbEntry.Name = state.Name;
-                    dbEntry.Code = state.Code;
+                    dbEntry.StateName = state.StateName;
+                    dbEntry.StateCode = state.StateCode;
                 }
             }
             context.SaveChanges();
@@ -502,8 +502,8 @@ namespace SportsStore.Domain.Concrete
                 if (dbEntry != null)
                 {
                     dbEntry.StateID = city.StateID;
-                    dbEntry.Name = city.Name;
-                    dbEntry.Code = city.Code;
+                    dbEntry.CityName = city.CityName;
+                    dbEntry.CityCode = city.CityCode;
                 }
             }
             context.SaveChanges();
@@ -537,8 +537,10 @@ namespace SportsStore.Domain.Concrete
                 Country dbEntry = context.Country.Find(country.CountryID);
                 if (dbEntry != null)
                 {
-                    dbEntry.Name = country.Name;
-                    dbEntry.Code = country.Code;
+                    dbEntry.CountryFIPS = country.CountryFIPS;
+                    dbEntry.CountryISO = country.CountryISO;
+                    dbEntry.CountryTLD = country.CountryTLD;
+                    dbEntry.CountryName = country.CountryName;
                 }
             }
             context.SaveChanges();

@@ -1,0 +1,87 @@
+﻿@model SportsStore.Domain.Entities.CustomerAddress
+
+@using (Ajax.BeginForm("CreateEditAddress", new { controller="Cart"},null, new { id = "CreateEditAddressForm" }))
+{
+    @Html.HiddenFor(model => model.CustomerID)
+    @Html.HiddenFor(model => model.CustomerAddressID)
+    <div class="panel-body">
+        <div class="col-md-12 col-xs-12 padding-10">
+            <div class="col-md-4 no-padding">
+                <label>Name</label>
+            </div>
+            <div class="col-md-8 no-padding">
+                @Html.TextBox("Name", null, new { @class = "form-control btn-sharp input-sm" })
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 padding-10">
+            <div class="col-md-4 no-padding">
+                <label>Pincode</label>
+            </div>
+            <div class="col-md-8 no-padding">
+                @Html.TextBox("PostalCode", null, new { @class = "form-control btn-sharp input-sm" })
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 padding-10">
+            <div class="col-md-4 no-padding">
+                <label>Address</label>
+            </div>
+            <div class="col-md-8 no-padding">
+                @Html.TextArea("Address", null, new { @class = "form-control btn-sharp input-sm", rows = 4 })
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 padding-10">
+            <div class="col-md-4 no-padding">
+                <label>Landmark</label>
+            </div>
+            <div class="col-md-8 no-padding">
+                @Html.TextBox("Notes", null, new { @class = "form-control btn-sharp input-sm", placeholder = "(Optional)" })
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 padding-10">
+            <div class="col-md-4 no-padding">
+                <label>Phone *</label>
+            </div>
+            <div class="col-md-8 no-padding">
+                @Html.TextBox("WorkPhone", null, new { @class = "form-control btn-sharp input-sm" })
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 padding-10">
+            <div class="col-md-4 no-padding">
+                <label>Alternate Phone</label>
+            </div>
+            <div class="col-md-8 no-padding">
+                @Html.TextBox("HomePhone", null, new { @class = "form-control btn-sharp input-sm" })
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 padding-10">
+            <div class="col-md-4 no-padding">
+                <label>Country</label>
+            </div>
+            <div class="col-md-8 no-padding">
+                @{var result = TempData["Countries"] as List<SelectListItem>;}
+                @Html.DropDownList("Country", TempData["Countries"] as List<SelectListItem>, "Select Country ...", new { @class = "form-control btn-sharp input-sm" })
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 padding-10">
+            <div class="col-md-6 no-padding">
+                <div class="col-md-12"><label>State</label></div>
+                <div class="col-md-12" style="padding-right:0px">
+                    @Html.DropDownList("State", new SelectList(string.Empty, "Value", "Text"), "Select State ...", new { @class = "form-control btn-sharp input-sm" })
+                </div>
+            </div>
+            <div class=" col-md-6 no-padding">
+                <label>City</label>
+                <div class="col-md-12" style="padding-left:0px">
+                    @Html.DropDownList("City", new SelectList(string.Empty, "Value", "Text"), "Select City ...", new { @class = "form-control btn-sharp input-sm" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-red btn-sharp" data-dismiss="modal">CANCEL</button>
+        <button type="submit" class="btn btn-green btn-sharp" id="submitAddressForm">
+            SAVE ADDRESS
+        </button>
+    </div>
+}
+

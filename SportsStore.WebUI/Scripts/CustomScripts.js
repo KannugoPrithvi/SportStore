@@ -50,6 +50,47 @@
     $('#stars-existing').on('starrr:change', function (e, value) {
         $('#count-existing').html(value);
     });
+    //Code for Country State City Cascading drop down list
+    
+        debugger;
+        //Dropdownlist SelectedChange event
+        $("#Country").change(function () {
+            $("#State").empty();
+            $.ajax({
+                type: 'POST',
+                url: '/Cart/GetStates',
+                dataType: 'json',
+                data: { CountryID: $("#Country").val() },
+                success: function (states) {
+                    $.each(states, function (i, state) {
+                        $("#State").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retreive states.' + ex);
+                }
+            });
+            return false;
+        })
+        $("#State").change(function () {
+            $("#City").empty();
+            $.ajax({
+                type: 'POST',
+                url: '/Cart/GetCities',
+                dataType: 'json',
+                data: { StateID: $("#State").val() },
+                success: function (cities) {
+                    $.each(cities, function (i, city) {
+                        $("#City").append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retreive states.' + ex);
+                }
+            });
+            return false;
+        })
+    
 });
 //Code below for star rating
 var __slice = [].slice;
