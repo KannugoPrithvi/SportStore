@@ -54,16 +54,16 @@
     
         debugger;
         //Dropdownlist SelectedChange event
-        $("#Country").change(function () {
-            $("#State").empty();
+        $("#CountryID").change(function () {
+            $("#StateID").empty();
             $.ajax({
                 type: 'POST',
                 url: '/Cart/GetStates',
                 dataType: 'json',
-                data: { CountryID: $("#Country").val() },
+                data: { CountryID: $("#CountryID").val() },
                 success: function (states) {
                     $.each(states, function (i, state) {
-                        $("#State").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                        $("#StateID").append('<option value="' + state.Value + '">' + state.Text + '</option>');
                     });
                 },
                 error: function (ex) {
@@ -72,16 +72,16 @@
             });
             return false;
         })
-        $("#State").change(function () {
-            $("#City").empty();
+        $("#StateID").change(function () {
+            $("#CityID").empty();
             $.ajax({
                 type: 'POST',
                 url: '/Cart/GetCities',
                 dataType: 'json',
-                data: { StateID: $("#State").val() },
+                data: { StateID: $("#StateID").val() },
                 success: function (cities) {
                     $.each(cities, function (i, city) {
-                        $("#City").append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                        $("#CityID").append('<option value="' + city.Value + '">' + city.Text + '</option>');
                     });
                 },
                 error: function (ex) {

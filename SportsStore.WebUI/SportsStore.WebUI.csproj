@@ -567,6 +567,7 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Cart\Partial\_CreateEditSingleAddressForm.cshtml" />
+    <Content Include="Views\Cart\Address.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace SportsStore.WebUI.Controllers
 {
@@ -68,6 +69,26 @@ namespace SportsStore.WebUI.Controllers
                 return RedirectToRoute(new { controller = "Product", action = "Index" });
             }
         }
+        [HttpGet]
+        public ActionResult CreateEditAddress(int CustomerAddressID = 0)
+        {
+            var lstOfCountries = repository.Countries.ToList<Country>();
+            List<SelectListItem> selectCountryList = new List<SelectListItem>();
+            foreach (var item in lstOfCountries)
+            {
+                selectCountryList.Add(new SelectListItem { Text = item.CountryName, Value = item.CountryID.ToString() });
+            }
+            ViewData["Countries"] = selectCountryList;
+            if (CustomerAddressID != 0)
+            {
+                CustomerAddress customerAddress = repository.CustomerAddresses.FirstOrDefault(p => p.CustomerAddressID == CustomerAddressID);
+                return View("Address", customerAddress);
+            }
+            else
+            {
+                return View("Address", new CustomerAddress { CustomerID = Convert.ToInt32(User.Identity.GetUserId()) });
+            }
+        }
         [HttpPost]
         public RedirectToRouteResult CreateEditAddress(CustomerAddress customerAddress, string returnURL)
         {
@@ -99,13 +120,7 @@ namespace SportsStore.WebUI.Controllers
         [HttpGet]
         public ViewResult Checkout()
         {
-            var lstOfCountries = repository.Countries.ToList<Country>();
-            List<SelectListItem> selectCountryList = new List<SelectListItem>();
-            foreach (var item in lstOfCountries)
-            {
-                selectCountryList.Add(new SelectListItem { Text = item.CountryName, Value = item.CountryID.ToString() });
-            }
-            TempData["Countries"] = selectCountryList;
+
             return View(new CheckOutViewModel());
         }
         //[HttpPost]
@@ -187,9 +202,9 @@ namespace SportsStore.WebUI.Controllers
                 List<SelectListItem> selectStatesList = new List<SelectListItem>();
                 foreach (var item in lstOfStates)
                 {
-                    selectStatesList.Add(new SelectListItem { Text=item.StateName,Value=item.StateID.ToString()});
+                    selectStatesList.Add(new SelectListItem { Text = item.StateName, Value = item.StateID.ToString() });
                 }
-                return Json(new SelectList(selectStatesList,"Value","Text"));
+                return Json(new SelectList(selectStatesList, "Value", "Text"));
             }
             else
             {

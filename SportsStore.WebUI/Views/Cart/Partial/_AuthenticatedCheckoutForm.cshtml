@@ -37,11 +37,12 @@
 
     }
     <div class="col-md-12 text-center">
-        <a href="" class="btn btn-red btn-sharp" data-toggle="modal" data-target="#addressForm"><i class="fa fa-plus-circle"></i> ADD ADDRESS</a>
+        @Html.ActionLink("ADD ADDRESS", "CreateEditAddress", new { controller = "Cart", returnURL = Request.Url.PathAndQuery }, new { @class = "btn btn-red btn-sharp" })
+        @*<a href="" class="btn btn-red btn-sharp" data-toggle="modal" data-target="#addressForm"><i class="fa fa-plus-circle"></i> ADD ADDRESS</a>*@
     </div>
 </div>
 @* Code for Address Modal window below *@
-<div class="modal fade in" id="addressForm">
+@*<div class="modal fade in" id="addressForm">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -53,7 +54,4 @@
             </div>
         </div>
     </div>
-</div>
-<script type="text/javascript">
-
-</script>
+</div>*@
