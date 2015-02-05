@@ -5,7 +5,7 @@
     @foreach (var item in Model)
     {
 
-        <div class="col-md-5 no-padding" style="border:1px solid #0D47A1;margin-bottom:10px;margin:10px">
+        <div class="col-md-5 no-padding" id="Container_@item.CustomerAddressID" style="border:1px solid #0D47A1;margin-bottom:10px;margin:10px">
             <div class="col-md-12" style="background-color:#0D47A1;color:white;padding:5px">
                 <div class="col-md-5">
                     @item.Name
@@ -29,11 +29,21 @@
                 @item.PostalCode
             </div>
             <div class="col-md-12" style="background-color:#0D47A1;color:white;padding:5px">
-                <span style="padding-left:5px;padding-right:5px"><i class="fa fa-edit"></i></span>Edit
-                <span style="padding-left:5px;padding-right:5px"><i class="fa fa-trash"></i></span>Delete
-                <span style="padding-left:5px;padding-right:5px"><i class="fa fa-gift"></i></span>Ship to this place
+                <span style="padding-left:5px;padding-right:5px"><i class="fa fa-edit"></i></span>@Html.ActionLink("Edit", "CreateEditAddress", new { CustomerAddressID = item.CustomerAddressID, returnURL = Request.Url.PathAndQuery })
+                <span style="padding-left:5px;padding-right:5px"><i class="fa fa-trash"></i></span>@Html.ActionLink("Delete", "DeleteAddress", new { CustomerAddressID = item.CustomerAddressID, returnURL = Request.Url.PathAndQuery })
+                <span style="padding-left:5px;padding-right:5px" id="ShipTo_@item.CustomerAddressID"><i class="fa fa-gift"></i></span>
+                <input type="radio" id="radio_@item.CustomerAddressID" name="radios" value="all" checked>
+                <label for="radio_@item.CustomerAddressID">Ship to this place</label>
+                 
             </div>
         </div>
+        <script>
+            $("#ShipTo_@item.CustomerAddressID").click(function () {
+                $("#Container_@item.CustomerAddressID").css('-moz-box-shadow', '0 0 10px #ccc');
+                $("#Container_@item.CustomerAddressID").css('-webkit-box-shadow', '0 0 10px #ccc');
+                $("#Container_@item.CustomerAddressID").css('box-shadow', '0 0 10px #ccc');
+            });
+        </script>
 
     }
     <div class="col-md-12 text-center">
@@ -41,17 +51,3 @@
         @*<a href="" class="btn btn-red btn-sharp" data-toggle="modal" data-target="#addressForm"><i class="fa fa-plus-circle"></i> ADD ADDRESS</a>*@
     </div>
 </div>
-@* Code for Address Modal window below *@
-@*<div class="modal fade in" id="addressForm">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">ADD ADDRESS</h4>
-            </div>
-            <div class="modal-body">
-                @Html.Partial("Partial/_CreateEditSingleAddressForm", new SportsStore.Domain.Entities.CustomerAddress() { CustomerID = Convert.ToInt32(User.Identity.GetUserId()) })
-            </div>
-        </div>
-    </div>
-</div>*@

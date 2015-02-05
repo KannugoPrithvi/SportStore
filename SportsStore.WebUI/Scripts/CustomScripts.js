@@ -89,8 +89,7 @@
                 }
             });
             return false;
-        })
-    
+        })    
 });
 //Code below for star rating
 var __slice = [].slice;

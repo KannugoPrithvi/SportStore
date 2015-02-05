@@ -4,6 +4,8 @@
 {
     @Html.HiddenFor(model => model.CustomerID)
     @Html.HiddenFor(model => model.CustomerAddressID)
+    @Html.HiddenFor(model => model.IsBillingAddress)
+    @Html.HiddenFor(model => model.IsShippingAddress)
     <div class="panel-body">
         <div class="col-md-12 col-xs-12 padding-10">
             <div class="col-md-4 no-padding">
@@ -78,7 +80,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-red btn-sharp" data-dismiss="modal">CANCEL</button>
+        @Html.ActionLink("CANCEL", "Checkout", new { controller = "Cart" }, new { @class = "btn btn-red btn-sharp" })
         <button type="submit" class="btn btn-green btn-sharp">
             SAVE ADDRESS
         </button>

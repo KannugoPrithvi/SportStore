@@ -62,7 +62,7 @@ namespace SportsStore.WebUI.Controllers
             if (CustomerAddressID != 0)
             {
                 repository.DeleteCustomerAddress(CustomerAddressID);
-                return RedirectToAction("Index", new { returnURL });
+                return RedirectToAction("Checkout", new { returnURL });
             }
             else
             {
@@ -76,12 +76,16 @@ namespace SportsStore.WebUI.Controllers
             List<SelectListItem> selectCountryList = new List<SelectListItem>();
             foreach (var item in lstOfCountries)
             {
-                selectCountryList.Add(new SelectListItem { Text = item.CountryName, Value = item.CountryID.ToString() });
+                if (item.States.Count > 0)
+                {
+                    selectCountryList.Add(new SelectListItem { Text = item.CountryName, Value = item.CountryID.ToString() });
+                }
             }
             ViewData["Countries"] = selectCountryList;
             if (CustomerAddressID != 0)
             {
                 CustomerAddress customerAddress = repository.CustomerAddresses.FirstOrDefault(p => p.CustomerAddressID == CustomerAddressID);
+                selectCountryList.FirstOrDefault(p => p.Value == customerAddress.CountryID.ToString()).Selected = true;
                 return View("Address", customerAddress);
             }
             else
@@ -96,7 +100,7 @@ namespace SportsStore.WebUI.Controllers
             {
                 repository.SaveCustomerAddress(customerAddress);
             }
-            return RedirectToAction("Checkout");
+            return RedirectToAction("Checkout", new { returnURL});
         }
         public RedirectToRouteResult UpdateCart(Cart cart, string returnUrl, List<ProductCartList> lstProductCartList)
         {
