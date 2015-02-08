@@ -503,6 +503,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AuthenticatedCheckoutViewModel.cs" />
     <Compile Include="Models\CartIndexViewModel.cs" />
     <Compile Include="Models\CheckOutViewModel.cs" />
     <Compile Include="Models\CombinedProductSpecificationViewModel.cs" />
@@ -549,7 +550,7 @@
     <Content Include="Views\QuickView\Partial\General\_CustomerReviewDisplay.cshtml" />
     <Content Include="Views\QuickView\Partial\General\_ProductImageSlider.cshtml" />
     <Content Include="Views\Shared\_FooterGeneralContent.cshtml" />
-    <Content Include="Views\Cart\Partial\_CustomerAddressFillForm.cshtml" />
+    <Content Include="Views\Cart\Partial\_AuthenticatedCustomerAddressFillForm.cshtml" />
     <Content Include="Views\Cart\Partial\_AuthenticatedCheckoutForm.cshtml" />
     <Content Include="Views\Product\Partial\_HomePageProductSliders.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -568,6 +569,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Cart\Partial\_CreateEditSingleAddressForm.cshtml" />
     <Content Include="Views\Cart\Address.cshtml" />
+    <Content Include="Views\Cart\Partial\_CustomerAddressFillForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

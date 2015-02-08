@@ -22,24 +22,8 @@
     });
 </script>
 <h2>CHECK OUT</h2>
-@using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+@helper NonAddressCheckoutDetails()
 {
-    if (!User.Identity.IsAuthenticated)
-    {
-        <div class="col-md-12 col-xs-12" style="background-color:#4CAF50;color:white;padding:10px 10px 10px 15px">
-            <span>Returning customer? @Html.ActionLink("Click here to login", "Login", new { controller = "Account", returnUrl = Request.Url.PathAndQuery }, new { style = "color:yellow" }) or else you can continue to checkout as guest</span>
-        </div>
-        @Html.Partial("Partial/_CustomerAddressFillForm", Model)
-    }
-    else
-    {
-        <div class="col-md-12 col-xs-12" style="background-color:#4CAF50;color:white;padding:10px 10px 10px 15px">
-            <span>Please select/enter the delivery address</span>
-        </div>
-
-        @Html.Action("AuthenticatedAddressCheckoutForm", new { CustomerID = User.Identity.GetUserId() })
-    }
-
     <div class="col-md-12 col-xs-12">
         <div class="col-md-12 text-left"><h3>YOUR ORDER</h3></div>
         <div class="col-md-12 col-xs-12 no-padding">
@@ -105,4 +89,22 @@
         </button>
     </div>
 }
-
+@if (User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm("AuthenticatedCheckout", "Cart", FormMethod.Post))
+    {
+        <div class="col-md-12 col-xs-12" style="background-color:#4CAF50;color:white;padding:10px 10px 10px 15px">
+            <span>Please select/enter the delivery address</span>
+        </div>
+        @Html.Action("AuthenticatedAddressCheckoutForm", new { CustomerID = User.Identity.GetUserId() })
+        @NonAddressCheckoutDetails()
+    }
+}
+else
+{
+    <div class="col-md-12 col-xs-12" style="background-color:#4CAF50;color:white;padding:10px 10px 10px 15px">
+        <span>Returning customer? @Html.ActionLink("Click here to login", "Login", new { controller = "Account", returnUrl = Request.Url.PathAndQuery }, new { style = "color:yellow" }) or else you can continue to checkout as guest</span>
+    </div>
+    @Html.Partial("Partial/_CustomerAddressFillForm", Model)
+   @NonAddressCheckoutDetails()
+}

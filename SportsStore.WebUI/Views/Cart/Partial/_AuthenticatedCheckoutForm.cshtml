@@ -30,11 +30,26 @@
             </div>
             <div class="col-md-12" style="background-color:#0D47A1;color:white;padding:5px">
                 <span style="padding-left:5px;padding-right:5px"><i class="fa fa-edit"></i></span>@Html.ActionLink("Edit", "CreateEditAddress", new { CustomerAddressID = item.CustomerAddressID, returnURL = Request.Url.PathAndQuery })
-                <span style="padding-left:5px;padding-right:5px"><i class="fa fa-trash"></i></span>@Html.ActionLink("Delete", "DeleteAddress", new { CustomerAddressID = item.CustomerAddressID, returnURL = Request.Url.PathAndQuery })
-                <span style="padding-left:5px;padding-right:5px" id="ShipTo_@item.CustomerAddressID"><i class="fa fa-gift"></i></span>
-                <input type="radio" id="radio_@item.CustomerAddressID" name="radios" value="all" checked>
+                @if (item.IsBillingAddress == true)
+                {
+                    <span style="padding-left:5px;padding-right:5px"><i class="fa fa-trash"></i></span>
+                    @Html.Hidden("BillingAddress.CustomerAddressID", item.CustomerAddressID)
+                    @Html.Hidden("BillingAddress.CustomerID", item.CustomerID)
+                    @Html.ActionLink("Delete", "DeleteAddress", new { CustomerAddressID = item.CustomerAddressID, returnURL = Request.Url.PathAndQuery });
+                    <span style="padding-left:5px;padding-right:5px" id="ShipTo_@item.CustomerAddressID"><i class="fa fa-gift"></i></span>
+                    <input type="radio" id="radio_@item.CustomerAddressID" name="ShippingAddress.CustomerAddressID" value="@item.CustomerAddressID" checked>
+                }
+                else
+                {
+                    @Html.Hidden("ShippingAddress.CustomerAddressID", item.CustomerAddressID)
+                    @Html.Hidden("ShippingAddress.CustomerID", item.CustomerID)
+                    <span style="padding-left:5px;padding-right:5px" id="ShipTo_@item.CustomerAddressID"><i class="fa fa-gift"></i></span>
+                    <input type="radio" id="radio_@item.CustomerAddressID" name="ShippingAddress.CustomerAddressID" value="@item.CustomerAddressID">
+                }
+
+
                 <label for="radio_@item.CustomerAddressID">Ship to this place</label>
-                 
+
             </div>
         </div>
         <script>

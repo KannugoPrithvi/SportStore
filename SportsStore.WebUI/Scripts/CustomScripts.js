@@ -56,12 +56,15 @@
         //Dropdownlist SelectedChange event
         $("#CountryID").change(function () {
             $("#StateID").empty();
+            $("#CityID").empty();
             $.ajax({
                 type: 'POST',
                 url: '/Cart/GetStates',
                 dataType: 'json',
                 data: { CountryID: $("#CountryID").val() },
                 success: function (states) {
+                    $("#StateID").append('<option>Select state ....</option>');
+                    $("#CityID").append('<option>Select city ....</option>');
                     $.each(states, function (i, state) {
                         $("#StateID").append('<option value="' + state.Value + '">' + state.Text + '</option>');
                     });
@@ -80,6 +83,7 @@
                 dataType: 'json',
                 data: { StateID: $("#StateID").val() },
                 success: function (cities) {
+                    $("#CityID").append('<option>Select city ....</option>');
                     $.each(cities, function (i, city) {
                         $("#CityID").append('<option value="' + city.Value + '">' + city.Text + '</option>');
                     });

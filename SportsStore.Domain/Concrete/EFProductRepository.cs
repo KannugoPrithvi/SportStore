@@ -736,7 +736,46 @@ namespace SportsStore.Domain.Concrete
             return dbEntry;
         }
 
-
+        //OrderAddress related CRUD operations
+        public IEnumerable<OrderAddress> OrderAddresses
+        {
+            get { return context.OrderAddress; }
+        }
+        public void SaveOrderAddress(OrderAddress orderAddress)
+        {
+            if(orderAddress.OrderAddressID == 0)
+            {
+                context.OrderAddress.Add(orderAddress);
+            }
+            else
+            {
+                OrderAddress dbEntry = context.OrderAddress.Find(orderAddress.OrderAddressID);
+                if(dbEntry != null)
+                {
+                    dbEntry.OrderID = orderAddress.OrderID;
+                    dbEntry.Address = orderAddress.Address;
+                    dbEntry.City = orderAddress.City;
+                    dbEntry.State = orderAddress.State;
+                    dbEntry.PostalCode = orderAddress.PostalCode;
+                    dbEntry.Country = orderAddress.Country;
+                    dbEntry.HomePhone = orderAddress.HomePhone;
+                    dbEntry.WorkPhone = orderAddress.WorkPhone;
+                    dbEntry.Email = orderAddress.Email;
+                    dbEntry.Notes = orderAddress.Notes;
+                }
+            }
+            context.SaveChanges();
+        }
+        public OrderAddress DeleteOrderAddress(int orderAddressID)
+        {
+            OrderAddress dbEntry = context.OrderAddress.Find(orderAddressID);
+            if(dbEntry != null)
+            {
+                context.OrderAddress.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
 
         //OrderDelivery related CRUD operations
         public IEnumerable<OrderDelivery> OrderDeliveries
@@ -774,9 +813,7 @@ namespace SportsStore.Domain.Concrete
             }
             return dbEntry;
         }
-
-
-
+        
 
         //OrderItem related CRUD operations
         public IEnumerable<OrderItem> OrderItems

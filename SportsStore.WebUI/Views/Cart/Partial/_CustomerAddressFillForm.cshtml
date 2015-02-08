@@ -3,7 +3,7 @@
     <div class="col-md-12 col-xs-12 padding-10">
         <label>Country</label>
         <div class="col-md-12 no-padding">
-            @Html.DropDownList(TypeOfShipping + ".Country", ViewData["Countries"] as IEnumerable<SelectListItem>, "Select Country....", new { @class = "form-control btn-sharp" })
+            @Html.DropDownList(TypeOfShipping + ".CountryID", ViewData["Countries"] as IEnumerable<SelectListItem>, "Select Country....", new { @class = "form-control btn-sharp" })
         </div>
     </div>
     <div class="col-md-12 col-xs-12 padding-10">
@@ -30,13 +30,13 @@
         <div class="col-md-6 col-xs-6 no-padding">
             <label>State/Province</label>
             <div class="col-md-12" style="padding-left:0px">
-                @Html.TextBox(TypeOfShipping + ".StateProvince", null, new { @class = "form-control btn-sharp", placeholder = "State/Province" })
+                @Html.DropDownList(TypeOfShipping + ".StateID", new SelectList(string.Empty, "Value", "Text"), "Select State ...", new { @class = "form-control btn-sharp" })
             </div>
         </div>
         <div class="col-md-6 col-xs-6 no-padding">
             <div class="col-md-12"><label>Town/City</label></div>
             <div class="col-md-12" style="padding-right:0px">
-                @Html.TextBox(TypeOfShipping + ".TownCity", null, new { @class = "form-control btn-sharp", placeholder = "Town/City" })
+                @Html.DropDownList(TypeOfShipping + ".CityID", new SelectList(string.Empty, "Value", "Text"), "Select City ...", new { @class = "form-control btn-sharp" })
             </div>
         </div>
     </div>
@@ -66,6 +66,49 @@
             @Html.TextBox(TypeOfShipping + ".Email", null, new { @class = "form-control btn-sharp", placeholder = "example@example.com" })
         </div>
     </div>
+    <script>
+    //Dropdownlist SelectedChange event
+    $("#@TypeOfShipping" + "_CountryID").change(function () {
+        $("#@TypeOfShipping" + "_StateID").empty();
+        $("#@TypeOfShipping" + "_CityID").empty();
+        $.ajax({
+            type: 'POST',
+            url: '/Cart/GetStates',
+            dataType: 'json',
+            data: { CountryID: $("#@TypeOfShipping" + "_CountryID").val() },
+            success: function (states) {
+                $("#@TypeOfShipping" + "_StateID").append('<option>Select state ....</option>');
+                $("#@TypeOfShipping" + "_CityID").append('<option>Select city ....</option>');
+                $.each(states, function (i, state) {
+                    $("#@TypeOfShipping" + "_StateID").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                });
+            },
+            error: function (ex) {
+                alert('Failed to retreive states.' + ex);
+            }
+        });
+        return false;
+    })
+    $("#@TypeOfShipping" + "_StateID").change(function () {
+        $("#@TypeOfShipping" + "_CityID").empty();
+        $.ajax({
+            type: 'POST',
+            url: '/Cart/GetCities',
+            dataType: 'json',
+            data: { StateID: $("#@TypeOfShipping" + "_StateID").val() },
+            success: function (cities) {
+                $("#@TypeOfShipping" + "_CityID").append('<option>Select city ....</option>');
+                $.each(cities, function (i, city) {
+                    $("#@TypeOfShipping" + "_CityID").append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                });
+            },
+            error: function (ex) {
+                alert('Failed to retreive states.' + ex);
+            }
+        });
+        return false;
+    })
+</script>
 }
 <div class="col-md-12 col-xs-12" style="margin-top:10px;margin-bottom:20px">
     <div class="col-md-6 col-xs-6" style="border-right:1px solid #EDECEC">

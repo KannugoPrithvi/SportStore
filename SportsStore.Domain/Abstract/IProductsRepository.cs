@@ -99,6 +99,10 @@ namespace SportsStore.Domain.Abstract
         void SaveOrder(Order order);
         Order DeleteOrder(int orderID);
 
+        //OrderAddress
+        IEnumerable<OrderAddress> OrderAddresses { get; }
+        void SaveOrderAddress(OrderAddress orderAddress);
+        OrderAddress DeleteOrderAddress(int orderAddressID);
 
         //OrderDelivery
         IEnumerable<OrderDelivery> OrderDeliveries { get; }

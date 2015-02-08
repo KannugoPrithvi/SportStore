@@ -636,7 +636,7 @@ input[type=number] {
 
 /*Custom Navigation bar ends*/
 /*Code to style Radio buttons starts*/
-input[type=radio], input[type=checkbox] {
+input[type=radio] {
     display: none;
 }
 
@@ -652,18 +652,12 @@ input[type=radio], input[type=checkbox] {
         vertical-align: middle;
         cursor: pointer;
         background-color: #4CAF50;
-        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
     }
 
     input[type=radio]:checked + label {
         background-image: none;
         outline: 0;
         color:#1A237E;
-        -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
-        -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
         background-color: #FFEB3B;
     }
 /*Code to style Radio buttons ends*/

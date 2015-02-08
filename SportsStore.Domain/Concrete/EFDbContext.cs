@@ -32,6 +32,7 @@ namespace SportsStore.Domain.Concrete
         public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<Option> Option { get; set; }
         public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderAddress> OrderAddress { get; set; }
         public virtual DbSet<OrderDelivery> OrderDelivery { get; set; }
         public virtual DbSet<OrderDiscount> OrderDiscount { get; set; }
         public virtual DbSet<OrderItem> OrderItem { get; set; }

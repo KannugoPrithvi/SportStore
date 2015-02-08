@@ -8,6 +8,14 @@ namespace SportsStore.Domain.Entities
 {
     public class Order
     {
+        public Order()
+        {
+            this.OrderAddresses = new HashSet<OrderAddress>();
+            this.OrderDeliveries = new HashSet<OrderDelivery>();
+            this.OrderDiscounts = new HashSet<OrderDiscount>();
+            this.OrderItems = new HashSet<OrderItem>();
+            this.Payments = new HashSet<Payment>();
+        }
         public int OrderID { get; set; }
         public Nullable<int> CustomerID { get; set; }        
         public Nullable<int> OrderNumber { get; set; }
@@ -29,6 +37,7 @@ namespace SportsStore.Domain.Entities
         public virtual ICollection<OrderDelivery> OrderDeliveries { get; set; }
         public virtual ICollection<OrderDiscount> OrderDiscounts { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<OrderAddress> OrderAddresses { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
     }
 }

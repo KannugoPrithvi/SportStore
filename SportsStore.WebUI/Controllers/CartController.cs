@@ -100,7 +100,7 @@ namespace SportsStore.WebUI.Controllers
             {
                 repository.SaveCustomerAddress(customerAddress);
             }
-            return RedirectToAction("Checkout", new { returnURL});
+            return RedirectToAction("Checkout", new { returnURL });
         }
         public RedirectToRouteResult UpdateCart(Cart cart, string returnUrl, List<ProductCartList> lstProductCartList)
         {
@@ -150,8 +150,26 @@ namespace SportsStore.WebUI.Controllers
         {
             if (CustomerID != 0)
             {
+                var lstOfCountries = repository.Countries.ToList<Country>();
+                List<SelectListItem> selectCountryList = new List<SelectListItem>();
+                foreach (var item in lstOfCountries)
+                {
+                    if (item.States.Count > 0)
+                    {
+                        selectCountryList.Add(new SelectListItem { Text = item.CountryName, Value = item.CountryID.ToString() });
+                    }
+                }
+                ViewData["Countries"] = selectCountryList;
                 var allCustomerAddresses = repository.CustomerAddresses.Where(p => p.CustomerID == CustomerID).ToList<CustomerAddress>();
-                return PartialView("Partial/_AuthenticatedCheckoutForm", allCustomerAddresses);
+                ViewData["CustomerID"] = User.Identity.GetUserId();
+                if (allCustomerAddresses.Count > 0)
+                {
+                    return PartialView("Partial/_AuthenticatedCheckoutForm", allCustomerAddresses);
+                }
+                else
+                {
+                    return PartialView("Partial/_AuthenticatedCustomerAddressFillForm", allCustomerAddresses);
+                }
             }
             else
             {
@@ -160,10 +178,8 @@ namespace SportsStore.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Checkout(Cart cart, CheckOutViewModel checkOutViewModel)
+        public ActionResult AuthenticatedCheckout(Cart cart, CustomerAddress BillingAddress, CustomerAddress ShippingAddress, bool? IsShippingAddressChecked)
         {
-            return null;
-            var request = Request.Form;
             if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Sorry your cart is empty!");
@@ -172,22 +188,53 @@ namespace SportsStore.WebUI.Controllers
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                    AccountController accountController = new AccountController();
-                    CartUser user = new CartUser
+                    //Below condition handles first time checkout or no addresses in the database 
+                    //for a registered user
+                    if (BillingAddress.CustomerAddressID == 0)
                     {
-                        FirstName = checkOutViewModel.BillingAddressDetails.FirstName,
-                        LastName = checkOutViewModel.BillingAddressDetails.LastName,
-                        Email = checkOutViewModel.BillingAddressDetails.Email,
-                        UserName = checkOutViewModel.BillingAddressDetails.FirstName + " ," + checkOutViewModel.BillingAddressDetails.LastName,
-                    };
-                    if (checkOutViewModel.IsShippingAddressChecked == false)
-                    {
-
+                        BillingAddress.IsBillingAddress = true;
+                        BillingAddress.IsShippingAddress = true;
+                        repository.SaveCustomerAddress(BillingAddress);
+                        //Code to save billing address in order address table with 
+                        //billing address = 1 and shipping address = 0
+                        if (IsShippingAddressChecked == true)
+                        {
+                            ShippingAddress.IsBillingAddress = false;
+                            ShippingAddress.IsShippingAddress = true;
+                            repository.SaveCustomerAddress(ShippingAddress);
+                            //Need to save this address in order address table with isbilling and isshipping equal to 1
+                            //save billingaddress in order address with isshipping = false
+                            //save shipping address in order address with ishipping = true
+                        }
+                        else
+                        {
+                            //save billing address in order address with isbilling = true
+                            //and ishipping = true
+                        }
                     }
+                    //The below condition needs to handle the pre saved addresses of a
+                    //registered customer
                     else
                     {
-
+                        //Decide whether the BillingAddress and Shipping Address are same or not
+                        if(BillingAddress.CustomerAddressID == ShippingAddress.CustomerAddressID)
+                        {
+                            //Save a Billing Address in order address with ishipping = isbilling = true
+                        }
+                        else
+                        {
+                            //Save two addresses in order address with billing address = 1,ishipping = 0 and isbilling = 0,ishipping = 1 for other one
+                        }
+                        
+                        //get the customeraddress id of the selected addresses
+                        //get the list of all addresses from the database
+                        //if the selected address by the customer is billing address
+                        //then store the billing address in order addres with isshipping = true
+                        //isbilling = true or else save the billing address with isbilling = true
+                        //isshipping = false and save the selected address by the customer with
+                        //isbilling = false and isshippping = true
                     }
+
                     orderProcessor.ProcessOrder(cart, new ShippingDetails());
                     cart.Clear();
                     return View("Completed");
@@ -195,8 +242,16 @@ namespace SportsStore.WebUI.Controllers
             }
             else
             {
-                return View(checkOutViewModel);
+
             }
+            return null;
+        }
+        public bool PaymentProcess(CheckoutPaymentInformation checkoutPaymentInformation)
+        {
+            if (checkoutPaymentInformation != null)
+                return true;
+            else
+                return false;
         }
         public JsonResult GetStates(int CountryID = 0)
         {
